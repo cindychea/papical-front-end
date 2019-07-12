@@ -1,3 +1,12 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+nav {
+  background-color: #27B7DB;
+}
 .sign-in-page {
   width: 100vw;
   height: 100vh;
@@ -9,4 +18,15 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+.sign-in-title {
+  color: #27B7DB;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.sign-in {
+  width: 450px;
+}
+.papical-logo {
+  height: 450px;
+  width: 450px;
 }
