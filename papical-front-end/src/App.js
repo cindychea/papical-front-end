@@ -4,6 +4,8 @@ import axios from 'axios';
 import Dashboard from "./Dashboard.js";
 import Calendar from "./Calendar.js";
 import Friends from "./Friends.js";
+import Notifications from "./Notifications.js";
+import User from "./User.js";
 import SignIn from "./SignIn.js";
 import './App.css';
 
@@ -50,6 +52,12 @@ function AppRouter() {
             <li>
               <Link to="/friends">Friends</Link>
             </li>
+            <li>
+              <Link to="/notifications">Notifications</Link>
+            </li>
+            <li>
+              <Link to="/user">User</Link>
+            </li>
           </ul>
         </nav>
 
@@ -57,6 +65,8 @@ function AppRouter() {
         <Route path="/" exact component={Dashboard} />
         <Route path="/calendar/" component={Calendar} />
         <Route path="/friends/" component={Friends} />
+        <Route path="/notifications/" component={Notifications} />
+        <Route path="/user/" component={User} />
         {state.isLoggedIn ? '' : <SignIn onLogInFunc={onLogInFunc}></SignIn>}
         
       </div>
