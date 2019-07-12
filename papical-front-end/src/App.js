@@ -14,7 +14,7 @@ require('dotenv').config()
 function AppRouter() {
 
   const [state, setState] = useState({
-    isLoggedIn: false,
+    isLoggedIn: true,
   });
 
   function onLogInFunc({username, password}) {
