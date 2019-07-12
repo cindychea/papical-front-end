@@ -18,6 +18,7 @@ function SignUp() {
   }
 
   const registerUser = () => {
+    // fix this... 400 bad request
     const url = "http://localhost:8000/users/"
     axios.post(url, {
       username: state.username,

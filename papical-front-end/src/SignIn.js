@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Icon from './Icon.png'
+import Icon from './Icon.png';
 
 function SignIn({onLogInFunc, onSignUpFunc}) {
 
