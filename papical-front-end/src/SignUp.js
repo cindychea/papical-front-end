@@ -20,12 +20,24 @@ function SignUp() {
   const registerUser = () => {
     // fix this... 400 bad request
     const url = "http://localhost:8000/users/"
+    // username: state.username,
+    // first_name: state.first_name,
+    // last_name: state.last_name,
+    // email: state.email,
+    // password: state.password,
     axios.post(url, {
-      username: state.username,
-      first_name: state.first_name,
-      last_name: state.last_name,
-      email: state.email,
-      password: state.password,
+      "username": "markmasleyfds2",
+      "first_name": "Mafdafrk",
+      "last_name": "Masdafdaley",
+      "email": "mmdadm@me.com",
+      "password": "markspass",
+      "date_of_birth": null,
+      "gender": "",
+      "location": null,
+      "tag": [
+          "food"
+      ],
+      "picture": null
       })
       .then(function(response) {
         console.log(response)
