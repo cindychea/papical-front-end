@@ -1,3 +1,26 @@
+/* GET FONTS */
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('./fonts/HelveticaNeue.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Medium';
+  src: url('./fonts/HelveticaNeueMed.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Light';
+  src: url('./fonts/HelveticaNeueLt.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* APP COMPONENT */
 html {
   box-sizing: border-box;
 }
@@ -22,8 +45,7 @@ nav {
   left: 0;
 }
 .sign-in-title {
-  color: #27B7DB;
-  font-family: Arial, Helvetica, sans-serif;
+  width: 250px;
 }
 .sign-in {
   width: 450px;

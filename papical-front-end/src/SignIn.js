@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Icon from './Icon.png';
+import Icon from './pictures/Icon.png';
+import Name from './pictures/Name.png';
 
 function SignIn({onLogInFunc, onSignUpFunc}) {
 
@@ -12,7 +13,7 @@ function SignIn({onLogInFunc, onSignUpFunc}) {
   return (
   <div className="sign-in-page">
     <div className="sign-in">
-      <h1 className="sign-in-title">Papical</h1>
+      <img className="sign-in-title" src={Name} alt="Papical"/>
       <h4>An App that makes planning hangouts with friends simple.</h4>
       Username <input type='text' name='Username' placeholder='Username' onChange={(e) => setState({...state, username: e.target.value})}/>
       Password <input type='password' name='Password' placeholder='Password'onChange={(e) => setState({...state, password: e.target.value})}/>

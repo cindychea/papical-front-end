@@ -10,11 +10,42 @@ function SignUp() {
     email: '',
     username: '',
     password: '',
-    tag: '',
+    tag: '["rock climbing"]',
     picture: '',
     friends: '',
     active: 'stepBase',
   });
+
+  const onSubmit = (e) => {
+    console.log('form submitted')
+    e.preventDefault()
+    registerUser(state)
+    setState({...state, active: 'stepThree'})
+  }
+
+  const registerUser = () => {
+    console.log('registering')
+    const url = "http://localhost:8000/users/"
+    axios.post(url, {
+      username: state.username,
+      first_name: state.first_name,
+      last_name: state.last_name,
+      email: state.email,
+      password: state.password,
+      date_of_birth: null,
+      gender: '',
+      location: null,
+      tag: state.tag,
+      picture: null
+      })
+      .then(function(response) {
+        console.log(response)
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   function stepBase() {
     return (
@@ -25,7 +56,7 @@ function SignUp() {
         <input type='email' name='Email' placeholder='Email' onChange={(e) => setState({...state, email: e.target.value})}/>
         <input type='text' name='Username' placeholder='Username' onChange={(e) => setState({...state, username: e.target.value})}/>
         <input type='password' name='Password' placeholder='Password' onChange={(e) => setState({...state, password: e.target.value})}/>
-        <button onClick={() => {setState({...state, active: 'stepOne'})}}>Continue</button>
+        <button type='button' onClick={() => {setState({...state, active: 'stepOne'})}}>Continue</button>
     </div>
     )
   }
@@ -33,11 +64,11 @@ function SignUp() {
   function stepOne() {
     return (
       <div className="sign-up-one">
-        <button onClick={() => {setState({...state, active: 'stepBase'})}}><span>&#8592;</span></button>
+        <button type='button' onClick={() => {setState({...state, active: 'stepBase'})}}><span>&#8592;</span></button>
         <h2>Lets get you set up <span>(1/4)</span></h2>
         <input type='file' name='profilePicture' accept='image/*' onChange={(e) => setState({...state, picture: e.target.value})}/>
-        <button onClick={() => {setState({...state, active: 'stepTwo'})}}>Continue</button>
-        <button onClick={() => {setState({...state, active: 'stepTwo'})}}>Later</button>
+        <button type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>Continue</button>
+        <button type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>Later</button>
       </div>
     )
   }
@@ -46,13 +77,12 @@ function SignUp() {
     return (
       <div className="sign-up-two">
         <form onSubmit={onSubmit}>
-          <button onClick={() => {setState({...state, active: 'stepOne'})}}><span>&#8592;</span></button>
+          <button type='button' onClick={() => {setState({...state, active: 'stepOne'})}}><span>&#8592;</span></button>
           <h2>Lets get you set up <span>(2/4)</span></h2>
           <p>What are your interests/hobbies?</p>
           <p>(Separate each interest with a comma)</p>
-          <input type='text' name='tag' placeholder='I am interested in...' onChange={(e) => setState({...state, tag: e.target.value})}/>
-          <input type='submit' value='Continue' onClick={() => {setState({...state, active: 'stepThree'})}} />
-          <input type='submit' value='Later' onClick={() => {setState({...state, active: 'stepThree'})}} />
+          <input type='text' name='tag' placeholder='I am interested in...' />
+          <button type='submit'>Continue Later</button>
         </form>
       </div>
       
@@ -63,13 +93,13 @@ function SignUp() {
   function stepThree() {
     return (
       <div className="sign-up-three">
-        <button onClick={() => {setState({...state, active: 'stepTwo'})}}><span>&#8592;</span></button>
+        <button type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}><span>&#8592;</span></button>
         <h2>Lets get you set up <span>(3/4)</span></h2>
         <p>Add your friends!</p>
         <p>(Separate each interest with a comma)</p>
         <input type='text' name='friends' placeholder='Search by username/name/email' onChange={(e) => setState({...state, friends: e.target.value})}/>
-        <button onClick={() => {setState({...state, active: 'stepFour'})}}>Continue</button>
-        <button onClick={() => {setState({...state, active: 'stepFour'})}}>Later</button>
+        <button type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Continue</button>
+        <button type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Later</button>
       </div>
     )
   }
@@ -77,7 +107,7 @@ function SignUp() {
   function stepFour() {
     return (
       <div className="sign-up-four">
-        <button onClick={() => {setState({...state, active: 'stepThree'})}}><span>&#8592;</span></button>
+        <button type='button' onClick={() => {setState({...state, active: 'stepThree'})}}><span>&#8592;</span></button>
         <h2>Lets get you set up <span>(4/4)</span></h2>
         <p>Let your friends know when you're free to hangout this week.</p>
         <NavLink to="/">Done!</NavLink>
@@ -101,30 +131,6 @@ function SignUp() {
       default:
         return stepBase();
     }
-  }
-
-  const onSubmit = (e) => {
-    e.preventDefault()
-    registerUser(state)
-  }
-
-  const registerUser = () => {
-    const url = "http://localhost:8000/users/"
-    axios.post(url, {
-      username: state.username,
-      first_name: state.first_name,
-      last_name: state.last_name,
-      email: state.email,
-      password: state.password,
-      })
-      .then(function(response) {
-        console.log(response)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    // post to backend
-    //  on success, redirect to OnboardingWizard
   }
 
   return (
