@@ -10,85 +10,24 @@ function SignUp() {
     email: '',
     username: '',
     password: '',
-  });
-
-  const onSubmit = (e) => {
-    e.preventDefault()
-    registerUser(state)
-  }
-
-  const registerUser = () => {
-    // fix this... 400 bad request
-    const url = "http://localhost:8000/users/"
-    // username: state.username,
-    // first_name: state.first_name,
-    // last_name: state.last_name,
-    // email: state.email,
-    // password: state.password,
-    axios.post(url, {
-      "username": "markmasleyfds2",
-      "first_name": "Mafdafrk",
-      "last_name": "Masdafdaley",
-      "email": "mmdadm@me.com",
-      "password": "markspass",
-      "date_of_birth": null,
-      "gender": "",
-      "location": null,
-      "tag": [
-          "food"
-      ],
-      "picture": null
-      })
-      .then(function(response) {
-        console.log(response)
-        OnboardingWizard()
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    // post to backend
-    //  on success, redirect to OnboardingWizard
-  }
-
-  return (
-  <div className="sign-up-base">
-    <h2>Sign Up</h2>
-    <form onSubmit={onSubmit}>
-      <input type='text' name='FirstName' placeholder='First Name' onChange={(e) => setState({...state, first_name: e.target.value})}/>
-      <input type='text' name='LastName' placeholder='Last Name' onChange={(e) => setState({...state, last_name: e.target.value})}/>
-      <input type='email' name='Email' placeholder='Email' onChange={(e) => setState({...state, email: e.target.value})}/>
-      <input type='text' name='Username' placeholder='Username' onChange={(e) => setState({...state, username: e.target.value})}/>
-      <input type='password' name='Password' placeholder='Password'onChange={(e) => setState({...state, password: e.target.value})}/>
-      <input type='submit' value='Continue' />
-    </form>
-  </div>
-  )
-}
-
-
-function OnboardingWizard() {
-
-  const [state, setState] = useState({
     tag: '',
     picture: '',
     friends: '',
-    active: 'stepOne',
+    active: 'stepBase',
   });
 
-  function getActiveStep() {
-    console.log(state.active)
-    switch (state.active) {
-      case 'stepOne':
-        return stepOne();
-      case 'stepTwo':
-        return stepTwo();
-      case 'stepThree':
-        return stepThree();
-      case 'stepFour':
-        return stepFour();
-      default:
-        return stepOne();
-    }
+  function stepBase() {
+    return (
+      <div className="sign-up-base">
+      <h2>Sign Up</h2>
+        <input type='text' name='FirstName' placeholder='First Name' onChange={(e) => setState({...state, first_name: e.target.value})}/>
+        <input type='text' name='LastName' placeholder='Last Name' onChange={(e) => setState({...state, last_name: e.target.value})}/>
+        <input type='email' name='Email' placeholder='Email' onChange={(e) => setState({...state, email: e.target.value})}/>
+        <input type='text' name='Username' placeholder='Username' onChange={(e) => setState({...state, username: e.target.value})}/>
+        <input type='password' name='Password' placeholder='Password' onChange={(e) => setState({...state, password: e.target.value})}/>
+        <button onClick={() => {setState({...state, active: 'stepOne'})}}>Continue</button>
+    </div>
+    )
   }
 
   function stepOne() {
@@ -106,18 +45,18 @@ function OnboardingWizard() {
   function stepTwo() {
     return (
       <div className="sign-up-two">
-        <button onClick={() => {setState({...state, active: 'stepOne'})}}><span>&#8592;</span></button>
-        <h2>Lets get you set up <span>(2/4)</span></h2>
-        <p>What are your interests/hobbies?</p>
-        <p>(Separate each interest with a comma)</p>
-        <input type='text' name='tag' placeholder='I am interested in...' onChange={(e) => setState({...state, tag: e.target.value})}/>
-        <button onClick={() => {
-          // Send request back to make a user, log in the user, get token
-          setState({...state, active: 'stepThree'})
-          }
-          }>Continue</button>
-        <button onClick={() => {setState({...state, active: 'stepThree'})}}>Later</button>
+        <form onSubmit={onSubmit}>
+          <button onClick={() => {setState({...state, active: 'stepOne'})}}><span>&#8592;</span></button>
+          <h2>Lets get you set up <span>(2/4)</span></h2>
+          <p>What are your interests/hobbies?</p>
+          <p>(Separate each interest with a comma)</p>
+          <input type='text' name='tag' placeholder='I am interested in...' onChange={(e) => setState({...state, tag: e.target.value})}/>
+          <input type='submit' value='Continue' onClick={() => {setState({...state, active: 'stepThree'})}} />
+          <input type='submit' value='Later' onClick={() => {setState({...state, active: 'stepThree'})}} />
+        </form>
       </div>
+      
+      
     )
   }
 
@@ -144,6 +83,48 @@ function OnboardingWizard() {
         <NavLink to="/">Done!</NavLink>
       </div>
     )
+  }
+
+  function getActiveStep() {
+    console.log(state.active)
+    switch (state.active) {
+      case 'stepBase':
+        return stepBase();
+      case 'stepOne':
+        return stepOne();
+      case 'stepTwo':
+        return stepTwo();
+      case 'stepThree':
+        return stepThree();
+      case 'stepFour':
+        return stepFour();
+      default:
+        return stepBase();
+    }
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    registerUser(state)
+  }
+
+  const registerUser = () => {
+    const url = "http://localhost:8000/users/"
+    axios.post(url, {
+      username: state.username,
+      first_name: state.first_name,
+      last_name: state.last_name,
+      email: state.email,
+      password: state.password,
+      })
+      .then(function(response) {
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    // post to backend
+    //  on success, redirect to OnboardingWizard
   }
 
   return (
