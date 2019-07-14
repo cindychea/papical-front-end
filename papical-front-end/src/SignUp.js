@@ -1,6 +1,7 @@
 import React, { useState }  from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import BackArrow from './pictures/BackArrow.png';
 
 function SignUp() {
 
@@ -63,29 +64,67 @@ function SignUp() {
 
   function stepOne() {
     return (
-      <div className="sign-up-one">
-        <button type='button' onClick={() => {setState({...state, active: 'stepBase'})}}><span>&#8592;</span></button>
-        <h2>Lets get you set up <span>(1/4)</span></h2>
-        <input type='file' name='profilePicture' accept='image/*' onChange={(e) => setState({...state, picture: e.target.value})}/>
-        <button type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>Continue</button>
-        <button type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>Later</button>
-      </div>
+      <React.Fragment>
+        <div className="sign-up-one-box">
+          <div className="back-button-box">
+            <button className="back-button" type='button' onClick={() => {setState({...state, active: 'stepBase'})}}>
+              <img src={BackArrow} alt="Back to Previous Page"></img>
+            </button>
+          </div>
+          <div className="sign-up-one">
+            <h2 className="sign-up-header">Lets get you set up <span>(1/4)</span></h2>
+            <div className="progress-box">
+              <div className="progress filled"></div>
+              <div className="progress"></div>
+              <div className="progress"></div>
+              <div className="progress"></div>
+            </div>
+            <div className="photo-section">
+              <div className="photo-box">
+                <div className="photo-holder"></div>
+                <label className="photo-upload-label" for="file">Add photo</label>
+                <input className="photo-upload" id='file' type='file' name='profilePicture' accept='image/*' onChange={(e) => setState({...state, picture: e.target.value})}/>
+              </div>
+              <div className="photo-text">
+                <p className="sign-in-tagline photo">Add a photo so your friends can find you easily.</p>
+              </div>
+            </div>
+            <div className="sign-up-btns">
+              <button className="std-btn base one" type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>Continue</button>
+              <button className="hollow-btn one" type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>Skip</button>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
     )
   }
 
   function stepTwo() {
     return (
-      <div className="sign-up-two">
-        <form onSubmit={onSubmit}>
-          <button type='button' onClick={() => {setState({...state, active: 'stepOne'})}}><span>&#8592;</span></button>
-          <h2>Lets get you set up <span>(2/4)</span></h2>
-          <p>What are your interests/hobbies?</p>
-          <p>(Separate each interest with a comma)</p>
-          <input type='text' name='tag' placeholder='I am interested in...' />
-          <button type='submit'>Continue Later</button>
-        </form>
-      </div>
-      
+      <React.Fragment>
+        <div className="sign-up-two-box">
+          <div className="back-button-box">
+            <button className="back-button" type='button' onClick={() => {setState({...state, active: 'stepBase'})}}>
+              <img src={BackArrow} alt="Back to Previous Page"></img>
+            </button>
+          </div>
+          <div className="sign-up-two">
+            <form onSubmit={onSubmit}>
+              <h2 className="sign-up-header">Lets get you set up <span>(2/4)</span></h2>
+              <div className="progress-box">
+                <div className="progress filled"></div>
+                <div className="progress filled"></div>
+                <div className="progress"></div>
+                <div className="progress"></div>
+              </div>
+              <p className="sign-in-tagline">What are your interests/hobbies?</p>
+              <p className="sign-in-tagline">(Separate each interest with a comma)</p>
+              <input className="sign-up-input italics" type='text' name='tag' placeholder='I am interested in...' />
+              <button className="submit-form" type='submit'><span className="std-btn base one">Continue</span><span className="hollow-btn one">Skip</span></button>
+            </form>
+          </div>
+        </div>
+      </React.Fragment>
       
     )
   }
@@ -99,7 +138,7 @@ function SignUp() {
         <p>(Separate each interest with a comma)</p>
         <input type='text' name='friends' placeholder='Search by username/name/email' onChange={(e) => setState({...state, friends: e.target.value})}/>
         <button type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Continue</button>
-        <button type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Later</button>
+        <button type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Skip</button>
       </div>
     )
   }

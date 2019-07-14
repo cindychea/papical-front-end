@@ -79,6 +79,7 @@ html {
   display: inline-block;
   text-align: center;
   margin-right: 10px;
+  font-size: 14pt;
 }
 .nav-std-btn {
   padding: 10px;
@@ -92,6 +93,7 @@ html {
   display: inline-block;
   text-align: center;
   margin-right: 40px;
+  font-size: 14pt;
 }
 
 /* SIGN IN COMPONENT */
@@ -117,9 +119,9 @@ html {
 .sign-in-tagline {
   color: #4f4f4f;
   font-family: "Helvetica Neue Medium", Arial, Helvetica, sans-serif;
-  font-size: 17px;
+  font-size: 18px;
   margin-bottom: 20px; 
-  max-width: 300px;
+  max-width: 400px;
 }
 .sign-in-box {
   display: flex;
@@ -127,9 +129,10 @@ html {
   align-items: flex-end;
   flex-direction: column;
   padding-right: 50px;
+  padding-top: 20px;
 }
 .sign-up-input.main {
-  min-width: 200px;  
+  min-width: 250px;  
 }
 .papical-logo {
   height: 450px;
@@ -150,6 +153,7 @@ input {
   min-width: 110px;
   display: inline-block;
   text-align: center;
+  font-size: 14pt;
 }
 .std-btn {
   padding: 10px;
@@ -162,11 +166,15 @@ input {
   min-width: 110px;
   display: inline-block;
   text-align: center;
+  font-size: 14pt;
 }
 .or {
   width: 110px;
   text-align: center;
   padding: 10px;
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 14pt;
+  color: #888888;
 }
 
 /* SIGN UP COMPONENT */
@@ -193,4 +201,114 @@ input {
 } 
 .std-btn.base {
   align-self: flex-end;
+}
+.sign-up-one-box, .sign-up-two-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 85vh;
+}
+.back-button-box {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex: 1 auto;
+  align-self: flex-start;
+  max-width: 30px;
+  margin-left: 40px;
+  padding-bottom: 70px;
+}
+.back-button {
+  border: none;
+}
+.sign-up-one {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  min-width: 600px;
+  margin: 0 auto;
+}
+.progress-box {
+  display: flex;
+  flex-direction: row;
+  min-width: 400px;
+  justify-content: center;
+  align-items: center;
+  padding-right: 200px;
+  padding-bottom: 40px;
+}
+.progress {
+  border: 2px solid #888888;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 10px;
+}
+.progress.filled {
+  background-color: #EEB074;
+}
+.photo-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.photo-box {
+  align-self: flex-start;
+}
+.photo-holder {
+  border: 1px solid #888888;
+  background-color: #ebebeb;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  margin-right: 70px;
+}
+.photo-upload-label {
+  color: #27B7DB;
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 15pt;
+  text-decoration: underline;
+  width: 100%;
+  margin-left: 50px;
+}
+.photo-upload {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.photo-text {
+  display: flex;
+  align-self: flex-end;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.sign-in-tagline.photo {
+  max-width: 300px;
+}
+.sign-up-btns {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  align-self: flex-end;
+}
+.std-btn.base.one {
+  margin-right: 10px;
+}
+.hollow-btn.one {
+  border: 1px solid #888888;
+  color: #888888;
+}
+.sign-up-input.italics {
+  font-style: italic;
+}
+.submit-form {
+  all: unset;
 }
