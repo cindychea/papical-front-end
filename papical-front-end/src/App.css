@@ -48,7 +48,7 @@ html {
   color: #4f4f4f
 }
 
-/* NAV COMPONENT */
+/* NAV */
 .nav {
   background-color: #27B7DB;
   display: flex;
@@ -94,6 +94,21 @@ html {
   text-align: center;
   margin-right: 40px;
   font-size: 14pt;
+}
+.nav-hollow-btn.inner {
+  border: none;
+  margin-right: 10px;
+}
+.bell {
+  width: 35px;
+  height: 35px;
+  margin-top: 3px;
+  margin-right: 40px;
+  margin-left: 20px;
+}
+.profile {
+  padding: 0 10px;
+  margin-right: 40px;
 }
 
 /* SIGN IN COMPONENT */
