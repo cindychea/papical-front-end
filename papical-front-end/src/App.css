@@ -202,7 +202,7 @@ input {
 .std-btn.base {
   align-self: flex-end;
 }
-.sign-up-one-box, .sign-up-two-box, .sign-up-three-box {
+.sign-up-one-box, .sign-up-two-box, .sign-up-three-box, .sign-up-four-box {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -221,7 +221,7 @@ input {
 .back-button {
   border: none;
 }
-.sign-up-one, .sign-up-two, .sign-up-three {
+.sign-up-one, .sign-up-two, .sign-up-three, .sign-up-four {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -331,3 +331,15 @@ input {
   align-content: flex-start;
   width: 100%;
 }
+.calendar-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  width: 100%;
+  margin-bottom: 150px;
+}
+.sign-in-tagline.cal {
+  max-width: 100%;
+}
+

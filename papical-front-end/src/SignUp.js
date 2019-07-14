@@ -167,12 +167,30 @@ function SignUp() {
 
   function stepFour() {
     return (
-      <div className="sign-up-four">
-        <button type='button' onClick={() => {setState({...state, active: 'stepThree'})}}><span>&#8592;</span></button>
-        <h2>Lets get you set up <span>(4/4)</span></h2>
-        <p>Let your friends know when you're free to hangout this week.</p>
-        <NavLink to="/">Done!</NavLink>
-      </div>
+      <React.Fragment>
+        <div className="sign-up-four-box">
+          <div className="back-button-box">
+            <button className="back-button" type='button' onClick={() => {setState({...state, active: 'stepThree'})}}>
+              <img src={BackArrow} alt="Back to Previous Page"></img>
+            </button>
+          </div>
+          <div className="sign-up-four">
+            <h2 className="sign-up-header">Lets get you set up <span>(4/4)</span></h2>
+            <div className="progress-box four">
+              <div className="progress filled"></div>
+              <div className="progress filled"></div>
+              <div className="progress filled"></div>
+              <div className="progress filled"></div>
+            </div>
+            <div className="calendar-section">
+              <p className="sign-in-tagline cal">Let your friends know when you're free to hangout this week.</p>
+            </div>
+            <div className="sign-up-btns">
+              <NavLink to="/"><span className="std-btn base plus">Done!</span><span className="hollow-btn plus">Skip</span></NavLink>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
     )
   }
 
