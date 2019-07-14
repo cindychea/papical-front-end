@@ -221,7 +221,7 @@ input {
 .back-button {
   border: none;
 }
-.sign-up-one {
+.sign-up-one, .sign-up-two {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -299,16 +299,27 @@ input {
   align-content: space-between;
   align-self: flex-end;
 }
-.std-btn.base.one {
+.std-btn.base.plus {
   margin-right: 10px;
 }
-.hollow-btn.one {
+.hollow-btn.plus {
   border: 1px solid #888888;
   color: #888888;
 }
+.progress-box.two {
+  padding-right: 0;
+}
 .sign-up-input.italics {
   font-style: italic;
+  margin-bottom: 150px;
+  max-width: 350px;
 }
 .submit-form {
   all: unset;
+}
+.interests-section {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
 }

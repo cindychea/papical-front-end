@@ -90,8 +90,8 @@ function SignUp() {
               </div>
             </div>
             <div className="sign-up-btns">
-              <button className="std-btn base one" type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>Continue</button>
-              <button className="hollow-btn one" type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>Skip</button>
+              <button className="std-btn base plus" type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>Continue</button>
+              <button className="hollow-btn plus" type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>Skip</button>
             </div>
           </div>
         </div>
@@ -111,16 +111,21 @@ function SignUp() {
           <div className="sign-up-two">
             <form onSubmit={onSubmit}>
               <h2 className="sign-up-header">Lets get you set up <span>(2/4)</span></h2>
-              <div className="progress-box">
+              <div className="progress-box two">
                 <div className="progress filled"></div>
                 <div className="progress filled"></div>
                 <div className="progress"></div>
                 <div className="progress"></div>
               </div>
-              <p className="sign-in-tagline">What are your interests/hobbies?</p>
-              <p className="sign-in-tagline">(Separate each interest with a comma)</p>
-              <input className="sign-up-input italics" type='text' name='tag' placeholder='I am interested in...' />
-              <button className="submit-form" type='submit'><span className="std-btn base one">Continue</span><span className="hollow-btn one">Skip</span></button>
+              <div className="interests-section">
+                <p className="sign-in-tagline">What are your interests and hobbies?</p>
+                <p className="sign-in-tagline">(Separate each interest with a comma)</p>
+                <br></br>
+                <input className="sign-up-input italics" type='text' name='tag' placeholder='I am interested in...' />
+                <div className="sign-up-btns">
+                  <button className="submit-form" type='submit'><span className="std-btn base plus">Continue</span><span className="hollow-btn plus">Skip</span></button>
+                </div>
+              </div>
             </form>
           </div>
         </div>
@@ -135,7 +140,6 @@ function SignUp() {
         <button type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}><span>&#8592;</span></button>
         <h2>Lets get you set up <span>(3/4)</span></h2>
         <p>Add your friends!</p>
-        <p>(Separate each interest with a comma)</p>
         <input type='text' name='friends' placeholder='Search by username/name/email' onChange={(e) => setState({...state, friends: e.target.value})}/>
         <button type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Continue</button>
         <button type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Skip</button>
