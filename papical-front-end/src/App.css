@@ -371,3 +371,14 @@ input {
   max-width: 300px;
   margin: 0 auto;
 }
+
+/* DASHBOARD COMPONENT */
+.dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  max-width: 300px;
+  margin: 0 auto;
+}
