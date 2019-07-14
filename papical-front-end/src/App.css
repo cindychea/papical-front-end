@@ -343,3 +343,16 @@ input {
   max-width: 100%;
 }
 
+/* SIGN UP COMPONENT */
+.sign-up-header.login {
+  text-decoration: none;
+}
+.log-in-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  max-width: 300px;
+  margin: 0 auto;
+}
