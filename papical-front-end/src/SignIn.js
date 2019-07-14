@@ -16,8 +16,8 @@ function SignIn({onLogInFunc, onSignUpFunc}) {
       <img className="sign-in-title" src={Name} alt="Papical"/>
       <p className="sign-in-tagline">An app that makes planning hangouts with friends simple.</p>
       <div className="sign-in-box">
-        <div><input type='text' name='Username' placeholder='Username' onChange={(e) => setState({...state, username: e.target.value})}/></div>
-        <div><input type='password' name='Password' placeholder='Password'onChange={(e) => setState({...state, password: e.target.value})}/></div>
+        <div><input className="sign-up-input main" type='text' name='Username' placeholder='Username' onChange={(e) => setState({...state, username: e.target.value})}/></div>
+        <div><input className="sign-up-input main" type='password' name='Password' placeholder='Password'onChange={(e) => setState({...state, password: e.target.value})}/></div>
         <br />
         <div><NavLink className="hollow-btn" to="/" onClick={() => onLogInFunc(state)}>Log In</NavLink></div>
         <p className="or">or</p>

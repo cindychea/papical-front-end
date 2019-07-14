@@ -51,12 +51,12 @@ function SignUp() {
     return (
       <div className="sign-up-base">
       <h2 className="sign-up-header">Sign Up</h2>
-        <input type='text' name='FirstName' placeholder='First Name' onChange={(e) => setState({...state, first_name: e.target.value})}/>
-        <input type='text' name='LastName' placeholder='Last Name' onChange={(e) => setState({...state, last_name: e.target.value})}/>
-        <input type='email' name='Email' placeholder='Email' onChange={(e) => setState({...state, email: e.target.value})}/>
-        <input type='text' name='Username' placeholder='Username' onChange={(e) => setState({...state, username: e.target.value})}/>
-        <input type='password' name='Password' placeholder='Password' onChange={(e) => setState({...state, password: e.target.value})}/>
-        <button type='button' onClick={() => {setState({...state, active: 'stepOne'})}}>Continue</button>
+        <input className="sign-up-input" type='text' name='FirstName' placeholder='First Name' onChange={(e) => setState({...state, first_name: e.target.value})}/>
+        <input className="sign-up-input" type='text' name='LastName' placeholder='Last Name' onChange={(e) => setState({...state, last_name: e.target.value})}/>
+        <input className="sign-up-input" type='email' name='Email' placeholder='Email' onChange={(e) => setState({...state, email: e.target.value})}/>
+        <input className="sign-up-input" type='text' name='Username' placeholder='Username' onChange={(e) => setState({...state, username: e.target.value})}/>
+        <input className="sign-up-input" type='password' name='Password' placeholder='Password' onChange={(e) => setState({...state, password: e.target.value})}/>
+        <button className="std-btn base" type='button' onClick={() => {setState({...state, active: 'stepOne'})}}>Sign Up</button>
     </div>
     )
   }
