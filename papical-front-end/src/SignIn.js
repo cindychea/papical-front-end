@@ -14,13 +14,15 @@ function SignIn({onLogInFunc, onSignUpFunc}) {
   <div className="sign-in-page">
     <div className="sign-in">
       <img className="sign-in-title" src={Name} alt="Papical"/>
-      <h4>An App that makes planning hangouts with friends simple.</h4>
-      Username <input type='text' name='Username' placeholder='Username' onChange={(e) => setState({...state, username: e.target.value})}/>
-      Password <input type='password' name='Password' placeholder='Password'onChange={(e) => setState({...state, password: e.target.value})}/>
-      <br />
-      <NavLink to="/" onClick={() => onLogInFunc(state)}>Log In</NavLink>
-      <p>or</p>
-      <NavLink to="/signup" onClick={onSignUpFunc}>Sign Up</NavLink>
+      <p className="sign-in-tagline">An app that makes planning hangouts with friends simple.</p>
+      <div className="sign-in-box">
+        <div><input type='text' name='Username' placeholder='Username' onChange={(e) => setState({...state, username: e.target.value})}/></div>
+        <div><input type='password' name='Password' placeholder='Password'onChange={(e) => setState({...state, password: e.target.value})}/></div>
+        <br />
+        <div><NavLink className="hollow-btn" to="/" onClick={() => onLogInFunc(state)}>Log In</NavLink></div>
+        <p className="or">or</p>
+        <div><NavLink className="std-btn" to="/signup" onClick={onSignUpFunc}>Sign Up</NavLink></div>
+      </div>
     </div>
     <div className="logo">
       <img className="papical-logo" src={Icon} alt="Papical Logo"/>

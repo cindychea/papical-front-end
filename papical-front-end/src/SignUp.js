@@ -50,7 +50,7 @@ function SignUp() {
   function stepBase() {
     return (
       <div className="sign-up-base">
-      <h2>Sign Up</h2>
+      <h2 className="sign-up-header">Sign Up</h2>
         <input type='text' name='FirstName' placeholder='First Name' onChange={(e) => setState({...state, first_name: e.target.value})}/>
         <input type='text' name='LastName' placeholder='Last Name' onChange={(e) => setState({...state, last_name: e.target.value})}/>
         <input type='email' name='Email' placeholder='Email' onChange={(e) => setState({...state, email: e.target.value})}/>
