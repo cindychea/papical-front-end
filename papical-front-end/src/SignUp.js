@@ -104,12 +104,12 @@ function SignUp() {
       <React.Fragment>
         <div className="sign-up-two-box">
           <div className="back-button-box">
-            <button className="back-button" type='button' onClick={() => {setState({...state, active: 'stepBase'})}}>
+            <button className="back-button" type='button' onClick={() => {setState({...state, active: 'stepOne'})}}>
               <img src={BackArrow} alt="Back to Previous Page"></img>
             </button>
           </div>
           <div className="sign-up-two">
-            <form onSubmit={onSubmit}>
+            <form className="interest-form" onSubmit={onSubmit}>
               <h2 className="sign-up-header">Lets get you set up <span>(2/4)</span></h2>
               <div className="progress-box two">
                 <div className="progress filled"></div>
@@ -136,14 +136,32 @@ function SignUp() {
 
   function stepThree() {
     return (
-      <div className="sign-up-three">
-        <button type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}><span>&#8592;</span></button>
-        <h2>Lets get you set up <span>(3/4)</span></h2>
-        <p>Add your friends!</p>
-        <input type='text' name='friends' placeholder='Search by username/name/email' onChange={(e) => setState({...state, friends: e.target.value})}/>
-        <button type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Continue</button>
-        <button type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Skip</button>
-      </div>
+      <React.Fragment>
+        <div className="sign-up-three-box">
+          <div className="back-button-box">
+            <button className="back-button" type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>
+              <img src={BackArrow} alt="Back to Previous Page"></img>
+            </button>
+          </div>
+          <div className="sign-up-three">
+            <h2 className="sign-up-header">Lets get you set up <span>(3/4)</span></h2>
+            <div className="progress-box three">
+              <div className="progress filled"></div>
+              <div className="progress filled"></div>
+              <div className="progress filled"></div>
+              <div className="progress"></div>
+            </div>
+            <div className="friends-section">
+              <p className="sign-in-tagline">Add your friends!</p>
+              <input className="sign-up-input italics" type='text' name='friends' placeholder='Search by username/name/email' onChange={(e) => setState({...state, friends: e.target.value})}/>
+            </div>
+            <div className="sign-up-btns">
+              <button className="std-btn base plus" type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Continue</button>
+              <button className="hollow-btn plus" type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Skip</button>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
     )
   }
 

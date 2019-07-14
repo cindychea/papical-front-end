@@ -202,7 +202,7 @@ input {
 .std-btn.base {
   align-self: flex-end;
 }
-.sign-up-one-box, .sign-up-two-box {
+.sign-up-one-box, .sign-up-two-box, .sign-up-three-box {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -221,7 +221,7 @@ input {
 .back-button {
   border: none;
 }
-.sign-up-one, .sign-up-two {
+.sign-up-one, .sign-up-two, .sign-up-three {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -306,6 +306,9 @@ input {
   border: 1px solid #888888;
   color: #888888;
 }
+.interest-form {
+  width: 100%;
+}
 .progress-box.two {
   padding-right: 0;
 }
@@ -320,6 +323,11 @@ input {
 .interests-section {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
+}
+.friends-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  width: 100%;
 }
