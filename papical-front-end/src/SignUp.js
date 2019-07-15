@@ -1,8 +1,9 @@
 import React, { useState }  from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import BackArrow from './pictures/BackArrow.png';
 
-function SignUp() {
+function SignUp({onFormSubmit}) {
 
   const [state, setState] = useState({
     first_name: '',
@@ -10,15 +11,20 @@ function SignUp() {
     email: '',
     username: '',
     password: '',
+    tag: '["rock climbing"]',
+    picture: '',
+    friends: '',
+    active: 'stepBase',
   });
 
   const onSubmit = (e) => {
     e.preventDefault()
     registerUser(state)
+    setState({...state, active: 'stepThree'})
   }
 
   const registerUser = () => {
-    // fix this... 400 bad request
+    console.log('registering')
     const url = "http://localhost:8000/users/"
     axios.post(url, {
       username: state.username,
@@ -26,46 +32,176 @@ function SignUp() {
       last_name: state.last_name,
       email: state.email,
       password: state.password,
+      date_of_birth: null,
+      gender: '',
+      location: null,
+      tag: state.tag,
+      picture: null
       })
       .then(function(response) {
         console.log(response)
-        OnboardingWizard()
+        let stateReg = {
+          username: state.username,
+          password: state.password
+        }
+        console.log(stateReg)
+        onFormSubmit(stateReg)
       })
       .catch(function (error) {
         console.log(error);
       });
-    // post to backend
-    //  on success, redirect to OnboardingWizard
   }
 
-  return (
-  <div className="sign-up-base">
-    <h2>Sign Up</h2>
-    <form onSubmit={onSubmit}>
-      <input type='text' name='FirstName' placeholder='First Name' onChange={(e) => setState({...state, first_name: e.target.value})}/>
-      <input type='text' name='LastName' placeholder='Last Name' onChange={(e) => setState({...state, last_name: e.target.value})}/>
-      <input type='email' name='Email' placeholder='Email' onChange={(e) => setState({...state, email: e.target.value})}/>
-      <input type='text' name='Username' placeholder='Username' onChange={(e) => setState({...state, username: e.target.value})}/>
-      <input type='password' name='Password' placeholder='Password'onChange={(e) => setState({...state, password: e.target.value})}/>
-      <input type='submit' value='Continue' />
-    </form>
-  </div>
-  )
-}
+  function stepBase() {
+    return (
+      <div className="sign-up-base">
+      <h2 className="sign-up-header">Sign Up</h2>
+        <input className="sign-up-input" type='text' name='FirstName' placeholder='First Name' onChange={(e) => setState({...state, first_name: e.target.value})}/>
+        <input className="sign-up-input" type='text' name='LastName' placeholder='Last Name' onChange={(e) => setState({...state, last_name: e.target.value})}/>
+        <input className="sign-up-input" type='email' name='Email' placeholder='Email' onChange={(e) => setState({...state, email: e.target.value})}/>
+        <input className="sign-up-input" type='text' name='Username' placeholder='Username' onChange={(e) => setState({...state, username: e.target.value})}/>
+        <input className="sign-up-input" type='password' name='Password' placeholder='Password' onChange={(e) => setState({...state, password: e.target.value})}/>
+        <button className="std-btn base" type='button' onClick={() => {setState({...state, active: 'stepOne'})}}>Sign Up</button>
+    </div>
+    )
+  }
 
+  function stepOne() {
+    return (
+      <React.Fragment>
+        <div className="sign-up-one-box">
+          <div className="back-button-box">
+            <button className="back-button" type='button' onClick={() => {setState({...state, active: 'stepBase'})}}>
+              <img src={BackArrow} alt="Back to Previous Page"></img>
+            </button>
+          </div>
+          <div className="sign-up-one">
+            <h2 className="sign-up-header">Lets get you set up <span>(1/4)</span></h2>
+            <div className="progress-box">
+              <div className="progress filled"></div>
+              <div className="progress"></div>
+              <div className="progress"></div>
+              <div className="progress"></div>
+            </div>
+            <div className="photo-section">
+              <div className="photo-box">
+                <div className="photo-holder"></div>
+                <label className="photo-upload-label" htmlFor="file">Add photo</label>
+                <input className="photo-upload" id='file' type='file' name='profilePicture' accept='image/*' onChange={(e) => setState({...state, picture: e.target.value})}/>
+              </div>
+              <div className="photo-text">
+                <p className="sign-in-tagline photo">Add a photo so your friends can find you easily.</p>
+              </div>
+            </div>
+            <div className="sign-up-btns">
+              <button className="std-btn base plus" type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>Continue</button>
+              <button className="hollow-btn plus" type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>Skip</button>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
 
-function OnboardingWizard() {
+  function stepTwo() {
+    return (
+      <React.Fragment>
+        <div className="sign-up-two-box">
+          <div className="back-button-box">
+            <button className="back-button" type='button' onClick={() => {setState({...state, active: 'stepOne'})}}>
+              <img src={BackArrow} alt="Back to Previous Page"></img>
+            </button>
+          </div>
+          <div className="sign-up-two">
+            <form className="interest-form" onSubmit={onSubmit}>
+              <h2 className="sign-up-header">Lets get you set up <span>(2/4)</span></h2>
+              <div className="progress-box two">
+                <div className="progress filled"></div>
+                <div className="progress filled"></div>
+                <div className="progress"></div>
+                <div className="progress"></div>
+              </div>
+              <div className="interests-section">
+                <p className="sign-in-tagline">What are your interests and hobbies?</p>
+                <p className="sign-in-tagline">(Separate each interest with a comma)</p>
+                <br></br>
+                <input className="sign-up-input italics" type='text' name='tag' placeholder='I am interested in...' />
+                <div className="sign-up-btns">
+                  <button className="submit-form" type='submit'><span className="std-btn base plus">Continue</span><span className="hollow-btn plus">Skip</span></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </React.Fragment>
+      
+    )
+  }
 
-  const [state, setState] = useState({
-    tag: '',
-    picture: '',
-    friends: '',
-    active: 'stepOne',
-  });
+  function stepThree() {
+    return (
+      <React.Fragment>
+        <div className="sign-up-three-box">
+          <div className="back-button-box">
+            <button className="back-button" type='button' onClick={() => {setState({...state, active: 'stepTwo'})}}>
+              <img src={BackArrow} alt="Back to Previous Page"></img>
+            </button>
+          </div>
+          <div className="sign-up-three">
+            <h2 className="sign-up-header">Lets get you set up <span>(3/4)</span></h2>
+            <div className="progress-box three">
+              <div className="progress filled"></div>
+              <div className="progress filled"></div>
+              <div className="progress filled"></div>
+              <div className="progress"></div>
+            </div>
+            <div className="friends-section">
+              <p className="sign-in-tagline">Add your friends!</p>
+              <input className="sign-up-input italics" type='text' name='friends' placeholder='Search by username/name/email' onChange={(e) => setState({...state, friends: e.target.value})}/>
+            </div>
+            <div className="sign-up-btns">
+              <button className="std-btn base plus" type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Continue</button>
+              <button className="hollow-btn plus" type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Skip</button>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
+  function stepFour() {
+    return (
+      <React.Fragment>
+        <div className="sign-up-four-box">
+          <div className="back-button-box">
+            <button className="back-button" type='button' onClick={() => {setState({...state, active: 'stepThree'})}}>
+              <img src={BackArrow} alt="Back to Previous Page"></img>
+            </button>
+          </div>
+          <div className="sign-up-four">
+            <h2 className="sign-up-header">Lets get you set up <span>(4/4)</span></h2>
+            <div className="progress-box four">
+              <div className="progress filled"></div>
+              <div className="progress filled"></div>
+              <div className="progress filled"></div>
+              <div className="progress filled"></div>
+            </div>
+            <div className="calendar-section">
+              <p className="sign-in-tagline cal">Let your friends know when you're free to hangout this week.</p>
+            </div>
+            <div className="sign-up-btns">
+              <NavLink to="/"><span className="std-btn base plus">Done!</span><span className="hollow-btn plus">Skip</span></NavLink>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
 
   function getActiveStep() {
-    console.log(state.active)
     switch (state.active) {
+      case 'stepBase':
+        return stepBase();
       case 'stepOne':
         return stepOne();
       case 'stepTwo':
@@ -75,68 +211,12 @@ function OnboardingWizard() {
       case 'stepFour':
         return stepFour();
       default:
-        return stepOne();
+        return stepBase();
     }
-  }
-
-  function stepOne() {
-    return (
-      <div className="sign-up-one">
-        <button onClick={() => {setState({...state, active: 'stepBase'})}}><span>&#8592;</span></button>
-        <h2>Lets get you set up <span>(1/4)</span></h2>
-        <input type='file' name='profilePicture' accept='image/*' onChange={(e) => setState({...state, picture: e.target.value})}/>
-        <button onClick={() => {setState({...state, active: 'stepTwo'})}}>Continue</button>
-        <button onClick={() => {setState({...state, active: 'stepTwo'})}}>Later</button>
-      </div>
-    )
-  }
-
-  function stepTwo() {
-    return (
-      <div className="sign-up-two">
-        <button onClick={() => {setState({...state, active: 'stepOne'})}}><span>&#8592;</span></button>
-        <h2>Lets get you set up <span>(2/4)</span></h2>
-        <p>What are your interests/hobbies?</p>
-        <p>(Separate each interest with a comma)</p>
-        <input type='text' name='tag' placeholder='I am interested in...' onChange={(e) => setState({...state, tag: e.target.value})}/>
-        <button onClick={() => {
-          // Send request back to make a user, log in the user, get token
-          setState({...state, active: 'stepThree'})
-          }
-          }>Continue</button>
-        <button onClick={() => {setState({...state, active: 'stepThree'})}}>Later</button>
-      </div>
-    )
-  }
-
-  function stepThree() {
-    return (
-      <div className="sign-up-three">
-        <button onClick={() => {setState({...state, active: 'stepTwo'})}}><span>&#8592;</span></button>
-        <h2>Lets get you set up <span>(3/4)</span></h2>
-        <p>Add your friends!</p>
-        <p>(Separate each interest with a comma)</p>
-        <input type='text' name='friends' placeholder='Search by username/name/email' onChange={(e) => setState({...state, friends: e.target.value})}/>
-        <button onClick={() => {setState({...state, active: 'stepFour'})}}>Continue</button>
-        <button onClick={() => {setState({...state, active: 'stepFour'})}}>Later</button>
-      </div>
-    )
-  }
-
-  function stepFour() {
-    return (
-      <div className="sign-up-four">
-        <button onClick={() => {setState({...state, active: 'stepThree'})}}><span>&#8592;</span></button>
-        <h2>Lets get you set up <span>(4/4)</span></h2>
-        <p>Let your friends know when you're free to hangout this week.</p>
-        <NavLink to="/">Done!</NavLink>
-      </div>
-    )
   }
 
   return (
     <React.Fragment>
-      {console.log(state)}
       {getActiveStep()}
     </React.Fragment>
   )
