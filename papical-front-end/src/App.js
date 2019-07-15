@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import Dashboard from "./Dashboard.js";
-import Calendar from "./Calendar.js";
+import Calendars from "./Calendar.js";
 import Friends from "./Friends.js";
 import Notifications from "./Notifications.js";
 import User from "./User.js";
@@ -12,6 +12,9 @@ import SignUp from "./SignUp.js";
 import './reset.css';
 import './normalize.css';
 import './App.css';
+import Name2 from './pictures/Name2.png';
+import Bell from './pictures/Bell.png';
+import Profile from './pictures/Profile.png';
 
 require('dotenv').config()
 
@@ -19,7 +22,7 @@ function AppRouter() {
 
   const [state, setState] = useState({
     isInsider: false,
-    isLoggedIn: false,
+    isLoggedIn: true,
   });
 
   
@@ -65,15 +68,16 @@ function AppRouter() {
     function outerNav() {
       return (
         <React.Fragment>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/login">Log In</Link>
-              </li>
-              <li>
-                <Link to="/signup">Sign Up</Link>
-              </li>
-            </ul>
+          <nav className="nav outer">
+            <div className="left-side">
+              {/* <NavLink to="/"> */}
+                <img className="papical-logo-white" src={Name2} alt="Papical Logo"/>
+              {/* </NavLink> */}
+            </div>
+            <div className="right-side">
+              <Link className="nav-hollow-btn" to="/login">Log In</Link>
+              <Link className="nav-std-btn" to="/signup">Sign Up</Link>
+            </div>
           </nav>
         </React.Fragment>
       )
@@ -82,24 +86,19 @@ function AppRouter() {
     function innerNav() {
       return (
         <React.Fragment>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/calendar">Calendar</Link>
-              </li>
-              <li>
-                <Link to="/friends">Friends</Link>
-              </li>
-              <li>
-                <Link to="/notifications">Notifications</Link>
-              </li>
-              <li>
-                <Link to="/user">User</Link>
-              </li>
-            </ul>
+          <nav className="nav inner">
+            <div className="left-side">
+              {/* <NavLink to="/"> */}
+                <img className="papical-logo-white" src={Name2} alt="Papical Logo"/>
+              {/* </NavLink> */}
+            </div>
+            <div className="right-side">
+              <Link className="nav-hollow-btn inner" to="/">Dashboard</Link>
+              <Link className="nav-hollow-btn inner" to="/calendar">Calendar</Link>
+              <Link className="nav-hollow-btn inner" to="/friends">Friends</Link>
+              <Link to="/notifications"><img className="bell" src={Bell} alt="Notifications"/></Link>
+              <Link to="/user"><img className="profile" src={Profile} alt="Profile"/></Link>
+            </div>
           </nav>
         </React.Fragment>
       )
@@ -109,18 +108,21 @@ function AppRouter() {
     <BrowserRouter>
       <div className="App">
         {getActiveNav()}
-        <h1>Papical</h1>
         <Route path="/" exact component={Dashboard} />
-        <Route path="/calendar/" component={Calendar} />
+        <Route path="/calendar/" component={Calendars} />
         <Route path="/friends/" component={Friends} />
         <Route path="/notifications/" component={Notifications} />
         <Route path="/user/" component={User} />
-        <Route path="/signup/" component={SignUp} />
+        <Route path="/signup/" 
+              render={(routeProps) => (
+                <SignUp {...routeProps} onFormSubmit={onLogInFunc} />
+                )} 
+        />
         <Route path="/login/"
-               render={(routeProps) => (
-                 <LogIn {...routeProps} onLogInFunc={onLogInFunc} />
-               )} 
-         />
+              render={(routeProps) => (
+                <LogIn {...routeProps} onLogInFunc={onLogInFunc} />
+              )} 
+        />
         {state.isInsider ? '' : <SignIn onLogInFunc={onLogInFunc} onSignUpFunc={onSignUpFunc} />}
       </div>
     </BrowserRouter>

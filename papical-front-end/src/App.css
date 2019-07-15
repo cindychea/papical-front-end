@@ -1,11 +1,114 @@
+/* GET FONTS */
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('./fonts/HelveticaNeue.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Medium';
+  src: url('./fonts/HelveticaNeueMed.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Light';
+  src: url('./fonts/HelveticaNeueLt.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* APP COMPONENT */
 html {
   box-sizing: border-box;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
-nav {
+.sign-up-input::-webkit-input-placeholder {
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 14pt;
+  color: #4f4f4f
+}
+.sign-up-input:-ms-input-placeholder {
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 14pt;
+  color: #4f4f4f
+}
+.sign-up-input:-moz-placeholder {
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 14pt;
+  color: #4f4f4f
+}
+.sign-up-input::-moz-placeholder {
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 14pt;
+  color: #4f4f4f
+}
+
+/* NAV */
+.nav {
   background-color: #27B7DB;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px;
+}
+.papical-logo-white {
+  max-width: 120px;
+}
+.left-side {
+  flex: 0 0 auto;
+  justify-content: flex-start;
+}
+.right-side {
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+.nav-hollow-btn {
+  padding: 10px;
+  border: 1px solid #fafafa;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fafafa;
+  font-weight: 600;
+  min-width: 110px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 10px;
+  font-size: 14pt;
+}
+.nav-std-btn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #fafafa;
+  color: #27B7DB;
+  font-weight: 600;
+  min-width: 110px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 40px;
+  font-size: 14pt;
+}
+.nav-hollow-btn.inner {
+  border: none;
+  margin-right: 10px;
+}
+.bell {
+  width: 35px;
+  height: 35px;
+  margin-top: 3px;
+  margin-right: 40px;
+  margin-left: 20px;
+}
+.profile {
+  padding: 0 10px;
+  margin-right: 40px;
 }
 
 /* SIGN IN COMPONENT */
@@ -21,14 +124,303 @@ nav {
   top: 0;
   left: 0;
 }
-.sign-in-title {
-  color: #27B7DB;
-  font-family: Arial, Helvetica, sans-serif;
-}
 .sign-in {
-  width: 450px;
+  width: 350px;
+}
+.sign-in-title {
+  width: 250px;
+  margin-bottom: 35px;
+}
+.sign-in-tagline {
+  color: #4f4f4f;
+  font-family: "Helvetica Neue Medium", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  margin-bottom: 20px; 
+  max-width: 400px;
+}
+.sign-in-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  padding-right: 50px;
+  padding-top: 20px;
+}
+.sign-up-input.main {
+  min-width: 250px;  
 }
 .papical-logo {
   height: 450px;
   width: 450px;
+}
+input {
+  border: 1px solid #fafafa;
+  padding: 8px;
+  margin-bottom: 20px;
+}
+.hollow-btn {
+  padding: 10px;
+  border: 1px solid #27B7DB;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #27B7DB;
+  min-width: 110px;
+  display: inline-block;
+  text-align: center;
+  font-size: 14pt;
+}
+.std-btn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #27B7DB;
+  font-weight: 600;
+  color: #fafafa;
+  min-width: 110px;
+  display: inline-block;
+  text-align: center;
+  font-size: 14pt;
+}
+.or {
+  width: 110px;
+  text-align: center;
+  padding: 10px;
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 14pt;
+  color: #888888;
+}
+
+/* SIGN UP COMPONENT */
+.sign-up-header {
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 38px;
+  color: #4f4f4f;
+  padding: 25px 0px;
+  align-self: flex-start;
+}
+.sign-up-base {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.sign-up-input {
+  min-width: 300px;
+  border: 1px solid #888888;
+  border-radius: 5px;
+} 
+.std-btn.base {
+  align-self: flex-end;
+}
+.sign-up-one-box, .sign-up-two-box, .sign-up-three-box, .sign-up-four-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 85vh;
+}
+.back-button-box {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex: 1 auto;
+  align-self: flex-start;
+  max-width: 30px;
+  margin-left: 40px;
+  padding-bottom: 70px;
+}
+.back-button {
+  border: none;
+}
+.sign-up-one, .sign-up-two, .sign-up-three, .sign-up-four {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  min-width: 600px;
+  margin: 0 auto;
+}
+.progress-box {
+  display: flex;
+  flex-direction: row;
+  min-width: 400px;
+  justify-content: center;
+  align-items: center;
+  padding-right: 200px;
+  padding-bottom: 40px;
+}
+.progress {
+  border: 2px solid #888888;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 10px;
+}
+.progress.filled {
+  background-color: #EEB074;
+}
+.photo-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.photo-box {
+  align-self: flex-start;
+}
+.photo-holder {
+  border: 1px solid #888888;
+  background-color: #ebebeb;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  margin-right: 70px;
+}
+.photo-upload-label {
+  color: #27B7DB;
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 15pt;
+  text-decoration: underline;
+  width: 100%;
+  margin-left: 50px;
+}
+.photo-upload {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.photo-text {
+  display: flex;
+  align-self: flex-end;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.sign-in-tagline.photo {
+  max-width: 300px;
+}
+.sign-up-btns {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  align-self: flex-end;
+}
+.std-btn.base.plus {
+  margin-right: 10px;
+}
+.hollow-btn.plus {
+  border: 1px solid #888888;
+  color: #888888;
+}
+.interest-form {
+  width: 100%;
+}
+.progress-box.two {
+  padding-right: 0;
+}
+.sign-up-input.italics {
+  font-style: italic;
+  margin-bottom: 150px;
+  max-width: 350px;
+}
+.submit-form {
+  all: unset;
+}
+.interests-section {
+  display: flex;
+  flex-direction: column;
+}
+.friends-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  width: 100%;
+}
+.calendar-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  width: 100%;
+  margin-bottom: 150px;
+}
+.sign-in-tagline.cal {
+  max-width: 100%;
+}
+
+/* SIGN UP COMPONENT */
+.sign-up-header.login {
+  text-decoration: none;
+}
+.log-in-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* DASHBOARD COMPONENT */
+.dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.activity {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+.activity-header {
+  color: #4f4f4f;
+  font-family: "Helvetica Neue Medium", Arial, Helvetica, sans-serif;
+  font-size: 15pt;
+  margin-bottom: 20px; 
+  margin-right: 70px;
+  display: flex;
+  align-self: flex-start;
+}
+.activity-link {
+  color: #27B7DB;
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 15pt;
+  text-decoration: underline;
+}
+.activity-header.two {
+  margin-top: 40px;
+}
+.std-btn.base.dash {
+  margin-left: 100px;
+}
+
+/* CALENDAR COMPONENT */
+.cal {
+  height: 300px;
+}
+
+
+.profile-photo {
+  border: 1px solid #888888;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  margin-right: 70px;
 }
