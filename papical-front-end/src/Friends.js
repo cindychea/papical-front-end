@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import { request } from 'https';
-// import { userInfo } from 'os';
 
 function Friends() {
   
-  const [friends, setFriends] = useState([])
-  const [currentUser, setCurrentUser] = useState([])
+  const [friendships, setFriendships] = useState([])
+  const [currentUser, setCurrentUser] = useState({})
+
   
-  // getting current information
+// Getting current user information
   useEffect( () => {
   
     const url = 'http://localhost:8000/users/'
@@ -18,16 +17,15 @@ function Friends() {
       } 
     }).then(function (response) {
         // handle success
-        setCurrentUser(response.data)
+        setCurrentUser(response.data[0])
       })
       .catch(function (error) {
         // handle error
         console.log(error);
       })
-  
   }, [])
 
-  // getting unique list of friendships
+  // Getting list of friendships
   useEffect( () => {
 
       const url = 'http://localhost:8000/friends/'
@@ -37,67 +35,43 @@ function Friends() {
         } 
       }).then(function (response) {
           // handle success
-          // console.log('data', response.data);
-          setFriends(response.data)
+          setFriendships(response.data)
         })
         .catch(function (error) {
           // handle error
           console.log(error);
         })
+  }, [])
 
-    }, [])
+  const FriendDetails = (friendship) => {
+    const from_user = friendship.from_user
+    const to_user = friendship.to_user
 
-  //getting friends list
-  let friendUsers = []
-  const FriendsList = (friend) => {
-    const user = currentUser[0];
-    const from_user = friend.from_user
-    const to_user = friend.to_user
+    // let friend = null
+    // if (friendship.to_user === currentUser) {
+    //   friend = from_user
+    // } else {
+    //   friend = to_user
+    // }
 
-    if (to_user.pk !== user.pk) {
-      friendUsers.push(to_user)
-    }
-    if (from_user.pk !== user.pk) {
-      friendUsers.push(from_user)
-    }
-
-    //getting unique friends
-    var listOfFriends = friendUsers.reduce((unique, o) => {
-      if(!unique.some(obj => obj.pk === o.pk)) {
-        unique.push(o);
-      }
-      return unique;
-    },[])
-
-    console.log(listOfFriends)
-
-    // listOfFriends.forEach((user) => {
-    //   console.log(user);
-
-    // })
-
-
-    // return (
-    //     <li key={friend.pk}>
-    //       <p>{to_user.picture}</p>
-    //       <p>{to_user.username}</p>
-    //       <p>{to_user.first_name} {to_user.last_name}</p>
-    //     </li>
-    //   )
+    const friend = (friendship.to_user.pk === currentUser.pk) ? from_user : to_user
     
+    const imageUrl = (friend.picture === null) ? `http://localhost:8000/media/images/profile_icon.svg` : `http://localhost:8000${friend.picture}`
 
+    return (
+      <li key={friend.pk}>
+        <img src={`${imageUrl}`} alt={friend.username} />
+        <p>{friend.username}</p>
+        <p>{friend.first_name} {friend.last_name}</p>
+      </li>
+    )
   }
-
-
-
-
-
 
   return (
     <section>
       <h2>Friends</h2>
         <ul>
-          {friends.map((friend) => FriendsList(friend))}
+          {friendships.map((friendship) => FriendDetails(friendship))}
         </ul>
       <p></p>
     </section>
