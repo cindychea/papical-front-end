@@ -56,7 +56,20 @@ function Notifications() {
     )
   }
 
-
+  const PendingInviteDetails = (pendingInvite) => {
+    const hangout = pendingInvite.hangout
+    
+    return (
+      <li key={hangout.pk}>
+        <p>{hangout.name}</p>
+        <p>{hangout.description}</p>
+        <p>{hangout.start_time}</p>
+        <p>{hangout.end_time}</p>
+        <button>Accept</button>
+        <button>Decline</button>
+      </li>
+    )
+  }
 
 
   return (
@@ -69,6 +82,13 @@ function Notifications() {
           {confirmedInvite.map((invite) => HangoutDetails(invite))}
         </ul>
       </div>
+      <div>
+        <h3>{pendingInvite.length} pending invitations</h3>
+        <ul>
+          {pendingInvite.map((invite) => PendingInviteDetails(invite))}
+        </ul>
+      </div>
+
     </section>
   )
 }
