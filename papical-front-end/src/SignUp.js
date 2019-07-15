@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import BackArrow from './pictures/BackArrow.png';
 
-function SignUp() {
+function SignUp({onFormSubmit}) {
 
   const [state, setState] = useState({
     first_name: '',
@@ -18,7 +18,6 @@ function SignUp() {
   });
 
   const onSubmit = (e) => {
-    console.log('form submitted')
     e.preventDefault()
     registerUser(state)
     setState({...state, active: 'stepThree'})
@@ -41,7 +40,12 @@ function SignUp() {
       })
       .then(function(response) {
         console.log(response)
-
+        let stateReg = {
+          username: state.username,
+          password: state.password
+        }
+        console.log(stateReg)
+        onFormSubmit(stateReg)
       })
       .catch(function (error) {
         console.log(error);
@@ -82,7 +86,7 @@ function SignUp() {
             <div className="photo-section">
               <div className="photo-box">
                 <div className="photo-holder"></div>
-                <label className="photo-upload-label" for="file">Add photo</label>
+                <label className="photo-upload-label" htmlFor="file">Add photo</label>
                 <input className="photo-upload" id='file' type='file' name='profilePicture' accept='image/*' onChange={(e) => setState({...state, picture: e.target.value})}/>
               </div>
               <div className="photo-text">
@@ -195,7 +199,6 @@ function SignUp() {
   }
 
   function getActiveStep() {
-    console.log(state.active)
     switch (state.active) {
       case 'stepBase':
         return stepBase();
@@ -214,7 +217,6 @@ function SignUp() {
 
   return (
     <React.Fragment>
-      {console.log(state)}
       {getActiveStep()}
     </React.Fragment>
   )

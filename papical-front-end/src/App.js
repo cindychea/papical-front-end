@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import Dashboard from "./Dashboard.js";
-import Calendar from "./Calendar.js";
+import Calendars from "./Calendar.js";
 import Friends from "./Friends.js";
 import Notifications from "./Notifications.js";
 import User from "./User.js";
@@ -70,7 +70,9 @@ function AppRouter() {
         <React.Fragment>
           <nav className="nav outer">
             <div className="left-side">
-            <img className="papical-logo-white" src={Name2} alt="Papical Logo"/>
+              {/* <NavLink to="/"> */}
+                <img className="papical-logo-white" src={Name2} alt="Papical Logo"/>
+              {/* </NavLink> */}
             </div>
             <div className="right-side">
               <Link className="nav-hollow-btn" to="/login">Log In</Link>
@@ -86,7 +88,9 @@ function AppRouter() {
         <React.Fragment>
           <nav className="nav inner">
             <div className="left-side">
-              <img className="papical-logo-white" src={Name2} alt="Papical Logo"/>
+              {/* <NavLink to="/"> */}
+                <img className="papical-logo-white" src={Name2} alt="Papical Logo"/>
+              {/* </NavLink> */}
             </div>
             <div className="right-side">
               <Link className="nav-hollow-btn inner" to="/">Dashboard</Link>
@@ -105,11 +109,15 @@ function AppRouter() {
       <div className="App">
         {getActiveNav()}
         <Route path="/" exact component={Dashboard} />
-        <Route path="/calendar/" component={Calendar} />
+        <Route path="/calendar/" component={Calendars} />
         <Route path="/friends/" component={Friends} />
         <Route path="/notifications/" component={Notifications} />
         <Route path="/user/" component={User} />
-        <Route path="/signup/" component={SignUp} />
+        <Route path="/signup/" 
+              render={(routeProps) => (
+                <SignUp {...routeProps} onFormSubmit={onLogInFunc} />
+                )} 
+        />
         <Route path="/login/"
               render={(routeProps) => (
                 <LogIn {...routeProps} onLogInFunc={onLogInFunc} />

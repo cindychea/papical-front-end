@@ -379,6 +379,38 @@ input {
   align-items: center;
   flex-direction: column;
   height: 75vh;
-  max-width: 300px;
+  max-width: 600px;
   margin: 0 auto;
+}
+.activity {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+.activity-header {
+  color: #4f4f4f;
+  font-family: "Helvetica Neue Medium", Arial, Helvetica, sans-serif;
+  font-size: 15pt;
+  margin-bottom: 20px; 
+  margin-right: 70px;
+  display: flex;
+  align-self: flex-start;
+}
+.activity-link {
+  color: #27B7DB;
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 15pt;
+  text-decoration: underline;
+}
+.activity-header.two {
+  margin-top: 40px;
+}
+.std-btn.base.dash {
+  margin-left: 100px;
+}
+
+/* CALENDAR COMPONENT */
+.cal {
+  height: 300px;
 }
