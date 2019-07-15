@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import Cal from './Cal.js';
 
 function Dashboard() {
   const [currentUser, setCurrentUser] = useState([])
@@ -75,10 +76,12 @@ function Dashboard() {
         </NavLink>
       </div>
       <div className="activity">
-        <p className="activity-header two">Your weekly summary:</p>
+        <p className="activity-header two">Your weekly summary</p>
         {/* make this into a link */}
         <button className="std-btn base dash">Book a hangout</button>
-        {/* add calendar */}
+      </div>
+      <div id="dashboard-calendar-box">
+        <Cal />
       </div>
     </div>
   )

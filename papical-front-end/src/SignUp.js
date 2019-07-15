@@ -1,6 +1,7 @@
 import React, { useState }  from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import Cal from './Cal.js';
 import BackArrow from './pictures/BackArrow.png';
 
 function SignUp({onFormSubmit}) {
@@ -187,10 +188,13 @@ function SignUp({onFormSubmit}) {
               <div className="progress filled"></div>
             </div>
             <div className="calendar-section">
-              <p className="sign-in-tagline cal">Let your friends know when you're free to hangout this week.</p>
+              <p className="sign-in-tagline cal">You're all set! Go to the calendar to your friends know when you're free or to book a hangout.</p>
             </div>
-            <div className="sign-up-btns">
-              <NavLink to="/"><span className="std-btn base plus">Done!</span><span className="hollow-btn plus">Skip</span></NavLink>
+            <div id="sign-up-calendar-box">
+              <Cal />
+            </div>
+            <div className="sign-up-btns cal">
+              <NavLink to="/"><span className="std-btn base plus">Done!</span></NavLink>
             </div>
           </div>
         </div>

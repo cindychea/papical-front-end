@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import Dashboard from "./Dashboard.js";
-import Calendars from "./Calendar.js";
+import Calendar from "./Calendar.js";
 import Friends from "./Friends.js";
 import Notifications from "./Notifications.js";
 import User from "./User.js";
@@ -109,7 +109,7 @@ function AppRouter() {
       <div className="App">
         {getActiveNav()}
         <Route path="/" exact component={Dashboard} />
-        <Route path="/calendar/" component={Calendars} />
+        <Route path="/calendar/" component={Calendar} />
         <Route path="/friends/" component={Friends} />
         <Route path="/notifications/" component={Notifications} />
         <Route path="/user/" component={User} />
