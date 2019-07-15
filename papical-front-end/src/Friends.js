@@ -1,66 +1,77 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import { request } from 'https';
-// import { userInfo } from 'os';
 
 function Friends() {
-
-  const [friends, setFriends] = useState([])
-  const [currentUser, setCurrentUser] = useState([])
   
+  const [friendships, setFriendships] = useState([])
+  const [currentUser, setCurrentUser] = useState({})
 
+  
+// Getting current user information
   useEffect( () => {
-
-      const url = 'http://localhost:8000/friends/'
-      axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
-      }).then(function (response) {
-          // handle success
-          // console.log('data', response.data);
-          setFriends(response.data)
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-
-    }, [])
-
-  useEffect( () => {
-
+  
     const url = 'http://localhost:8000/users/'
-    axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+    axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
+      } 
     }).then(function (response) {
         // handle success
-        // console.log('data', response.data);
-        setCurrentUser(response.data)
+        setCurrentUser(response.data[0])
       })
       .catch(function (error) {
         // handle error
         console.log(error);
       })
-
   }, [])
 
-  const FriendsList = (friend) => {
-    let user = currentUser[0];
+  // Getting list of friendships
+  useEffect( () => {
 
-    if (friend.from_user.pk !== user.pk) {
- 
-      return (
-          <li key={friend.pk}>
-            <p>{friend.from_user.picture}</p>
-            <p>{friend.from_user.username}</p>
-            <p>{friend.from_user.first_name} {friend.from_user.last_name}</p>
-          </li>
-        )
-      }
+      const url = 'http://localhost:8000/friends/'
+      axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
+        } 
+      }).then(function (response) {
+          // handle success
+          setFriendships(response.data)
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+  }, [])
+
+  const FriendDetails = (friendship) => {
+    const from_user = friendship.from_user
+    const to_user = friendship.to_user
+
+    // let friend = null
+    // if (friendship.to_user === currentUser) {
+    //   friend = from_user
+    // } else {
+    //   friend = to_user
+    // }
+
+    const friend = (friendship.to_user.pk === currentUser.pk) ? from_user : to_user
+    
+    const imageUrl = (friend.picture === null) ? `http://localhost:8000/media/images/profile_icon.svg` : `http://localhost:8000${friend.picture}`
+
+    return (
+      <li key={friend.pk}>
+        <img src={`${imageUrl}`} alt={friend.username} />
+        <p>{friend.username}</p>
+        <p>{friend.first_name} {friend.last_name}</p>
+      </li>
+    )
   }
 
   return (
     <section>
       <h2>Friends</h2>
         <ul>
-          {friends.map((friend) => FriendsList(friend))}
+          {friendships.map((friendship) => FriendDetails(friendship))}
         </ul>
       <p></p>
     </section>
