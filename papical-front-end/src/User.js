@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Tags from './Tags';
 
 function User() {
 
   const [currentUser, setCurrentUser] = useState({})
-  // const [intrests, setIntrests] = useState([])
 
 // Getting current user information
   useEffect( () => {
@@ -25,9 +25,6 @@ function User() {
   
   }, [])
 
-  const tags = currentUser.tag
-  console.log(tags);
-
 
   const imageUrl = `http://localhost:8000${currentUser.picture}`;
 
@@ -44,7 +41,7 @@ function User() {
         <div>
           <h2>Interests</h2>
           <ul>
-            
+            <Tags />
           </ul>
         </div>
     </section>
