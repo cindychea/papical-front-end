@@ -22,7 +22,7 @@ function AppRouter() {
 
   const [state, setState] = useState({
     isInsider: false,
-    isLoggedIn: false,
+    isLoggedIn: true,
   });
 
   
