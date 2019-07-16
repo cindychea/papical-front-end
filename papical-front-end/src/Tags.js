@@ -3,36 +3,36 @@ import axios from 'axios';
 
 function Tags() {
 
-  const [tags, setTags] = useState([])
+  const [userTags, setUserTags] = useState([])
 
-// Getting current user information
+// Getting list of tags from current user
   useEffect( () => {
   
-    const url = 'http://localhost:8000/tags/'
+    const url = 'http://localhost:8000/users/'
     axios.get(url, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
       } 
     }).then(function (response) {
-        // handle success
-        setTags(response.data)
+        const currentUser = response.data[0]
+        setUserTags(currentUser.tag);
       })
       .catch(function (error) {
         // handle error
         console.log(error);
       })
-      
-    }, [])
   
+  }, [])
+
   const TagList = (tag) => {
     return (
-      <li>{tag.name}</li>
+      <li>{tag}</li>
     )
   }
   return (
     <div>
       <ul>
-        {tags.map((tag) => TagList(tag))}
+        {userTags.map((tag) => TagList(tag))}
       </ul>
     </div>
   )
