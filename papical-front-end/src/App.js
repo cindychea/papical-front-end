@@ -4,6 +4,7 @@ import axios from 'axios';
 import Dashboard from "./Dashboard.js";
 import Calendar from "./Calendar.js";
 import Friends from "./Friends.js";
+import FriendProfile from "./FriendProfile";
 import Notifications from "./Notifications.js";
 import User from "./User.js";
 import SignIn from "./SignIn.js";
@@ -136,6 +137,7 @@ function AppRouter() {
         <Route exact path="/" component={Dashboard} />
         <Route path="/calendar/" component={Calendar} />
         <Route path="/friends/" component={Friends} />
+        <Route path="/friendprofile/" component={FriendProfile} />
         <Route path="/notifications/" component={Notifications} />
         <Route path="/user/" component={User} />
         <Route path="/signup/" 

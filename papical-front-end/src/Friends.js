@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Delete from './pictures/Delete.png';
 
 function Friends() {
@@ -100,11 +101,16 @@ function Friends() {
     const imageUrl = (friend.picture === null) ? `http://localhost:8000/media/images/profile_icon.svg` : `http://localhost:8000${friend.picture}`
 
     return (
-      <div key={friend.pk} className="friend">
+      <Link to={{
+        pathname: "/friendprofile",
+        friendProfileProps:{
+          friend: friend
+        }
+        }} key={friend.pk} className="friend">
         <img src={`${imageUrl}`} alt={friend.username} className="friends-photo"/>
         <p className="friend-name">{friend.first_name} {friend.last_name}</p>
         <img src={Delete} alt="Delete" className="delete"/>
-      </div>
+      </Link>
     )
   }
 
