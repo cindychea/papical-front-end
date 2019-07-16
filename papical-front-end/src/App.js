@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import Dashboard from "./Dashboard.js";
@@ -21,9 +21,15 @@ require('dotenv').config()
 function AppRouter() {
 
   const [state, setState] = useState({
-    isInsider: false,
-    isLoggedIn: true,
+    isInsider: Boolean(localStorage.getItem('refreshtoken')),
+    isLoggedIn: Boolean(localStorage.getItem('refreshtoken')),
   });
+
+
+  useEffect(() => {
+    console.log('mounted', state);
+  }, []) 
+
 
   
   function onLogInFunc({username, password}) {
@@ -35,7 +41,7 @@ function AppRouter() {
       password,
     })
     .then(function(response) {
-      console.log(response.data.access)
+      // console.log(response.data.access)
       localStorage.setItem('accesstoken', response.data.access)
       localStorage.setItem('refreshtoken', response.data.refresh)
       setState({
@@ -52,6 +58,15 @@ function AppRouter() {
       setState({
         isInsider: true,
       });
+    }
+
+    function onLogOut(e) {
+      e.preventDefault()
+      localStorage.removeItem('accesstoken')
+      localStorage.removeItem('refreshtoken')
+      setState({...state, isLoggedIn: false, isInsider: false});
+      console.log(state)
+      // console.log(localStorage.getItem('refreshtoken'))
     }
     
     function getActiveNav() {
@@ -93,6 +108,7 @@ function AppRouter() {
               {/* </NavLink> */}
             </div>
             <div className="right-side">
+            <button onClick={onLogOut} className="hollow-btn base dash">Log Out</button>
               <Link className="nav-hollow-btn inner" to="/">Dashboard</Link>
               <Link className="nav-hollow-btn inner" to="/calendar">Calendar</Link>
               <Link className="nav-hollow-btn inner" to="/friends">Friends</Link>
@@ -108,7 +124,8 @@ function AppRouter() {
     <BrowserRouter>
       <div className="App">
         {getActiveNav()}
-        <Route path="/" exact component={Dashboard} />
+        {/* <button onClick={onLogOut}>fsdfdfsf</button> */}
+        <Route exact path="/" component={Dashboard} />
         <Route path="/calendar/" component={Calendar} />
         <Route path="/friends/" component={Friends} />
         <Route path="/notifications/" component={Notifications} />

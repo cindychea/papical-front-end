@@ -15,10 +15,10 @@ function Dashboard() {
         const hangoutList = response.data
         const filteredHangouts = hangoutList.filter(hangout => hangout['creator'] === currentUser['username'])
         // debugger;
-        console.log("CurrentUser", currentUser)
-        console.log("CurrentUser username", currentUser.username)
-        console.log("Hangouts:", hangoutList)
-        console.log("Filtered Hangouts:", filteredHangouts)
+        // console.log("CurrentUser", currentUser)
+        // console.log("CurrentUser username", currentUser.username)
+        // console.log("Hangouts:", hangoutList)
+        // console.log("Filtered Hangouts:", filteredHangouts)
         setUserHangouts(filteredHangouts)
       })
       .catch(function (error) {
@@ -34,8 +34,8 @@ function Dashboard() {
         const inviteList = response.data
         const filteredInvites = inviteList.filter(invite => invite.invitee === currentUser.pk)
         // debugger;
-        console.log("Invites:", inviteList)
-        console.log("Filtered Invites:", filteredInvites)
+        // console.log("Invites:", inviteList)
+        // console.log("Filtered Invites:", filteredInvites)
         setUserInvites(filteredInvites)
       })
       .catch(function (error) {
@@ -60,10 +60,7 @@ function Dashboard() {
         // handle error
         console.log(error);
       })
-  }, [])
-
-  // useEffect( () => {
-  // },[])
+  }, [currentUser])
 
   return (
     <div className="dashboard">

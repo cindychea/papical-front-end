@@ -16,6 +16,7 @@ function SignUp({onFormSubmit}) {
     picture: '',
     friends: '',
     active: 'stepBase',
+    // active: localStorage.getItem('refreshtoken') ? '' : 'stepBase',
   });
 
   const onSubmit = (e) => {
@@ -25,7 +26,7 @@ function SignUp({onFormSubmit}) {
   }
 
   const registerUser = () => {
-    console.log('registering')
+    // console.log('registering')
     const url = "http://localhost:8000/users/"
     axios.post(url, {
       username: state.username,
@@ -45,7 +46,7 @@ function SignUp({onFormSubmit}) {
           username: state.username,
           password: state.password
         }
-        console.log(stateReg)
+        // console.log(stateReg)
         onFormSubmit(stateReg)
       })
       .catch(function (error) {
@@ -180,7 +181,7 @@ function SignUp({onFormSubmit}) {
             </button>
           </div>
           <div className="sign-up-four">
-            <h2 className="sign-up-header">Lets get you set up <span>(4/4)</span></h2>
+            <h2 className="sign-up-header four">Lets get you set up <span>(4/4)</span></h2>
             <div className="progress-box four">
               <div className="progress filled"></div>
               <div className="progress filled"></div>
