@@ -39,7 +39,7 @@ function User() {
   }, [])
 
 
-  const imageUrl = `http://localhost:8000${currentUser.picture}`;
+  // const imageUrl = `http://localhost:8000${currentUser.picture}`;
 
   return (
     <section>

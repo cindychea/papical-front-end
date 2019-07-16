@@ -458,7 +458,7 @@ input {
   margin-bottom: 30px;
   background-color: #fafafa;
 }
-.book-hangout-form, .add-availability-form {
+#book-hangout-form, #add-availability-form {
   display: flex;
   justify-content: center;
   align-items: center;
