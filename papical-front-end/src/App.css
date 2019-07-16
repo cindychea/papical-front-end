@@ -413,4 +413,15 @@ input {
 /* CALENDAR COMPONENT */
 .cal {
   height: 300px;
+
+}
+
+/* PROFILE COMPONENT */
+.profile-photo {
+  border: 1px solid #888888;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  margin-right: 70px;
 }
