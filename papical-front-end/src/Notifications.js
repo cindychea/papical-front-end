@@ -30,9 +30,9 @@ function Notifications() {
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
         const inviteList = response.data
-        const confirmedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee === currentUser.pk && invite.attending === "A")
-        const pendingInvite = inviteList.filter(invite => invite.invitee === currentUser.pk && invite.attending === "NA")
-        
+        const confirmedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
+        const pendingInvite = inviteList.filter(invite => invite.invitee['pk'] === currentUser.pk && invite.attending === "NA")
+
         setConfirmedInvite(confirmedInvite)
         setPendingInvite(pendingInvite)
       })
@@ -40,11 +40,15 @@ function Notifications() {
         // handle error
         console.log(error);
       })
-  }
-
+    }
+    
   const HangoutDetails = (confirmedInvite) => {
     const hangout = confirmedInvite.hangout
-    
+    const invitee = confirmedInvite.invitee['username']
+    const creator = confirmedInvite.creator
+
+    const friend = (invitee !== currentUser.username) ? invitee : creator
+
     return (
       <li key={hangout.pk}>
         <p>{hangout.name}</p>
@@ -52,25 +56,30 @@ function Notifications() {
         <p>{hangout.description}</p>
         <p>{hangout.start_time}</p>
         <p>{hangout.end_time}</p>
+        <p>{friend}</p>
       </li>
     )
   }
 
   const PendingInviteDetails = (pendingInvite) => {
     const hangout = pendingInvite.hangout
-    
+    const invitee = pendingInvite.invitee['username']
+    const creator = pendingInvite.creator
+
+    const friend = (invitee !== currentUser.username) ? invitee : creator
+
     return (
       <li key={hangout.pk}>
         <p>{hangout.name}</p>
         <p>{hangout.description}</p>
         <p>{hangout.start_time}</p>
         <p>{hangout.end_time}</p>
-        <button>Accept</button>
-        <button>Decline</button>
+        <p>{friend}</p>
+        <a href="#">Accept</a>
+        <a href="#">Decline</a>
       </li>
     )
   }
-
 
   return (
     <section>
