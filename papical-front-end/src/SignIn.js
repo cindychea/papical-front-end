@@ -6,8 +6,8 @@ import Name from './pictures/Name.png';
 function SignIn({onLogInFunc, onSignUpFunc}) {
 
   const [state, setState] = useState({
-    username: 'cindychea',
-    password: '53sHhp28',
+    username: '',
+    password: '',
   });
 
   return (

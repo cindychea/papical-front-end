@@ -320,6 +320,7 @@ input {
 .hollow-btn.plus {
   border: 1px solid #888888;
   color: #888888;
+  background-color: #fafafa;
 }
 .interest-form {
   width: 100%;
@@ -423,6 +424,9 @@ input {
 .std-btn.base.dash {
   margin-left: 312px;
 }
+.hollow-btn.base.dash {
+  background-color: #fafafa;
+}
 #dashboard-calendar-box {
   height: 300px;
   width: 750px;
@@ -452,4 +456,14 @@ input {
 }
 .hollow-btn.base.cal {
   margin-bottom: 30px;
+  background-color: #fafafa;
+}
+.book-hangout-form, .add-availability-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  max-width: 300px;
+  margin: 0 auto;
 }

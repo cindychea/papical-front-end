@@ -1,7 +1,25 @@
 import React, { useState } from 'react';
 import Cal from './Cal.js';
+import BackArrow from './pictures/BackArrow.png';
 
 function Calendar() {
+
+  const [hangout, setHangout] = useState({
+    name: '',
+    date: '',
+    start_time: '',
+    end_time: '',
+    description: '',
+    location: '',
+    tags: ''
+  })
+
+  const [availability, setAvailability] = useState({
+    date: '',
+    start_time: '',
+    end_time: '',
+    available: true,
+  })
 
   const [state, setState] = useState({
     active: 'calView',
@@ -13,8 +31,8 @@ function Calendar() {
         <div className="calendar">
           <h2 className="sign-up-header cal">Calendar</h2>
           <div className="sign-up-btns">
-            <button className="std-btn base cal">Book a Hangout</button>
-            <button className="hollow-btn base cal">Add Availability</button>
+            <button className="std-btn base cal" onClick={() => {setState({...state, active: 'bookHangout'})}}>Book a Hangout</button>
+            <button className="hollow-btn base cal" onClick={() => {setState({...state, active: 'addAvailability'})}}>Add Availability</button>
           </div>
           <div id="calendar-box">
             <Cal />
@@ -27,7 +45,24 @@ function Calendar() {
   function bookHangout() {
     return (
       <React.Fragment>
-        BOOK HANGOUT
+        <div className="sign-up-one-box">
+          <div className="back-button-box">
+            <button className="back-button" type='button' onClick={() => {setState({...state, active: 'calView'})}}>
+              <img src={BackArrow} alt="Back to Previous Page"></img>
+            </button>
+          </div>
+          <form className="book-hangout-form">
+          <h2 className="sign-up-header">Book a Hangout</h2>
+            <input className="sign-up-input" type='text' name='EventName' placeholder='Event Name' onChange={(e) => setHangout({...hangout, name: e.target.value})}/>
+            <input className="sign-up-input" type='date' name='Date' placeholder='Date' onChange={(e) => setHangout({...hangout, date: e.target.value})}/>
+            <input className="sign-up-input" type='time' name='StartTime' placeholder='Start Time' onChange={(e) => setHangout({...hangout, start_time: e.target.value})}/>
+            <input className="sign-up-input" type='time' name='EndTime' placeholder='End Time' onChange={(e) => setHangout({...hangout, end_time: e.target.value})}/>
+            <input className="sign-up-input" type='text' name='Description' placeholder='Description' onChange={(e) => setHangout({...hangout, description: e.target.value})}/>
+            <input className="sign-up-input" type='location' name='Location' placeholder='Location' onChange={(e) => setHangout({...hangout, location: e.target.value})}/>
+            <input className="sign-up-input" type='text' name='tag' placeholder='Tags' />            
+            <button className="std-btn base" onClick={() => {setState({...state, active: 'calView'})}}>Submit</button>
+          </form>
+        </div>
       </React.Fragment>
     )
   }
@@ -35,7 +70,20 @@ function Calendar() {
   function addAvailability() {
     return (
       <React.Fragment>
-        ADD AVAILABILITY
+        <div className="sign-up-one-box">
+          <div className="back-button-box">
+            <button className="back-button" type='button' onClick={() => {setState({...state, active: 'calView'})}}>
+              <img src={BackArrow} alt="Back to Previous Page"></img>
+            </button>
+          </div>
+          <form className="add-availability-form">
+          <h2 className="sign-up-header">Add Availability</h2>
+            <input className="sign-up-input" type='date' name='Date' placeholder='Date' onChange={(e) => setAvailability({...availability, date: e.target.value})}/>
+            <input className="sign-up-input" type='time' name='StartTime' placeholder='Start Time' onChange={(e) => setAvailability({...availability, start_time: e.target.value})}/>
+            <input className="sign-up-input" type='time' name='EndTime' placeholder='End Time' onChange={(e) => setAvailability({...availability, end_time: e.target.value})}/>
+            <button className="std-btn base" onClick={() => {setState({...state, active: 'calView'})}}>Submit</button>
+          </form>
+        </div>
       </React.Fragment>
     )
   }
