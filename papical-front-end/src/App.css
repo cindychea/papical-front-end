@@ -478,3 +478,13 @@ input {
   align-self: flex-start;
   padding: 0 0 2px 2px ;
 }
+
+/* PROFILE COMPONENT */
+.profile-photo {
+  border: 1px solid #888888;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  margin-right: 70px;
+}

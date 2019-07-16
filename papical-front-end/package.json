@@ -6,6 +6,7 @@
     "@types/react-big-calendar": "^0.22.0",
     "axios": "^0.19.0",
     "@types/react-router-dom": "^4.3.4",
+    "axios": "^0.19.0",
     "dotenv": "^8.0.0",
     "lodash.update": "^4.10.2",
     "moment": "^2.24.0",
