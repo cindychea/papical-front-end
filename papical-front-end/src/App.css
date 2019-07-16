@@ -413,9 +413,10 @@ input {
 /* CALENDAR COMPONENT */
 .cal {
   height: 300px;
+
 }
 
-
+/* PROFILE COMPONENT */
 .profile-photo {
   border: 1px solid #888888;
   width: 200px;
