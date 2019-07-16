@@ -1,13 +1,13 @@
 import React from 'react';
 import {
   Calendar,
-  DateLocalizer,
+  // DateLocalizer,
   momentLocalizer,
-  globalizeLocalizer,
-  move,
+  // globalizeLocalizer,
+  // move,
   Views,
-  Navigate,
-  components,
+  // Navigate,
+  // components,
 } from 'react-big-calendar'
 import moment from "moment";
 import events from './events-temp'

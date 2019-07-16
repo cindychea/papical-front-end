@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, NavLink, Link } from "react-router-dom";
 import axios from 'axios';
 import Dashboard from "./Dashboard.js";
@@ -24,13 +24,6 @@ function AppRouter() {
     isInsider: Boolean(localStorage.getItem('refreshtoken')),
     isLoggedIn: Boolean(localStorage.getItem('refreshtoken')),
   });
-
-
-  useEffect(() => {
-    console.log('mounted', state);
-  }, []) 
-
-
   
   function onLogInFunc({username, password}) {
     
