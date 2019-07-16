@@ -15,7 +15,6 @@ function User() {
         Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
       } 
     }).then(function (response) {
-        // handle success
         setCurrentUser(response.data[0])
       })
       .catch(function (error) {
