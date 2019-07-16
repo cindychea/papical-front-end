@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import Cal from './Cal.js';
 
 function Dashboard() {
   const [currentUser, setCurrentUser] = useState([])
@@ -12,10 +13,44 @@ function Dashboard() {
     const url = 'http://localhost:8000/users/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
+        const hangoutList = response.data
+        const filteredHangouts = hangoutList.filter(hangout => hangout['creator'] === currentUser['username'])
+        // debugger;
+        // console.log("CurrentUser", currentUser)
+        // console.log("CurrentUser username", currentUser.username)
+        // console.log("Hangouts:", hangoutList)
+        // console.log("Filtered Hangouts:", filteredHangouts)
+        setUserHangouts(filteredHangouts)
         // handle success
         const user = response.data[0]
         setCurrentUser(user)
         getInvites(user)
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+        console.log(error.response.data.code);
+        const refreshUrl = 'http://localhost:8000/refresh/'
+        if (error.response.data.code === 'token_not_valid') {
+          axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
+          .then(function (response) {
+            localStorage.setItem('accesstoken', response.data.access)
+          })
+        }
+      })
+      .then(function (response) {
+        const url = 'http://localhost:8000/hangouts/'
+        axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+        }).then(function (response) {
+            const hangoutList = response.data
+            const filteredHangouts = hangoutList.filter(hangout => hangout['creator'] === currentUser['username'])
+            // debugger;
+            // console.log("CurrentUser", currentUser)
+            // console.log("CurrentUser username", currentUser.username)
+            // console.log("Hangouts:", hangoutList)
+            // console.log("Filtered Hangouts:", filteredHangouts)
+            setUserHangouts(filteredHangouts)
+        })
       })
       .catch(function (error) {
         // handle error
@@ -27,6 +62,12 @@ function Dashboard() {
     const url = 'http://localhost:8000/invitations/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
+        const inviteList = response.data
+        const filteredInvites = inviteList.filter(invite => invite.invitee === currentUser.pk)
+        // debugger;
+        // console.log("Invites:", inviteList)
+        // console.log("Filtered Invites:", filteredInvites)
+        setUserInvites(filteredInvites)
       const inviteList = response.data
         const confirmedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
         const pendingInvite = inviteList.filter(invite => invite.invitee['pk'] === currentUser.pk && invite.attending === "NA")
@@ -36,7 +77,74 @@ function Dashboard() {
       .catch(function (error) {
         // handle error
         console.log(error);
+        console.log(error.response.data.code);
+        const refreshUrl = 'http://localhost:8000/refresh/'
+        if (error.response.data.code === 'token_not_valid') {
+          axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
+          .then(function (response) {
+            localStorage.setItem('accesstoken', response.data.access)
+          })
+        }
       })
+      .then(function (response) {
+        const url = 'http://localhost:8000/invitations/'
+        axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+        }).then(function (response) {
+          const inviteList = response.data
+          const filteredInvites = inviteList.filter(invite => invite.invitee === currentUser.pk)
+          // debugger;
+          // console.log("Invites:", inviteList)
+          // console.log("Filtered Invites:", filteredInvites)
+          setUserInvites(filteredInvites)
+        })
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+  }
+
+  useEffect( () => {
+    const url = 'http://localhost:8000/users/'
+    axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+    }).then(function (response) {
+        // handle success
+        console.log('data 1', response.data);
+        const user = response.data[0]
+        // async await????
+        setCurrentUser(user)
+        getHangouts(user)
+        getInvites(user)
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error.response.data.code);
+        const refreshUrl = 'http://localhost:8000/refresh/'
+        if (error.response.data.code === 'token_not_valid') {
+          axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
+          .then(function (response) {
+            localStorage.setItem('accesstoken', response.data.access)
+          })
+        }
+      })
+      .then(function (response) {
+        const url = 'http://localhost:8000/users/'
+        axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+        }).then(function (response) {
+            // handle success
+            console.log('data 1', response.data);
+            const user = response.data[0]
+            // async await????
+            setCurrentUser(user)
+            getHangouts(user)
+            getInvites(user)
+          })
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+  }, [])
     }
     
   return (
@@ -50,10 +158,11 @@ function Dashboard() {
         </NavLink>
       </div>
       <div className="activity">
-        <p className="activity-header two">Your weekly summary:</p>
-        {/* make this into a link */}
-        <button className="std-btn base dash">Book a hangout</button>
-        {/* add calendar */}
+        <p className="activity-header two">Your weekly summary</p>
+        <NavLink className="std-btn base dash" to="/calendar">Book a hangout</NavLink>
+      </div>
+      <div id="dashboard-calendar-box">
+        <Cal />
       </div>
     </div>
   )

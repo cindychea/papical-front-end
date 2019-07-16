@@ -320,6 +320,7 @@ input {
 .hollow-btn.plus {
   border: 1px solid #888888;
   color: #888888;
+  background-color: #fafafa;
 }
 .interest-form {
   width: 100%;
@@ -346,19 +347,33 @@ input {
   align-content: flex-start;
   width: 100%;
 }
+.sign-up-header.four {
+  align-self: center;
+}
+.progress-box.four {
+  padding-right: 0;
+}
 .calendar-section {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: center;
   align-content: flex-start;
   width: 100%;
-  margin-bottom: 150px;
+  margin-bottom: 30px;
 }
 .sign-in-tagline.cal {
-  max-width: 100%;
+  max-width: 600px;
+}
+#sign-up-calendar-box {
+  height: 300px;
+  width: 750px;
+  margin-bottom: 30px;
+}
+.sign-up-btns.cal {
+  margin-right: -10px;
 }
 
-/* SIGN UP COMPONENT */
+/* SIGN IN COMPONENT */
 .sign-up-header.login {
   text-decoration: none;
 }
@@ -379,8 +394,8 @@ input {
   align-items: center;
   flex-direction: column;
   height: 75vh;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 750px;
+  margin: 30px auto;
 }
 .activity {
   display: flex;
@@ -407,13 +422,61 @@ input {
   margin-top: 40px;
 }
 .std-btn.base.dash {
-  margin-left: 100px;
+  margin-left: 312px;
+}
+.hollow-btn.base.dash {
+  background-color: #fafafa;
+}
+#dashboard-calendar-box {
+  height: 300px;
+  width: 750px;
+  margin-top: 30px;
 }
 
 /* CALENDAR COMPONENT */
-.cal {
+#calendar-box {
   height: 300px;
-
+  width: 800px;
+}
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.sign-up-header.cal {
+  padding-bottom: 0px;
+}
+.std-btn.base.cal {
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+.hollow-btn.base.cal {
+  margin-bottom: 30px;
+  background-color: #fafafa;
+}
+.book-hangout-form, .add-availability-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 75vh;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.sign-up-input.time {
+  height: 30px;
+  margin-bottom: 20px;
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+}
+.cal-input-time {
+  color: #4f4f4f;
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  align-self: flex-start;
+  padding: 0 0 2px 2px ;
 }
 
 /* PROFILE COMPONENT */

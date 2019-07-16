@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, NavLink, Link } from "react-router-dom";
 import axios from 'axios';
 import Dashboard from "./Dashboard.js";
-import Calendars from "./Calendar.js";
+import Calendar from "./Calendar.js";
 import Friends from "./Friends.js";
 import Notifications from "./Notifications.js";
 import User from "./User.js";
@@ -21,9 +21,15 @@ require('dotenv').config()
 function AppRouter() {
 
   const [state, setState] = useState({
-    isInsider: false,
-    isLoggedIn: true,
+    isInsider: Boolean(localStorage.getItem('refreshtoken')),
+    isLoggedIn: Boolean(localStorage.getItem('refreshtoken')),
   });
+
+
+  useEffect(() => {
+    console.log('mounted', state);
+  }, []) 
+
 
   
   function onLogInFunc({username, password}) {
@@ -45,6 +51,9 @@ function AppRouter() {
     })
       .catch(function (error) {
         console.log(error);
+        // check response code status
+        // figure out the status code we get back when token invalid
+        // if status code matches, new request
       });
     }
     
@@ -52,6 +61,15 @@ function AppRouter() {
       setState({
         isInsider: true,
       });
+    }
+
+    function onLogOut(e) {
+      e.preventDefault()
+      localStorage.removeItem('accesstoken')
+      localStorage.removeItem('refreshtoken')
+      setState({...state, isLoggedIn: false, isInsider: false});
+      console.log(state)
+      // console.log(localStorage.getItem('refreshtoken'))
     }
     
     function getActiveNav() {
@@ -70,9 +88,9 @@ function AppRouter() {
         <React.Fragment>
           <nav className="nav outer">
             <div className="left-side">
-              {/* <NavLink to="/"> */}
+              <NavLink to="/">
                 <img className="papical-logo-white" src={Name2} alt="Papical Logo"/>
-              {/* </NavLink> */}
+              </NavLink>
             </div>
             <div className="right-side">
               <Link className="nav-hollow-btn" to="/login">Log In</Link>
@@ -88,11 +106,12 @@ function AppRouter() {
         <React.Fragment>
           <nav className="nav inner">
             <div className="left-side">
-              {/* <NavLink to="/"> */}
+              <NavLink to="/">
                 <img className="papical-logo-white" src={Name2} alt="Papical Logo"/>
-              {/* </NavLink> */}
+              </NavLink>
             </div>
             <div className="right-side">
+            <NavLink to="/" onClick={onLogOut} className="hollow-btn base dash">Log Out</NavLink>
               <Link className="nav-hollow-btn inner" to="/">Dashboard</Link>
               <Link className="nav-hollow-btn inner" to="/calendar">Calendar</Link>
               <Link className="nav-hollow-btn inner" to="/friends">Friends</Link>
@@ -108,8 +127,9 @@ function AppRouter() {
     <BrowserRouter>
       <div className="App">
         {getActiveNav()}
-        <Route path="/" exact component={Dashboard} />
-        <Route path="/calendar/" component={Calendars} />
+        {/* <button onClick={onLogOut}>fsdfdfsf</button> */}
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/calendar/" component={Calendar} />
         <Route path="/friends/" component={Friends} />
         <Route path="/notifications/" component={Notifications} />
         <Route path="/user/" component={User} />
