@@ -15,7 +15,7 @@ function Dashboard() {
         // handle success
         const user = response.data[0]
         setCurrentUser(user)
-        getConfirmedInvite(user)
+        getInvites(user)
       })
       .catch(function (error) {
         // handle error
@@ -23,7 +23,7 @@ function Dashboard() {
       })
   }, [])
 
-  const getConfirmedInvite = (currentUser) => {
+  const getInvites = (currentUser) => {
     const url = 'http://localhost:8000/invitations/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
@@ -39,45 +39,6 @@ function Dashboard() {
       })
     }
     
-  const HangoutDetails = (confirmedInvite) => {
-    const hangout = confirmedInvite.hangout
-    const invitee = confirmedInvite.invitee['username']
-    const creator = confirmedInvite.creator
-
-    const friend = (invitee !== currentUser.username) ? invitee : creator
-
-    return (
-      <li key={hangout.pk}>
-        <p>{hangout.name}</p>
-        <p>{hangout.date}</p>
-        <p>{hangout.description}</p>
-        <p>{hangout.start_time}</p>
-        <p>{hangout.end_time}</p>
-        <p>{friend}</p>
-      </li>
-    )
-  }
-
-  const PendingInviteDetails = (pendingInvite) => {
-    const hangout = pendingInvite.hangout
-    const invitee = pendingInvite.invitee['username']
-    const creator = pendingInvite.creator
-
-    const friend = (invitee !== currentUser.username) ? invitee : creator
-
-    return (
-      <li key={hangout.pk}>
-        <p>{hangout.name}</p>
-        <p>{hangout.description}</p>
-        <p>{hangout.start_time}</p>
-        <p>{hangout.end_time}</p>
-        <p>{friend}</p>
-        <a href="#">Accept</a>
-        <a href="#">Decline</a>
-      </li>
-    )
-  }
-
   return (
     <div className="dashboard">
       <h2 className="sign-up-header">Hi {currentUser.first_name}!</h2>

@@ -16,7 +16,7 @@ function Notifications() {
         // handle success
         const user = response.data[0]
         setCurrentUser(user)
-        getConfirmedInvite(user)
+        getInvites(user)
       })
       .catch(function (error) {
         // handle error
@@ -24,7 +24,7 @@ function Notifications() {
       })
   }, [])
 
-  const getConfirmedInvite = (currentUser) => {
+  const getInvites = (currentUser) => {
     const url = 'http://localhost:8000/invitations/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
