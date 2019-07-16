@@ -9,6 +9,7 @@ import User from "./User.js";
 import SignIn from "./SignIn.js";
 import LogIn from "./LogIn.js";
 import SignUp from "./SignUp.js";
+import DropdownMenu from "./DropdownMenu.js";
 import './reset.css';
 import './normalize.css';
 import './App.css';
@@ -23,6 +24,7 @@ function AppRouter() {
   const [state, setState] = useState({
     isInsider: Boolean(localStorage.getItem('refreshtoken')),
     isLoggedIn: Boolean(localStorage.getItem('refreshtoken')),
+    showDropdown: false
   });
 
 
@@ -71,6 +73,15 @@ function AppRouter() {
       console.log(state)
       // console.log(localStorage.getItem('refreshtoken'))
     }
+
+    function onDropdownClick(e) {
+      e.preventDefault();
+      if (state.showDropdown === false) {
+        setState({...state, showDropdown: true})
+      } else if (state.showDropdown === true) {
+        setState({...state, showDropdown: false})
+      }
+    }
     
     function getActiveNav() {
       switch (state.isInsider && state.isLoggedIn) {
@@ -111,12 +122,12 @@ function AppRouter() {
               </NavLink>
             </div>
             <div className="right-side">
-            <NavLink to="/" onClick={onLogOut} className="hollow-btn base dash">Log Out</NavLink>
               <Link className="nav-hollow-btn inner" to="/">Dashboard</Link>
               <Link className="nav-hollow-btn inner" to="/calendar">Calendar</Link>
               <Link className="nav-hollow-btn inner" to="/friends">Friends</Link>
               <Link to="/notifications"><img className="bell" src={Bell} alt="Notifications"/></Link>
-              <Link to="/user"><img className="profile" src={Profile} alt="Profile"/></Link>
+              <img className="profile" src={Profile} alt="Profile" onClick={onDropdownClick} />
+              {state.showDropdown ? <DropdownMenu onLogOut={onLogOut} /> : ''}
             </div>
           </nav>
         </React.Fragment>
