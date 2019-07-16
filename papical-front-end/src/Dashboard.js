@@ -24,6 +24,32 @@ function Dashboard() {
       .catch(function (error) {
         // handle error
         console.log(error);
+        console.log(error.response.data.code);
+        const refreshUrl = 'http://localhost:8000/refresh/'
+        if (error.response.data.code === 'token_not_valid') {
+          axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
+          .then(function (response) {
+            localStorage.setItem('accesstoken', response.data.access)
+          })
+        }
+      })
+      .then(function (response) {
+        const url = 'http://localhost:8000/hangouts/'
+        axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+        }).then(function (response) {
+            const hangoutList = response.data
+            const filteredHangouts = hangoutList.filter(hangout => hangout['creator'] === currentUser['username'])
+            // debugger;
+            // console.log("CurrentUser", currentUser)
+            // console.log("CurrentUser username", currentUser.username)
+            // console.log("Hangouts:", hangoutList)
+            // console.log("Filtered Hangouts:", filteredHangouts)
+            setUserHangouts(filteredHangouts)
+        })
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
       })
   }
 
@@ -41,6 +67,30 @@ function Dashboard() {
       .catch(function (error) {
         // handle error
         console.log(error);
+        console.log(error.response.data.code);
+        const refreshUrl = 'http://localhost:8000/refresh/'
+        if (error.response.data.code === 'token_not_valid') {
+          axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
+          .then(function (response) {
+            localStorage.setItem('accesstoken', response.data.access)
+          })
+        }
+      })
+      .then(function (response) {
+        const url = 'http://localhost:8000/invitations/'
+        axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+        }).then(function (response) {
+          const inviteList = response.data
+          const filteredInvites = inviteList.filter(invite => invite.invitee === currentUser.pk)
+          // debugger;
+          // console.log("Invites:", inviteList)
+          // console.log("Filtered Invites:", filteredInvites)
+          setUserInvites(filteredInvites)
+        })
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
       })
   }
 
@@ -49,18 +99,42 @@ function Dashboard() {
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
         // handle success
-        console.log('data', response.data);
+        console.log('data 1', response.data);
         const user = response.data[0]
-
+        // async await????
         setCurrentUser(user)
         getHangouts(user)
         getInvites(user)
       })
       .catch(function (error) {
         // handle error
+        console.log(error.response.data.code);
+        const refreshUrl = 'http://localhost:8000/refresh/'
+        if (error.response.data.code === 'token_not_valid') {
+          axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
+          .then(function (response) {
+            localStorage.setItem('accesstoken', response.data.access)
+          })
+        }
+      })
+      .then(function (response) {
+        const url = 'http://localhost:8000/users/'
+        axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+        }).then(function (response) {
+            // handle success
+            console.log('data 1', response.data);
+            const user = response.data[0]
+            // async await????
+            setCurrentUser(user)
+            getHangouts(user)
+            getInvites(user)
+          })
+      })
+      .catch(function (error) {
+        // handle error
         console.log(error);
       })
-  }, [currentUser])
+  }, [])
 
   return (
     <div className="dashboard">
@@ -74,8 +148,7 @@ function Dashboard() {
       </div>
       <div className="activity">
         <p className="activity-header two">Your weekly summary</p>
-        {/* make this into a link */}
-        <button className="std-btn base dash">Book a hangout</button>
+        <NavLink className="std-btn base dash" to="/calendar">Book a hangout</NavLink>
       </div>
       <div id="dashboard-calendar-box">
         <Cal />

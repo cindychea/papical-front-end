@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, NavLink, Link } from "react-router-dom";
 import axios from 'axios';
 import Dashboard from "./Dashboard.js";
 import Calendar from "./Calendar.js";
@@ -41,7 +41,7 @@ function AppRouter() {
       password,
     })
     .then(function(response) {
-      // console.log(response.data.access)
+      console.log(response.data.access)
       localStorage.setItem('accesstoken', response.data.access)
       localStorage.setItem('refreshtoken', response.data.refresh)
       setState({
@@ -51,6 +51,9 @@ function AppRouter() {
     })
       .catch(function (error) {
         console.log(error);
+        // check response code status
+        // figure out the status code we get back when token invalid
+        // if status code matches, new request
       });
     }
     
@@ -85,9 +88,9 @@ function AppRouter() {
         <React.Fragment>
           <nav className="nav outer">
             <div className="left-side">
-              {/* <NavLink to="/"> */}
+              <NavLink to="/">
                 <img className="papical-logo-white" src={Name2} alt="Papical Logo"/>
-              {/* </NavLink> */}
+              </NavLink>
             </div>
             <div className="right-side">
               <Link className="nav-hollow-btn" to="/login">Log In</Link>
@@ -103,12 +106,12 @@ function AppRouter() {
         <React.Fragment>
           <nav className="nav inner">
             <div className="left-side">
-              {/* <NavLink to="/"> */}
+              <NavLink to="/">
                 <img className="papical-logo-white" src={Name2} alt="Papical Logo"/>
-              {/* </NavLink> */}
+              </NavLink>
             </div>
             <div className="right-side">
-            <button onClick={onLogOut} className="hollow-btn base dash">Log Out</button>
+            <NavLink to="/" onClick={onLogOut} className="hollow-btn base dash">Log Out</NavLink>
               <Link className="nav-hollow-btn inner" to="/">Dashboard</Link>
               <Link className="nav-hollow-btn inner" to="/calendar">Calendar</Link>
               <Link className="nav-hollow-btn inner" to="/friends">Friends</Link>

@@ -54,9 +54,12 @@ function Calendar() {
           <form className="book-hangout-form">
           <h2 className="sign-up-header">Book a Hangout</h2>
             <input className="sign-up-input" type='text' name='EventName' placeholder='Event Name' onChange={(e) => setHangout({...hangout, name: e.target.value})}/>
-            <input className="sign-up-input" type='date' name='Date' placeholder='Date' onChange={(e) => setHangout({...hangout, date: e.target.value})}/>
-            <input className="sign-up-input" type='time' name='StartTime' placeholder='Start Time' onChange={(e) => setHangout({...hangout, start_time: e.target.value})}/>
-            <input className="sign-up-input" type='time' name='EndTime' placeholder='End Time' onChange={(e) => setHangout({...hangout, end_time: e.target.value})}/>
+            <label className="cal-input-time" for='Date'>Date</label>
+            <input className="sign-up-input time" type='date' name='Date' id='Date' onChange={(e) => setHangout({...hangout, date: e.target.value})}/>
+            <label className="cal-input-time" for='StartTime'>Start Time</label>
+            <input className="sign-up-input time" type='time' name='StartTime' id='StartTime' onChange={(e) => setHangout({...hangout, start_time: e.target.value})}/>
+            <label className="cal-input-time" for='EndTime'>End Time</label>            
+            <input className="sign-up-input time" type='time' name='EndTime' id='EndTime' onChange={(e) => setHangout({...hangout, end_time: e.target.value})}/>
             <input className="sign-up-input" type='text' name='Description' placeholder='Description' onChange={(e) => setHangout({...hangout, description: e.target.value})}/>
             <input className="sign-up-input" type='location' name='Location' placeholder='Location' onChange={(e) => setHangout({...hangout, location: e.target.value})}/>
             <input className="sign-up-input" type='text' name='tag' placeholder='Tags' />            
@@ -78,9 +81,12 @@ function Calendar() {
           </div>
           <form className="add-availability-form">
           <h2 className="sign-up-header">Add Availability</h2>
-            <input className="sign-up-input" type='date' name='Date' placeholder='Date' onChange={(e) => setAvailability({...availability, date: e.target.value})}/>
-            <input className="sign-up-input" type='time' name='StartTime' placeholder='Start Time' onChange={(e) => setAvailability({...availability, start_time: e.target.value})}/>
-            <input className="sign-up-input" type='time' name='EndTime' placeholder='End Time' onChange={(e) => setAvailability({...availability, end_time: e.target.value})}/>
+          <label className="cal-input-time" for='Date'>Date</label>
+            <input className="sign-up-input" type='date' name='Date' id='Date' onChange={(e) => setAvailability({...availability, date: e.target.value})}/>
+            <label className="cal-input-time" for='StartTime'>Start Time</label>
+            <input className="sign-up-input" type='time' name='StartTime' id='StartTime' onChange={(e) => setAvailability({...availability, start_time: e.target.value})}/>
+            <label className="cal-input-time" for='EndTime'>End Time</label>            
+            <input className="sign-up-input" type='time' name='EndTime' id='EndTime' onChange={(e) => setAvailability({...availability, end_time: e.target.value})}/>
             <button className="std-btn base" onClick={() => {setState({...state, active: 'calView'})}}>Submit</button>
           </form>
         </div>

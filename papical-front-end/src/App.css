@@ -467,3 +467,14 @@ input {
   max-width: 300px;
   margin: 0 auto;
 }
+.sign-up-input.time {
+  height: 30px;
+  margin-bottom: 20px;
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+}
+.cal-input-time {
+  color: #4f4f4f;
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  align-self: flex-start;
+  padding: 0 0 2px 2px ;
+}
