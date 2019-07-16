@@ -69,6 +69,7 @@ function AppRouter() {
 
     function onDropdownClick(e) {
       e.preventDefault();
+      console.log(state.showDropdown)
       if (state.showDropdown === false) {
         setState({...state, showDropdown: true})
       } else if (state.showDropdown === true) {

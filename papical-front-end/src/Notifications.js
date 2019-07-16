@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 function Notifications() {
@@ -80,14 +81,19 @@ function Notifications() {
     const friend = (invitee !== currentUser.username) ? invitee : creator
 
     return (
-      <li key={hangout.pk}>
-        <p>{hangout.name}</p>
-        <p>{hangout.date}</p>
+      <div classname="notif-container">
+        <div className="notif-box" key={hangout.pk}>
+          <div className="notif-left">
+            <p className="notif-name">{hangout.name}</p>
+            <p className="notif-friend">{friend}</p>
+          </div>
+          <div className="notif-right">
+            <p className="notif-dt">{hangout.date}</p>
+            <p className="notif-dt">{hangout.start_time} to {hangout.end_time}</p>
+          </div>
+        </div>
         <p>{hangout.description}</p>
-        <p>{hangout.start_time}</p>
-        <p>{hangout.end_time}</p>
-        <p>{friend}</p>
-      </li>
+      </div>
     )
   }
 
@@ -99,36 +105,35 @@ function Notifications() {
     const friend = (invitee !== currentUser.username) ? invitee : creator
 
     return (
-      <li key={hangout.pk}>
-        <p>{hangout.name}</p>
-        <p>{hangout.description}</p>
-        <p>{hangout.start_time}</p>
-        <p>{hangout.end_time}</p>
-        <p>{friend}</p>
-        <a href="#">Accept</a>
-        <a href="#">Decline</a>
+      <li className="notif-box" key={hangout.pk}>
+        <div className="notif-left">
+        <p className="notif-name">{hangout.name}</p>
+        <p className="notif-friend">{friend}</p>
+        <p className="notif-dt">{hangout.date}</p>
+        <p className="notif-dt">{hangout.start_time} to {hangout.end_time}</p>
+        </div>
+        <div className="notif-right">
+        <NavLink to="/notifications">Accept</NavLink>
+        <NavLink to="/notifications">Decline</NavLink>
+        </div>
       </li>
     )
   }
 
   return (
-    <section>
-      <h2>Notifications</h2>
-
-      <div>
-        <h3>{confirmedInvite.length} upcoming hangouts</h3>
-        <ul>
-          {confirmedInvite.map((invite) => HangoutDetails(invite))}
-        </ul>
+    <div className="notification-box">
+      <h2 className="sign-up-header">Notifications</h2>
+      <div className="notifications">
+        <div className="upcoming-hangouts">
+          <h3 className="upcoming-header">{confirmedInvite.length} upcoming hangouts</h3>
+            {confirmedInvite.map((invite) => HangoutDetails(invite))}
+        </div>
+        <div className="upcoming-invites">
+          <h3 className="upcoming-header">{pendingInvite.length} pending invitations</h3>
+            {pendingInvite.map((invite) => PendingInviteDetails(invite))}
+        </div>
       </div>
-      <div>
-        <h3>{pendingInvite.length} pending invitations</h3>
-        <ul>
-          {pendingInvite.map((invite) => PendingInviteDetails(invite))}
-        </ul>
-      </div>
-
-    </section>
+    </div>
   )
 }
 

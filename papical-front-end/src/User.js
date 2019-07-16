@@ -38,14 +38,13 @@ function User() {
       })
   }, [])
 
-
-  // const imageUrl = `http://localhost:8000${currentUser.picture}`;
+  const imageUrl = (currentUser.picture === null) ? `http://localhost:8000/media/images/profile_icon.svg` : `http://localhost:8000${currentUser.picture}`
 
   return (
     <section>
-      <h2>Profile</h2>
+      <h2 className="sign-up-header">Profile</h2>
         <div>
-          {/* <img src={`${imageUrl}`} alt={currentUser.username} /> */}
+          <img src={`${imageUrl}`} alt={currentUser.username} className="photo-holder"/>
           <p>{currentUser.first_name} {currentUser.last_name}</p>
           <p>{currentUser.email}</p>
           <p>{currentUser.username}</p>

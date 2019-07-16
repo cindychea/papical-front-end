@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Delete from './pictures/Delete.png';
 
 function Friends() {
   
@@ -74,6 +75,8 @@ function Friends() {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
             } 
+          }).then(function (response) {
+            setFriendships(response.data)
           })
         })
         .catch(function (error) {
@@ -97,21 +100,18 @@ function Friends() {
     const imageUrl = (friend.picture === null) ? `http://localhost:8000/media/images/profile_icon.svg` : `http://localhost:8000${friend.picture}`
 
     return (
-      <li key={friend.pk}>
-        <img src={`${imageUrl}`} alt={friend.username} />
-        <p>{friend.username}</p>
-        <p>{friend.first_name} {friend.last_name}</p>
-      </li>
+      <div key={friend.pk} className="friend">
+        <img src={`${imageUrl}`} alt={friend.username} className="friends-photo"/>
+        <p className="friend-name">{friend.first_name} {friend.last_name}</p>
+        <img src={Delete} alt="Delete" className="delete"/>
+      </div>
     )
   }
 
   return (
-    <section>
-      <h2>Friends</h2>
-        <ul>
+    <section className="friends-box">
+      <h2 className="sign-up-header">Friends</h2>
           {friendships.map((friendship) => FriendDetails(friendship))}
-        </ul>
-      <p></p>
     </section>
   )
 }
