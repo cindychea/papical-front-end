@@ -6,8 +6,7 @@ function Notifications() {
   const [currentUser, setCurrentUser] = useState([])
   const [confirmedInvite, setConfirmedInvite] = useState([])
   const [pendingInvite, setPendingInvite] = useState([])
-  const [userInvites, setUserInvites] = useState([])
-
+  // const [userHangouts, setUserHangouts] = useState([]) NOTE: USE FOR FUTURE WHEN ADD INVITES SENT BY USER
 
 // Getting current user's information
   useEffect( () => {
@@ -29,10 +28,9 @@ function Notifications() {
     const url = 'http://localhost:8000/invitations/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
-        const inviteList = response.data
+      const inviteList = response.data
         const confirmedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
         const pendingInvite = inviteList.filter(invite => invite.invitee['pk'] === currentUser.pk && invite.attending === "NA")
-
         setConfirmedInvite(confirmedInvite)
         setPendingInvite(pendingInvite)
       })
@@ -103,3 +101,25 @@ function Notifications() {
 }
 
 export default Notifications;
+
+
+
+// USE FOR FUTURE WHEN GETTING HANGOUTS SENT BY USER
+  // const getHangouts = (currentUser) => {
+  //   const url = 'http://localhost:8000/hangouts/'
+  //   axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+  //   }).then(function (response) {
+  //       const hangoutList = response.data
+  //       const filteredHangouts = hangoutList.filter(hangout => hangout['creator'] === currentUser['username'])
+  //       // debugger;
+  //       console.log("CurrentUser", currentUser)
+  //       console.log("CurrentUser username", currentUser.username)
+  //       console.log("Hangouts:", hangoutList)
+  //       console.log("Filtered Hangouts:", filteredHangouts)
+  //       setUserHangouts(filteredHangouts)
+  //     })
+  //     .catch(function (error) {
+  //       // handle error
+  //       console.log(error);
+  //     })
+  // }
