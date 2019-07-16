@@ -13,7 +13,7 @@ import './reset.css';
 import './normalize.css';
 import './App.css';
 import Name2 from './pictures/Name2.png';
-import Bell from './pictures/Bell.png';
+import Bell from './pictures/Bell.svg';
 import Profile from './pictures/Profile.png';
 
 require('dotenv').config()

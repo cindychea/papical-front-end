@@ -22,6 +22,25 @@ function Friends() {
       .catch(function (error) {
         // handle error
         console.log(error);
+        console.log(error.response.data.code);
+        const refreshUrl = 'http://localhost:8000/refresh/'
+        if (error.response.data.code === 'token_not_valid') {
+          axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
+          .then(function (response) {
+            localStorage.setItem('accesstoken', response.data.access)
+          })
+        }
+      })
+      .then(function(response) {
+        const url = 'http://localhost:8000/users/'
+        axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
+          } 
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
       })
   }, [])
 
@@ -39,6 +58,25 @@ function Friends() {
         })
         .catch(function (error) {
           // handle error
+          console.log(error);
+          console.log(error.response.data.code);
+          const refreshUrl = 'http://localhost:8000/refresh/'
+          if (error.response.data.code === 'token_not_valid') {
+            axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
+            .then(function (response) {
+              localStorage.setItem('accesstoken', response.data.access)
+            })
+          }
+        })
+        .then(function(response) {
+          const url = 'http://localhost:8000/friends/'
+          axios.get(url, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
+            } 
+          })
+        })
+        .catch(function (error) {
           console.log(error);
         })
   }, [])
