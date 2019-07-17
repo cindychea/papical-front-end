@@ -62,13 +62,13 @@ function Dashboard() {
           })
         }
       })
-      // .then(function (response) {
-      //   const inviteList = response.data
-      //   const confirmedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
-      //   const pendingInvite = inviteList.filter(invite => invite.invitee['pk'] === currentUser.pk && invite.attending === "NA")
-      //   setConfirmedInvite(confirmedInvite)
-      //   setPendingInvite(pendingInvite)
-      // })
+      .then(function (response) {
+        const inviteList = response.data
+        const confirmedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
+        const pendingInvite = inviteList.filter(invite => invite.invitee['pk'] === currentUser.pk && invite.attending === "NA")
+        setConfirmedInvite(confirmedInvite)
+        setPendingInvite(pendingInvite)
+      })
       .catch(function (error) {
         console.log(error);
       })

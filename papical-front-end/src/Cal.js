@@ -13,7 +13,8 @@ import moment from "moment";
 import events from './user-events.js'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-function Cal({event}) {
+
+function Cal({userHangouts, event}) {
 
   const localizer = momentLocalizer(moment)
 
@@ -36,8 +37,10 @@ function Cal({event}) {
             components={{
               timeSlotWrapper: ColoredDateCellWrapper,
             }}
+            // titleAccessor="name"
             startAccessor="start_time"
             endAccessor="end_time"
+            defaultDate={new Date(2019, 7, 18)}
           />
     )
 }
