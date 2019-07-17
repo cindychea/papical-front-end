@@ -13,7 +13,8 @@ import moment from "moment";
 import events from './user-events.js'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-function Cal({userHangouts}) {
+
+function Cal({userHangouts, event}) {
 
   const localizer = momentLocalizer(moment)
 
