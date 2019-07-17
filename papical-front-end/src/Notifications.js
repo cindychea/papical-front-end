@@ -81,7 +81,7 @@ function Notifications() {
     const friend = (invitee !== currentUser.username) ? invitee : creator
 
     return (
-      <div classname="notif-container">
+      <div className="notif-container">
         <div className="notif-box" key={hangout.pk}>
           <div className="notif-left">
             <p className="notif-name">{hangout.name}</p>

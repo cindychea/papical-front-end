@@ -45,7 +45,7 @@ function Tags() {
 
   const TagList = (tag) => {
     return (
-      <li>{tag}</li>
+      <li className="interest-list" key={tag.pk}>{tag}</li>
     )
   }
   return (

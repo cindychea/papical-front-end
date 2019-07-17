@@ -312,8 +312,8 @@ input {
 .photo-holder {
   border: 1px solid #888888;
   background-color: #ebebeb;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   margin-bottom: 20px;
   margin-right: 70px;
@@ -524,17 +524,87 @@ input {
   min-height: calc(100vh - 66px);
   max-width: 600px;
 }
+.sign-up-header.profile {
+  align-self: flex-start;
+  margin-left: 60px;
+}
+.photo-holder-profile {
+  border: 1px solid #888888;
+  background-color: #ebebeb;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  margin-right: 70px;
+}
 .inner-profile {
   display: flex;
-  justify-content: center;
   align-items: center;
   max-width: 600px;
 }
 .basic-info {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.user-info {
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 14pt;
+  color: #4f4f4f;
+  padding-bottom: 30px;
+}
+.user-info.border {
+  border-bottom: 1px solid #4f4f4f;
+}
+.interest-header {
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 14pt;
+  color: #4f4f4f;
+  padding-bottom: 20px;
+  padding-top: 30px;
+}
+.interest-list {
+  list-style-type: disc;
+  margin-left: 30px;
+}
+
+/* FRIEND PROFILE COMPONENT */
+.friend-profile {
+  display: flex;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
+  min-height: calc(100vh - 66px);
+  max-width: 750px;
+}
+.friend-profile-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.profile-info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+#friend-profile-cal-box {
+  height: 200px;
+  width: 750px;
+  margin-top: 30px;
+}
+.friend-avail {
+  font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
+  font-size: 16pt;
+  color: #4f4f4f;
+}
+.top-cal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 750px;
 }
 
 

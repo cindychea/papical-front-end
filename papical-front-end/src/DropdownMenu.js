@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 function DropdownMenu ({onLogOut}) {
 
   return (
-    <div class="menu-container">
+    <div className="menu-container">
       <div className="menu">
         <NavLink to="/user">Profile</NavLink>
         <NavLink to="/" onClick={onLogOut}>Logout</NavLink>

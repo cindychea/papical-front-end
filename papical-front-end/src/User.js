@@ -42,20 +42,20 @@ function User() {
 
   return (
     <div className="profile-box">
-      <h2 className="sign-up-header">Profile</h2>
+      <h2 className="sign-up-header profile">Profile</h2>
       <div className="inner-profile">
-        <img src={`${imageUrl}`} alt={currentUser.username} className="photo-holder"/>
+        <img src={`${imageUrl}`} alt={currentUser.username} className="photo-holder-profile"/>
         <div className="basic-info">
-        <p>{currentUser.first_name} {currentUser.last_name}</p>
-        <p>{currentUser.email}</p>
-        <p>{currentUser.username}</p>
+          <p className="user-info"><b>Full Name:</b> {currentUser.first_name} {currentUser.last_name}</p>
+          <p className="user-info"><b>Email:</b> {currentUser.email}</p>
+          <p className="user-info border"><b>Username:</b> {currentUser.username}</p>
+          <div className="interest-info">
+            <h2 className="interest-header"><b>Interests:</b></h2>
+            <ul>
+              <Tags />
+            </ul>
+          </div>
         </div>
-      </div>
-      <div>
-        <h2>Interests</h2>
-        <ul>
-          <Tags />
-        </ul>
       </div>
     </div>
   )
