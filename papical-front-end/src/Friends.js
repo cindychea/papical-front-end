@@ -11,7 +11,7 @@ function Friends() {
 // Getting current user information
   useEffect( () => {
   
-    const url = 'http://localhost:8000/users/'
+    const url = 'https://papicalapp.herokuapp.com/users/'
     axios.get(url, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
@@ -24,14 +24,14 @@ function Friends() {
         // handle error
         console.log(error);
         console.log(error.response.data.code);
-        const refreshUrl = 'http://localhost:8000/refresh/'
+        const refreshUrl = 'https://papicalapp.herokuapp.com/refresh/'
         if (error.response.data.code === 'token_not_valid') {
           axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
           .then(function (response) {
             localStorage.setItem('accesstoken', response.data.access)
           })
           .then(function(response) {
-            const url = 'http://localhost:8000/users/'
+            const url = 'https://papicalapp.herokuapp.com/users/'
             axios.get(url, {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
@@ -48,7 +48,7 @@ function Friends() {
   // Getting list of friendships
   useEffect( () => {
 
-      const url = 'http://localhost:8000/friends/'
+      const url = 'https://papicalapp.herokuapp.com/friends/'
       axios.get(url, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
@@ -61,14 +61,14 @@ function Friends() {
           // handle error
           console.log(error);
           console.log(error.response.data.code);
-          const refreshUrl = 'http://localhost:8000/refresh/'
+          const refreshUrl = 'https://papicalapp.herokuapp.com/refresh/'
           if (error.response.data.code === 'token_not_valid') {
             axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
             .then(function (response) {
               localStorage.setItem('accesstoken', response.data.access)
             })
             .then(function(response) {
-              const url = 'http://localhost:8000/friends/'
+              const url = 'https://papicalapp.herokuapp.com/friends/'
               axios.get(url, {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
@@ -97,7 +97,7 @@ function Friends() {
 
     const friend = (friendship.to_user.pk === currentUser.pk) ? from_user : to_user
     
-    const imageUrl = (friend.picture === null) ? `http://localhost:8000/media/images/profile_icon.svg` : `http://localhost:8000${friend.picture}`
+    const imageUrl = (friend.picture === null) ? `https://papicalapp.herokuapp.com/media/images/profile_icon.svg` : `https://papicalapp.herokuapp.com/${friend.picture}`
 
     return (
       <Link to={{

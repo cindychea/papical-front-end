@@ -9,7 +9,7 @@ function User() {
 // Getting current user information
   useEffect( () => {
   
-    const url = 'http://localhost:8000/users/'
+    const url = 'https://papicalapp.herokuapp.com/users/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
         setCurrentUser(response.data[0])
@@ -18,7 +18,7 @@ function User() {
         // handle error
         console.log(error);
         console.log(error.response.data.code);
-        const refreshUrl = 'http://localhost:8000/refresh/'
+        const refreshUrl = 'https://papicalapp.herokuapp.com/refresh/'
         if (error.response.data.code === 'token_not_valid') {
           axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
           .then(function (response) {
@@ -27,7 +27,7 @@ function User() {
         }
       })
       .then(function(response) {
-        const url = 'http://localhost:8000/users/'
+        const url = 'https://papicalapp.herokuapp.com/users/'
         axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
         }).then(function (response) {
             setCurrentUser(response.data[0])
@@ -38,7 +38,7 @@ function User() {
       })
   }, [])
 
-  const imageUrl = (currentUser.picture === null) ? `http://localhost:8000/media/images/profile_icon.svg` : `http://localhost:8000${currentUser.picture}`
+  const imageUrl = (currentUser.picture === null) ? `https://papicalapp.herokuapp.com/media/images/profile_icon.svg` : `https://papicalapp.herokuapp.com/${currentUser.picture}`
 
   return (
     <div className="profile-box">

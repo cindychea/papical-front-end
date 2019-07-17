@@ -48,7 +48,7 @@ function Calendar() {
 
   const bookHangoutSubmit = ({name, date, start_time, end_time, description, location}) => {
     console.log('booking')
-    const url = 'http://localhost:8000/hangouts/'
+    const url = 'https://papicalapp.herokuapp.com/hangouts/'
     axios.post(url, {
       name,
       date,
@@ -65,12 +65,12 @@ function Calendar() {
       // handle error
       console.log(error);
       console.log(error.response.data.code);
-      const refreshUrl = 'http://localhost:8000/refresh/'
+      const refreshUrl = 'https://papicalapp.herokuapp.com/refresh/'
       if (error.response.data.code === 'token_not_valid') {
         axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
         .then(function (response) {
           localStorage.setItem('accesstoken', response.data.access)
-          const url = 'http://localhost:8000/hangouts/'
+          const url = 'https://papicalapp.herokuapp.com/hangouts/'
           axios.post(url, {
             name,
             date,
@@ -90,7 +90,7 @@ function Calendar() {
 
   const availabilitySubmit = ({date, start_time, end_time, available}) => {
     console.log('availabile book')
-    const url = 'http://localhost:8000/freetimes/'
+    const url = 'https://papicalapp.herokuapp.com/freetimes/'
     axios.post(url, {
       date,
       start_time,
@@ -104,12 +104,12 @@ function Calendar() {
       // handle error
       console.log(error);
       console.log(error.response.data.code);
-      const refreshUrl = 'http://localhost:8000/refresh/'
+      const refreshUrl = 'https://papicalapp.herokuapp.com/refresh/'
       if (error.response.data.code === 'token_not_valid') {
         axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
         .then(function (response) {
           localStorage.setItem('accesstoken', response.data.access)
-          const url = 'http://localhost:8000/freetimes/'
+          const url = 'https://papicalapp.herokuapp.com/freetimes/'
           axios.post(url, {
             date,
             start_time,
@@ -128,7 +128,7 @@ function Calendar() {
   // Getting current user information
     useEffect( () => {
     
-      const url = 'http://localhost:8000/users/'
+      const url = 'https://papicalapp.herokuapp.com/users/'
       axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
       }).then(function (response) {
           const user = response.data[0]
@@ -139,7 +139,7 @@ function Calendar() {
           // handle error
           console.log(error);
           console.log(error.response.data.code);
-          const refreshUrl = 'http://localhost:8000/refresh/'
+          const refreshUrl = 'https://papicalapp.herokuapp.com/refresh/'
           if (error.response.data.code === 'token_not_valid') {
             axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
             .then(function (response) {
@@ -148,7 +148,7 @@ function Calendar() {
           }
         })
         .then(function(response) {
-          const url = 'http://localhost:8000/users/'
+          const url = 'https://papicalapp.herokuapp.com/users/'
           axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
           }).then(function (response) {
               const user = response.data[0]
@@ -164,7 +164,7 @@ function Calendar() {
   // Getting current user's hangouts
   const getUserHangouts = (currentUser) => {
     console.log('getting hangouts')
-    const url = 'http://localhost:8000/invitations/'
+    const url = 'https://papicalapp.herokuapp.com/invitations/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
         const inviteList = response.data
@@ -175,7 +175,7 @@ function Calendar() {
       })
       .catch(function (error) {
         console.log(error.response.data.code);
-        const refreshUrl = 'http://localhost:8000/refresh/'
+        const refreshUrl = 'https://papicalapp.herokuapp.com/refresh/'
         if (error.response.data.code === 'token_not_valid') {
           axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
           .then(function (response) {

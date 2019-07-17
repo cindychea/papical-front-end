@@ -27,7 +27,7 @@ function SignUp({onFormSubmit}) {
 
   const registerUser = () => {
     // console.log('registering')
-    const url = "http://localhost:8000/users/"
+    const url = "https://papicalapp.herokuapp.com/users/"
     axios.post(url, {
       username: state.username,
       first_name: state.first_name,
