@@ -622,6 +622,7 @@ input {
   display: flex;
   align-items: center;
   margin-bottom: 50px;
+  text-decoration: none;
 }
 .delete {
   align-self: flex-end;
@@ -637,7 +638,9 @@ input {
   color: #4f4f4f;
   font-family: "Helvetica Neue Medium", Arial, Helvetica, sans-serif;
   font-size: 15pt;
-  text-decoration: none;
+
+}
+.friend-name-link {
 }
 .friends-box .inner-content {
   /* flex: 0 0 300px; */
