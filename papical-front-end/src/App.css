@@ -522,11 +522,10 @@ input {
   align-items: center;
   flex-direction: column;
   min-height: calc(100vh - 66px);
-  max-width: 600px;
 }
 .sign-up-header.profile {
-  align-self: flex-start;
-  margin-left: 60px;
+  align-self: inherit;
+  width: 466px;
 }
 .photo-holder-profile {
   border: 1px solid #888888;
@@ -576,7 +575,6 @@ input {
   align-items: center;
   flex-direction: column;
   min-height: calc(100vh - 66px);
-  max-width: 750px;
 }
 .friend-profile-box {
   display: flex;
@@ -588,6 +586,10 @@ input {
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+.sign-up-header.f-profile {
+  align-self: inherit;
+  width: 750px;
 }
 #friend-profile-cal-box {
   height: 200px;

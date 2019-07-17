@@ -11,7 +11,7 @@ function FriendProfile(props) {
 
   return (
     <div className="friend-profile">
-      <h2 className="sign-up-header">{friend.first_name}'s Profile</h2>
+      <h2 className="sign-up-header f-profile">{friend.first_name}'s Profile</h2>
         <div className="friend-profile-box">
           <img src={`${imageUrl}`} alt={friend.username} className="photo-holder"/>
           <div className="profile-info">
