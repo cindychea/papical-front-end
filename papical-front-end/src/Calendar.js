@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cal from './Cal.js';
 import BackArrow from './pictures/BackArrow.png';
@@ -6,6 +6,7 @@ import BackArrow from './pictures/BackArrow.png';
 function Calendar() {
 
   const [currentUser, setCurrentUser] = useState({})
+  const [userHangouts, setUserHangouts] = useState({})
 
   const [hangout, setHangout] = useState({
     name: '',
@@ -126,15 +127,15 @@ function Calendar() {
   }
 
 
-
-
   // Getting current user information
     useEffect( () => {
     
       const url = 'http://localhost:8000/users/'
       axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
       }).then(function (response) {
-          setCurrentUser(response.data[0])
+          const user = response.data[0]
+          setCurrentUser(user)
+          getUserHangouts(user)
         })
         .catch(function (error) {
           // handle error
@@ -152,7 +153,9 @@ function Calendar() {
           const url = 'http://localhost:8000/users/'
           axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
           }).then(function (response) {
-              setCurrentUser(response.data[0])
+              const user = response.data[0]
+              setCurrentUser(user)
+              getUserHangouts(user)
             })
         })
         .catch(function (error) {
@@ -160,6 +163,38 @@ function Calendar() {
         })
     }, [])
 
+  // Getting current user's hangouts
+  const getUserHangouts = (currentUser) => {
+    console.log('getting hangouts')
+    const url = 'http://localhost:8000/invitations/'
+    axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+    }).then(function (response) {
+        const inviteList = response.data
+        const acceptedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
+        const inviteHangouts = acceptedInvite.map(invite => invite.hangout)
+        setUserHangouts(inviteHangouts)
+    
+      })
+      .catch(function (error) {
+        console.log(error.response.data.code);
+        const refreshUrl = 'http://localhost:8000/refresh/'
+        if (error.response.data.code === 'token_not_valid') {
+          axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
+          .then(function (response) {
+            localStorage.setItem('accesstoken', response.data.access)
+          })
+        }
+      })
+      .then(function (response) {
+        const inviteList = response.data
+        const acceptedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
+        const inviteHangouts = acceptedInvite.map(invite => invite.hangout)
+        setUserHangouts(inviteHangouts)
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    }
 
 
   function calView() {
@@ -172,7 +207,7 @@ function Calendar() {
             <button className="hollow-btn base cal" onClick={() => {setState({...state, active: 'addAvailability'})}}>Add Availability</button>
           </div>
           <div id="calendar-box">
-            <Cal />
+            <Cal hangouts={userHangouts} />
           </div>
         </div>
       </React.Fragment>
