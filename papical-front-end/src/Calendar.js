@@ -16,7 +16,7 @@ function Calendar() {
     end_time: '',
     description: '',
     location: '',
-    tags: ''
+    tag: ''
   })
 
   // all day is hardcoded in as no because of start and end times
@@ -36,11 +36,13 @@ function Calendar() {
 
   const submitHangout = (e) => {
     e.preventDefault()
+    setState({...state, active: 'calView'})
     bookHangoutSubmit(hangout)
   }
 
   const submitAvailability = (e) => {
     e.preventDefault()
+    setState({...state, active: 'calView'})
     availabilitySubmit(availability)
   }
 
@@ -54,7 +56,7 @@ function Calendar() {
       end_time,
       description,
       location,
-      tags: ''
+      tag: '["fun"]'
       })
     .then(function(response) {
       console.log(response)
@@ -68,23 +70,21 @@ function Calendar() {
         axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
         .then(function (response) {
           localStorage.setItem('accesstoken', response.data.access)
+          const url = 'http://localhost:8000/hangouts/'
+          axios.post(url, {
+            name,
+            date,
+            start_time,
+            end_time,
+            description,
+            location,
+            tags: ''
+            })
+        })
+        .catch(function (error) {
+          console.log(error);
         })
       }
-    })
-    .then(function(response) {
-      const url = 'http://localhost:8000/hangouts/'
-      axios.post(url, {
-        name,
-        date,
-        start_time,
-        end_time,
-        description,
-        location,
-        tags: ''
-        })
-    })
-    .catch(function (error) {
-      console.log(error);
     })
   }
 
@@ -109,21 +109,19 @@ function Calendar() {
         axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
         .then(function (response) {
           localStorage.setItem('accesstoken', response.data.access)
+          const url = 'http://localhost:8000/freetimes/'
+          axios.post(url, {
+            date,
+            start_time,
+            end_time,
+            available
+          })
+        })
+        .catch(function (error) {
+          console.log(error);
         })
       }
-    })
-    .then(function(response) {
-      const url = 'http://localhost:8000/freetimes/'
-      axios.post(url, {
-        date,
-        start_time,
-        end_time,
-        available
-        })
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+    })   
   }
 
 
@@ -235,7 +233,7 @@ function Calendar() {
             <input className="sign-up-input" type='location' name='Location' placeholder='Location' onChange={(e) => setHangout({...hangout, location: e.target.value})}/>
             <input className="sign-up-input" type='text' name='Invitees' placeholder='Invite your friends!' />
             <input className="sign-up-input" type='text' name='tag' placeholder='Tags' />            
-            <button type="submit" form="book-hangout-form" className="std-btn base" onClick={() => {setState({...state, active: 'calView'})}}>Submit</button>
+            <button type="submit" form="book-hangout-form" className="std-btn base">Submit</button>
           </form>
         </div>
       </React.Fragment>
@@ -259,7 +257,7 @@ function Calendar() {
             <input className="sign-up-input" type='time' name='StartTime' id='StartTime' onChange={(e) => setAvailability({...availability, start_time: e.target.value})}/>
             <label className="cal-input-time" for='EndTime'>End Time</label>            
             <input className="sign-up-input" type='time' name='EndTime' id='EndTime' onChange={(e) => setAvailability({...availability, end_time: e.target.value})}/>
-            <button type="submit" form="add-availability-form" className="std-btn base" onClick={() => {setState({...state, active: 'calView'})}}>Submit</button>
+            <button type="submit" form="add-availability-form" className="std-btn base">Submit</button>
           </form>
         </div>
       </React.Fragment>

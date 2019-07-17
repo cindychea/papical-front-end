@@ -17,7 +17,6 @@ function Dashboard() {
         const user = response.data[0]
         setCurrentUser(user)
         getInvites(user)
-        console.log()
       })
       .catch(function (error) {
         // handle error
