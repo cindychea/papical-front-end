@@ -233,6 +233,7 @@ function Calendar() {
             <input className="sign-up-input time" type='time' name='EndTime' id='EndTime' onChange={(e) => setHangout({...hangout, end_time: e.target.value})}/>
             <input className="sign-up-input" type='text' name='Description' placeholder='Description' onChange={(e) => setHangout({...hangout, description: e.target.value})}/>
             <input className="sign-up-input" type='location' name='Location' placeholder='Location' onChange={(e) => setHangout({...hangout, location: e.target.value})}/>
+            <input className="sign-up-input" type='text' name='Invitees' placeholder='Invite your friends!' />
             <input className="sign-up-input" type='text' name='tag' placeholder='Tags' />            
             <button type="submit" form="book-hangout-form" className="std-btn base" onClick={() => {setState({...state, active: 'calView'})}}>Submit</button>
           </form>

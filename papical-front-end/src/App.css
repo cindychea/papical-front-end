@@ -637,6 +637,7 @@ input {
   color: #4f4f4f;
   font-family: "Helvetica Neue Medium", Arial, Helvetica, sans-serif;
   font-size: 15pt;
+  text-decoration: none;
 }
 .friends-box .inner-content {
   /* flex: 0 0 300px; */
