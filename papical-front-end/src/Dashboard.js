@@ -11,7 +11,7 @@ function Dashboard() {
   // Getting current user's information
   useEffect( () => {
     console.log('use effect')
-    const url = 'https://papicalapp.herokuapp.com/users/'
+    const url = 'http://papicalapp.herokuapp.com/users/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
   }).then(function (response) {
     // handle success
@@ -23,14 +23,14 @@ function Dashboard() {
         // handle error
         console.log(error);
         console.log(error.response.data.code);
-        const refreshUrl = 'https://papicalapp.herokuapp.com/refresh/'
+        const refreshUrl = 'http://papicalapp.herokuapp.com/refresh/'
         if (error.response.data.code === 'token_not_valid') {
           axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
           .then(function (response) {
             localStorage.setItem('accesstoken', response.data.access)
           })
           .then(function(response) {
-            const url = 'https://papicalapp.herokuapp.com/users/'
+            const url = 'http://papicalapp.herokuapp.com/users/'
             axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
             })
           })
@@ -45,7 +45,7 @@ function Dashboard() {
   }, [])
 
   const getInvites = (currentUser) => {
-    const url = 'https://papicalapp.herokuapp.com/invitations/'
+    const url = 'http://papicalapp.herokuapp.com/invitations/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
         const inviteList = response.data
@@ -57,7 +57,7 @@ function Dashboard() {
       .catch(function (error) {
         console.log(error);
         console.log(error.response.data.code);
-        const refreshUrl = 'https://papicalapp.herokuapp.com/refresh/'
+        const refreshUrl = 'http://papicalapp.herokuapp.com/refresh/'
         if (error.response.data.code === 'token_not_valid') {
           axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
           .then(function (response) {
