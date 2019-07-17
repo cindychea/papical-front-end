@@ -251,11 +251,11 @@ function Calendar() {
           </div>
           <form onSubmit={submitAvailability} id="add-availability-form">
           <h2 className="sign-up-header">Add Availability</h2>
-          <label className="cal-input-time" for='Date'>Date</label>
+          <label className="cal-input-time" htmlFor='Date'>Date</label>
             <input className="sign-up-input" type='date' name='Date' id='Date' onChange={(e) => setAvailability({...availability, date: e.target.value})}/>
-            <label className="cal-input-time" for='StartTime'>Start Time</label>
+            <label className="cal-input-time" htmlFor='StartTime'>Start Time</label>
             <input className="sign-up-input" type='time' name='StartTime' id='StartTime' onChange={(e) => setAvailability({...availability, start_time: e.target.value})}/>
-            <label className="cal-input-time" for='EndTime'>End Time</label>            
+            <label className="cal-input-time" htmlFor='EndTime'>End Time</label>            
             <input className="sign-up-input" type='time' name='EndTime' id='EndTime' onChange={(e) => setAvailability({...availability, end_time: e.target.value})}/>
             <button type="submit" form="add-availability-form" className="std-btn base">Submit</button>
           </form>

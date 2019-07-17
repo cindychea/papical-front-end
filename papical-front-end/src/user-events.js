@@ -58,11 +58,6 @@ export default [
     desc: 'Most important meal of the day'
   },
   {
-    'title': 'Dinner',
-    'start_time': new Date(2019, 6, 12, 20, 0, 0, 0),
-    'end_time': new Date(2019, 6, 21, 0, 0, 0)
-  },
-  {
     'title': 'Birthday Party',
     'start_time': new Date(2019, 6, 13, 6, 0, 0),
     'end_time': new Date(2019, 6, 13, 10, 30, 0)

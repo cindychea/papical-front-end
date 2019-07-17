@@ -29,12 +29,15 @@ function Notifications() {
           .then(function (response) {
             localStorage.setItem('accesstoken', response.data.access)
           })
+          .then(function(response) {
+            const url = 'http://localhost:8000/users/'
+            axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+            })
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
         }
-      })
-      .then(function(response) {
-        const url = 'http://localhost:8000/users/'
-        axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
-        })
       })
       .catch(function (error) {
         console.log(error);
@@ -61,12 +64,15 @@ function Notifications() {
           .then(function (response) {
             localStorage.setItem('accesstoken', response.data.access)
           })
+          .then(function(response) {
+            const url = 'http://localhost:8000/invitations/'
+            axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+            })
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
         }
-      })
-      .then(function(response) {
-        const url = 'http://localhost:8000/invitations/'
-        axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
-        })
       })
       .catch(function (error) {
         console.log(error);

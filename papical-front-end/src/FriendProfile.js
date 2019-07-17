@@ -27,13 +27,13 @@ function FriendProfile(props) {
           .then(function (response) {
             localStorage.setItem('accesstoken', response.data.access)
           })
+          .then(function(response) {
+            const url = 'http://localhost:8000/invitations/'
+            axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+          })
+        })
         }
       })
-      .then(function(response) {
-        const url = 'http://localhost:8000/invitations/'
-        axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
-      })
-    })
     .catch(function (error) {
       console.log(error);
     })

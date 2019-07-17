@@ -4,19 +4,20 @@ import { NavLink } from 'react-router-dom';
 import Cal from './Cal.js';
 
 function Dashboard() {
-  const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState([])
   const [confirmedInvite, setConfirmedInvite] = useState({})
   const [pendingInvite, setPendingInvite] = useState({})
 
   // Getting current user's information
   useEffect( () => {
+    console.log('use effect')
     const url = 'http://localhost:8000/users/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
-    }).then(function (response) {
-        // handle success
-        const user = response.data[0]
-        setCurrentUser(user)
-        getInvites(user)
+  }).then(function (response) {
+    // handle success
+    const user = response.data[0]
+    setCurrentUser(user)
+    getInvites(user)
       })
       .catch(function (error) {
         // handle error
@@ -28,12 +29,15 @@ function Dashboard() {
           .then(function (response) {
             localStorage.setItem('accesstoken', response.data.access)
           })
+          .then(function(response) {
+            const url = 'http://localhost:8000/users/'
+            axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+            })
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
         }
-      })
-      .then(function(response) {
-        const url = 'http://localhost:8000/users/'
-        axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
-        })
       })
       .catch(function (error) {
         console.log(error);
@@ -59,14 +63,17 @@ function Dashboard() {
           .then(function (response) {
             localStorage.setItem('accesstoken', response.data.access)
           })
+          .then(function (response) {
+            const inviteList = response.data
+            const confirmedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
+            const pendingInvite = inviteList.filter(invite => invite.invitee['pk'] === currentUser.pk && invite.attending === "NA")
+            setConfirmedInvite(confirmedInvite)
+            setPendingInvite(pendingInvite)
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
         }
-      })
-      .then(function (response) {
-        const inviteList = response.data
-        const confirmedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
-        const pendingInvite = inviteList.filter(invite => invite.invitee['pk'] === currentUser.pk && invite.attending === "NA")
-        setConfirmedInvite(confirmedInvite)
-        setPendingInvite(pendingInvite)
       })
       .catch(function (error) {
         console.log(error);

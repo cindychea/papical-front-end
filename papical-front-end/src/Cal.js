@@ -40,7 +40,7 @@ function Cal({userHangouts, event}) {
             // titleAccessor="name"
             startAccessor="start_time"
             endAccessor="end_time"
-            defaultDate={new Date(2019, 7, 18)}
+            defaultDate={new Date(2019, 6, 18)}
           />
     )
 }

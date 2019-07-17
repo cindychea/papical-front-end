@@ -30,15 +30,15 @@ function Friends() {
           .then(function (response) {
             localStorage.setItem('accesstoken', response.data.access)
           })
+          .then(function(response) {
+            const url = 'http://localhost:8000/users/'
+            axios.get(url, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
+              } 
+            })
+          })
         }
-      })
-      .then(function(response) {
-        const url = 'http://localhost:8000/users/'
-        axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
-          } 
-        })
       })
       .catch(function (error) {
         console.log(error);
@@ -67,17 +67,17 @@ function Friends() {
             .then(function (response) {
               localStorage.setItem('accesstoken', response.data.access)
             })
+            .then(function(response) {
+              const url = 'http://localhost:8000/friends/'
+              axios.get(url, {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
+                } 
+              }).then(function (response) {
+                setFriendships(response.data)
+              })
+            })
           }
-        })
-        .then(function(response) {
-          const url = 'http://localhost:8000/friends/'
-          axios.get(url, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
-            } 
-          }).then(function (response) {
-            setFriendships(response.data)
-          })
         })
         .catch(function (error) {
           console.log(error);

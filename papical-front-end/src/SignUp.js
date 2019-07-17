@@ -38,7 +38,7 @@ function SignUp({onFormSubmit}) {
       gender: '',
       location: null,
       tag: state.tag,
-      picture: null
+      picture: state.picture
       })
       .then(function(response) {
         console.log(response)
@@ -87,9 +87,9 @@ function SignUp({onFormSubmit}) {
             </div>
             <div className="photo-section">
               <div className="photo-box">
-                <div className="photo-holder"></div>
+                <div className="photo-holder su"></div>
                 <label className="photo-upload-label" htmlFor="file">Add photo</label>
-                <input className="photo-upload" id='file' type='file' name='profilePicture' accept='image/*' onChange={(e) => setState({...state, picture: e.target.value})}/>
+                <input className="photo-upload" id='file' type='file' name='profilePicture' onChange={(e) => setState({...state, picture: e.target.value})}/>
               </div>
               <div className="photo-text">
                 <p className="sign-in-tagline photo">Add a photo so your friends can find you easily.</p>

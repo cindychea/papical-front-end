@@ -318,6 +318,15 @@ input {
   margin-bottom: 20px;
   margin-right: 70px;
 }
+.photo-holder.su {
+  border: 1px solid #888888;
+  background-color: #ebebeb;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  margin-right: 70px;
+}
 .photo-upload-label {
   color: #27B7DB;
   font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
@@ -336,7 +345,6 @@ input {
 }
 .photo-text {
   display: flex;
-  align-self: flex-end;
   justify-content: center;
   align-items: center;
   height: 100%;
