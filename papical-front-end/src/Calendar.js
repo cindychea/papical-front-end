@@ -182,18 +182,17 @@ function Calendar() {
           axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
           .then(function (response) {
             localStorage.setItem('accesstoken', response.data.access)
+            const inviteList = response.data
+            const acceptedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
+            const inviteHangouts = acceptedInvite.map(invite => invite.hangout)
+            setUserHangouts(inviteHangouts)
+          })
+          .catch(function (error) {
+            console.log(error);
           })
         }
       })
-      .then(function (response) {
-        const inviteList = response.data
-        const acceptedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
-        const inviteHangouts = acceptedInvite.map(invite => invite.hangout)
-        setUserHangouts(inviteHangouts)
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+      
     }
 
 
@@ -207,7 +206,7 @@ function Calendar() {
             <button className="hollow-btn base cal" onClick={() => {setState({...state, active: 'addAvailability'})}}>Add Availability</button>
           </div>
           <div id="calendar-box">
-            <Cal hangouts={userHangouts} />
+            <Cal userHangouts={userHangouts} />
           </div>
         </div>
       </React.Fragment>
