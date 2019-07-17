@@ -8,7 +8,7 @@ function Tags() {
 // Getting list of tags from current user
   useEffect( () => {
   
-    const url = 'http://papicalapp.herokuapp.com/users/'
+    const url = 'http://localhost:8000/users/'
     axios.get(url, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
@@ -21,7 +21,7 @@ function Tags() {
         // handle error
         console.log(error);
         console.log(error.response.data.code);
-        const refreshUrl = 'http://papicalapp.herokuapp.com/refresh/'
+        const refreshUrl = 'http://localhost:8000/refresh/'
         if (error.response.data.code === 'token_not_valid') {
           axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
           .then(function (response) {
@@ -30,7 +30,7 @@ function Tags() {
         }
       })
       .then(function(response) {
-        const url = 'http://papicalapp.herokuapp.com/users/'
+        const url = 'http://localhost:8000/users/'
         axios.get(url, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accesstoken')}`

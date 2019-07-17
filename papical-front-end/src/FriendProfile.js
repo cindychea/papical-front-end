@@ -10,7 +10,7 @@ function FriendProfile(props) {
   const friend = props.location.friendProfileProps.friend
 
   useEffect( () => {
-    const url = 'http://papicalapp.herokuapp.com/freetimes/'
+    const url = 'http://localhost:8000/freetimes/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
       const freeTimeList = response.data
@@ -21,14 +21,14 @@ function FriendProfile(props) {
         // handle error
         console.log(error);
         console.log(error.response.data.code);
-        const refreshUrl = 'http://papicalapp.herokuapp.com/refresh/'
+        const refreshUrl = 'http://localhost:8000/refresh/'
         if (error.response.data.code === 'token_not_valid') {
           axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
           .then(function (response) {
             localStorage.setItem('accesstoken', response.data.access)
           })
           .then(function(response) {
-            const url = 'http://papicalapp.herokuapp.com/invitations/'
+            const url = 'http://localhost:8000/invitations/'
             axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
           })
         })
@@ -41,7 +41,7 @@ function FriendProfile(props) {
   
 
   
-  const imageUrl = (friend.picture === null) ? `http://papicalapp.herokuapp.com/media/images/profile_icon.svg` : `http://papicalapp.herokuapp.com/${friend.picture}`
+  const imageUrl = (friend.picture === null) ? `http://localhost:8000/media/images/profile_icon.svg` : `http://localhost:8000/${friend.picture}`
   
   return (
     <div className="friend-profile">
