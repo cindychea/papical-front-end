@@ -29,22 +29,22 @@ html {
 }
 .sign-up-input::-webkit-input-placeholder {
   font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
-  font-size: 14pt;
+  font-size: 13pt;
   color: #4f4f4f
 }
 .sign-up-input:-ms-input-placeholder {
   font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
-  font-size: 14pt;
+  font-size: 13pt;
   color: #4f4f4f
 }
 .sign-up-input:-moz-placeholder {
   font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
-  font-size: 14pt;
+  font-size: 13pt;
   color: #4f4f4f
 }
 .sign-up-input::-moz-placeholder {
   font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
-  font-size: 14pt;
+  font-size: 13pt;
   color: #4f4f4f
 }
 
@@ -483,37 +483,56 @@ input {
 
 /* FRIENDS COMPONENT */
 .friends-box {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   height: 75vh;
-  max-width: 750px;
-  margin: 30px auto;
+  
+  margin: 30px auto; */
+  /* max-width: 75vh;
+  height: 600px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: calc(100vh - 66px);
 }
 .friend {
   display: flex;
   align-items: center;
-  flex-direction: row;
-  height: 75vh;
-  min-width: 600px;
-  margin: 0 auto;
+  margin-bottom: 50px;
 }
 .delete {
-
+  align-self: flex-end;
 }
 .friends-photo {
   border: 1px solid #888888;
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   margin-right: 70px;
 }
 .friend-name {
   color: #4f4f4f;
   font-family: "Helvetica Neue Medium", Arial, Helvetica, sans-serif;
   font-size: 15pt;
+}
+.friends-box .inner-content {
+  /* flex: 0 0 300px; */
+  width: 600px;
+}
+.sign-up-input.italics.friend {
+  margin-bottom: 0px;
+}
+.control-row {
+  display: flex;  
+  flex-direction: row;
+  margin-bottom: 75px;
+}
+.control-row input {
+  margin-right: 10px;
 }
 
 /* NOTIFICATION COMPONENT */
@@ -552,13 +571,19 @@ input {
 .notif-container {
   display: flex;
   flex-direction: column;
+  margin: 15px 0;
 }
 .notif-box {
   display: flex;
   flex-direction: row;
-  padding: 20px 0;
-  justify-content: space-between
+  padding: 30px 0;
+  justify-content: space-between;  
 }
+
+.upcoming-hangouts {
+  margin-right: 80px;
+}
+
 .notif-left {
   display: flex;
   flex-direction: column;
@@ -573,16 +598,25 @@ input {
 .notif-name {
   font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
   color: #4f4f4f;
-  font-size: 14pt;
+  font-size: 18pt;
+}
+.hollow-btn.small {
+  font-size: 12pt;
+  padding: 5px;
+  min-width: 80px;
+  margin-bottom: 10px;
+
 }
 .notif-friend {
   font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
   color: #27B7DB;
-  text-decoration: underline;
+  /* text-decoration: underline; */
   font-size: 14pt;
+  margin-top: 5px;
 }
 .notif-dt {
   font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
   color: #888888;
-  font-size: 14pt;
+  font-size: 12pt;
+  margin-top: 5px;
 }

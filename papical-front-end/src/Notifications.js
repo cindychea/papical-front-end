@@ -89,7 +89,7 @@ function Notifications() {
           </div>
           <div className="notif-right">
             <p className="notif-dt">{hangout.date}</p>
-            <p className="notif-dt">{hangout.start_time} to {hangout.end_time}</p>
+            <p className="notif-dt">{hangout.start_time.substr(0, hangout.start_time.length - 3)} to {hangout.end_time.substr(0, hangout.end_time.length - 3)}</p>
           </div>
         </div>
         <p>{hangout.description}</p>
@@ -100,8 +100,7 @@ function Notifications() {
   const PendingInviteDetails = (pendingInvite) => {
     const hangout = pendingInvite.hangout
     const invitee = pendingInvite.invitee['username']
-    const creator = pendingInvite.creator
-
+    const creator = pendingInvite.creator    
     const friend = (invitee !== currentUser.username) ? invitee : creator
 
     return (
@@ -110,11 +109,11 @@ function Notifications() {
         <p className="notif-name">{hangout.name}</p>
         <p className="notif-friend">{friend}</p>
         <p className="notif-dt">{hangout.date}</p>
-        <p className="notif-dt">{hangout.start_time} to {hangout.end_time}</p>
+        <p className="notif-dt">{hangout.start_time.substr(0, hangout.start_time.length - 3)} to {hangout.end_time.substr(0, hangout.end_time.length - 3)}</p>
         </div>
         <div className="notif-right">
-        <NavLink to="/notifications">Accept</NavLink>
-        <NavLink to="/notifications">Decline</NavLink>
+        <NavLink className="hollow-btn small" to="/notifications">Accept</NavLink>
+        <NavLink className="hollow-btn small" to="/notifications">Decline</NavLink>
         </div>
       </li>
     )

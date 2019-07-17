@@ -46,9 +46,6 @@ function AppRouter() {
     })
       .catch(function (error) {
         console.log(error);
-        // check response code status
-        // figure out the status code we get back when token invalid
-        // if status code matches, new request
       });
     }
     
@@ -63,7 +60,7 @@ function AppRouter() {
       localStorage.removeItem('accesstoken')
       localStorage.removeItem('refreshtoken')
       setState({...state, isLoggedIn: false, isInsider: false});
-      console.log(state)
+      // console.log(state)
       // console.log(localStorage.getItem('refreshtoken'))
     }
 
@@ -132,7 +129,6 @@ function AppRouter() {
     <BrowserRouter>
       <div className="App">
         {getActiveNav()}
-        {/* <button onClick={onLogOut}>fsdfdfsf</button> */}
         <Route exact path="/" component={Dashboard} />
         <Route path="/calendar/" component={Calendar} />
         <Route path="/friends/" component={Friends} />

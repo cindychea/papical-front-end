@@ -103,15 +103,20 @@ function Friends() {
       <div key={friend.pk} className="friend">
         <img src={`${imageUrl}`} alt={friend.username} className="friends-photo"/>
         <p className="friend-name">{friend.first_name} {friend.last_name}</p>
-        <img src={Delete} alt="Delete" className="delete"/>
       </div>
     )
   }
 
   return (
     <section className="friends-box">
-      <h2 className="sign-up-header">Friends</h2>
-          {friendships.map((friendship) => FriendDetails(friendship))}
+      <div className="inner-content">      
+        <h2 className="sign-up-header">Friends</h2>        
+        <div className="control-row">
+          <input className="sign-up-input italics friend" type='text' name='friends' placeholder='Search by username/name/email' />
+          <button className="std-btn base">Add friends</button>
+        </div>
+        {friendships.map((friendship) => FriendDetails(friendship))}
+      </div>
     </section>
   )
 }

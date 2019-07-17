@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom';
 import Cal from './Cal.js';
 
 function Dashboard() {
-  const [currentUser, setCurrentUser] = useState([])
-  const [confirmedInvite, setConfirmedInvite] = useState([])
-  const [pendingInvite, setPendingInvite] = useState([])
+  const [currentUser, setCurrentUser] = useState({})
+  const [confirmedInvite, setConfirmedInvite] = useState({})
+  const [pendingInvite, setPendingInvite] = useState({})
 
   // Getting current user's information
   useEffect( () => {
@@ -17,6 +17,7 @@ function Dashboard() {
         const user = response.data[0]
         setCurrentUser(user)
         getInvites(user)
+        console.log()
       })
       .catch(function (error) {
         // handle error
