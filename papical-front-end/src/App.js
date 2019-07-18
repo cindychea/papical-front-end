@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Route, NavLink, Link } from "react-router-dom";
+import { BrowserRouter, Route, NavLink, Link, Redirect } from "react-router-dom";
 import axios from 'axios';
 import Dashboard from "./Dashboard.js";
 import Calendar from "./Calendar.js";
@@ -28,6 +28,20 @@ function AppRouter() {
     showDropdown: false
   });
   
+  const reload = () => {
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem( 'firstLoad' ) )
+      {
+        localStorage[ 'firstLoad' ] = true;
+        window.location.reload();
+      }  
+
+      else
+        localStorage.removeItem( 'firstLoad' );
+    }
+  };
+
   function onLogInFunc({username, password}) {
     
     const urlToken = "http://localhost:8000/login/";
@@ -44,6 +58,7 @@ function AppRouter() {
         isInsider: true,
         isLoggedIn: true,
       });
+      reload()
     })
       .catch(function (error) {
         console.log(error);
@@ -78,7 +93,6 @@ function AppRouter() {
     function getActiveNav() {
       switch (state.isInsider && state.isLoggedIn) {
         case false:
-          return outerNav();
         case true:
           return innerNav();
         default:
