@@ -188,7 +188,7 @@ function SignUp({onFormSubmit}) {
               <div className="progress filled"></div>
             </div>
             <div className="calendar-section">
-              <p className="sign-in-tagline cal">You're all set! Go to the calendar to your friends know when you're free or to book a hangout.</p>
+              <p className="sign-in-tagline cal">You're all set! Go to the calendar so your friends know when you're free or to book a hangout.</p>
             </div>
             <div id="sign-up-calendar-box">
               <Cal />
