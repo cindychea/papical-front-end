@@ -58,7 +58,6 @@ function AppRouter() {
         isInsider: true,
         isLoggedIn: true,
       });
-      reload()
     })
       .catch(function (error) {
         console.log(error);

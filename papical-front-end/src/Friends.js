@@ -98,6 +98,7 @@ function Friends() {
     const friend = (friendship.to_user.pk === currentUser.pk) ? from_user : to_user
     
     const imageUrl = (friend.picture === null) ? `http://localhost:8000/media/images/profile_icon.svg` : `http://localhost:8000/${friend.picture}`
+    
 
     return (
       <Link to={{

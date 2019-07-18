@@ -38,7 +38,9 @@ function User() {
       })
   }, [])
 
+  // const imageUrl = (currentUser.picture === null) ? `http://localhost:8000/media/images/profile_icon.svg` : 'http://localhost:8000/media/images/jane-the-virgin.png'
   const imageUrl = (currentUser.picture === null) ? `http://localhost:8000/media/images/profile_icon.svg` : `http://localhost:8000/${currentUser.picture}`
+
 
   return (
     <div className="profile-box">
