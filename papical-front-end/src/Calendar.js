@@ -27,6 +27,7 @@ function Calendar() {
     date: '',
     start_time: '',
     end_time: '',
+    creator: 4,
     available: true,
   })
 
@@ -43,6 +44,8 @@ function Calendar() {
   const submitAvailability = (e) => {
     e.preventDefault()
     setState({...state, active: 'calView'})
+    // setAvailability({...availability, creator: 'currentUser'})
+    console.log(availability)
     availabilitySubmit(availability)
   }
 
@@ -88,13 +91,14 @@ function Calendar() {
     })
   }
 
-  const availabilitySubmit = ({date, start_time, end_time, available}) => {
+  const availabilitySubmit = ({date, start_time, end_time, creator, available}) => {
     console.log('availabile book')
     const url = 'http://localhost:8000/freetimes/'
     axios.post(url, {
       date,
       start_time,
       end_time,
+      creator,
       available
       })
     .then(function(response) {
@@ -133,7 +137,9 @@ function Calendar() {
       }).then(function (response) {
           const user = response.data[0]
           setCurrentUser(user)
-          getUserHangouts(user)
+          // setAvailability({...availability, creator: currentUser.pk})
+          // console.log(availability)
+          // getUserHangouts(user)
         })
         .catch(function (error) {
           // handle error
@@ -153,7 +159,7 @@ function Calendar() {
           }).then(function (response) {
               const user = response.data[0]
               setCurrentUser(user)
-              getUserHangouts(user)
+              // getUserHangouts(user)
             })
         })
         .catch(function (error) {
@@ -162,36 +168,36 @@ function Calendar() {
     }, [])
 
   // Getting current user's hangouts
-  const getUserHangouts = (currentUser) => {
-    console.log('getting hangouts')
-    const url = 'http://localhost:8000/invitations/'
-    axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
-    }).then(function (response) {
-        const inviteList = response.data
-        const acceptedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
-        const inviteHangouts = acceptedInvite.map(invite => invite.hangout)
-        setUserHangouts(inviteHangouts)
+  // const getUserHangouts = (currentUser) => {
+  //   // console.log('getting hangouts')
+  //   const url = 'http://localhost:8000/invitations/'
+  //   axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
+  //   }).then(function (response) {
+  //       const inviteList = response.data
+  //       const acceptedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
+  //       const inviteHangouts = acceptedInvite.map(invite => invite.hangout)
+  //       setUserHangouts(inviteHangouts)
     
-      })
-      .catch(function (error) {
-        console.log(error.response.data.code);
-        const refreshUrl = 'http://localhost:8000/refresh/'
-        if (error.response.data.code === 'token_not_valid') {
-          axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
-          .then(function (response) {
-            localStorage.setItem('accesstoken', response.data.access)
-            const inviteList = response.data
-            const acceptedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
-            const inviteHangouts = acceptedInvite.map(invite => invite.hangout)
-            setUserHangouts(inviteHangouts)
-          })
-          .catch(function (error) {
-            console.log(error);
-          })
-        }
-      })
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error.response.data.code);
+  //       const refreshUrl = 'http://localhost:8000/refresh/'
+  //       if (error.response.data.code === 'token_not_valid') {
+  //         axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
+  //         .then(function (response) {
+  //           localStorage.setItem('accesstoken', response.data.access)
+  //           const inviteList = response.data
+  //           const acceptedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
+  //           const inviteHangouts = acceptedInvite.map(invite => invite.hangout)
+  //           setUserHangouts(inviteHangouts)
+  //         })
+  //         .catch(function (error) {
+  //           console.log(error);
+  //         })
+  //       }
+  //     })
       
-    }
+  //   }
 
 
   function calView() {
@@ -223,11 +229,11 @@ function Calendar() {
           <form onSubmit={submitHangout} id="book-hangout-form">
           <h2 className="sign-up-header">Book a Hangout</h2>
             <input className="sign-up-input" type='text' name='EventName' placeholder='Event Name' onChange={(e) => setHangout({...hangout, name: e.target.value})}/>
-            <label className="cal-input-time" for='Date'>Date</label>
+            <label className="cal-input-time" htmlFor='Date'>Date</label>
             <input className="sign-up-input time" type='date' name='Date' id='Date' onChange={(e) => setHangout({...hangout, date: e.target.value})}/>
-            <label className="cal-input-time" for='StartTime'>Start Time</label>
+            <label className="cal-input-time" htmlFor='StartTime'>Start Time</label>
             <input className="sign-up-input time" type='time' name='StartTime' id='StartTime' onChange={(e) => setHangout({...hangout, start_time: e.target.value})}/>
-            <label className="cal-input-time" for='EndTime'>End Time</label>            
+            <label className="cal-input-time" htmlFor='EndTime'>End Time</label>            
             <input className="sign-up-input time" type='time' name='EndTime' id='EndTime' onChange={(e) => setHangout({...hangout, end_time: e.target.value})}/>
             <input className="sign-up-input" type='text' name='Description' placeholder='Description' onChange={(e) => setHangout({...hangout, description: e.target.value})}/>
             <input className="sign-up-input" type='location' name='Location' placeholder='Location' onChange={(e) => setHangout({...hangout, location: e.target.value})}/>
