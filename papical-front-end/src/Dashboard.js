@@ -10,7 +10,7 @@ function Dashboard() {
 
   // Getting current user's information
   useEffect( () => {
-    console.log('use effect')
+    // console.log('use effect')
     const url = 'http://localhost:8000/users/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
   }).then(function (response) {
@@ -21,8 +21,8 @@ function Dashboard() {
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
-        console.log(error.response.data.code);
+        // console.log(error);
+        // console.log(error.response.data.code);
         const refreshUrl = 'http://localhost:8000/refresh/'
         if (error.response.data.code === 'token_not_valid') {
           axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})
@@ -55,8 +55,8 @@ function Dashboard() {
         setPendingInvite(pendingInvite)
       })
       .catch(function (error) {
-        console.log(error);
-        console.log(error.response.data.code);
+        // console.log(error);
+        // console.log(error.response.data.code);
         const refreshUrl = 'http://localhost:8000/refresh/'
         if (error.response.data.code === 'token_not_valid') {
           axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})

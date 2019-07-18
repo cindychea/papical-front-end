@@ -47,7 +47,7 @@ function Calendar() {
   }
 
   const bookHangoutSubmit = ({name, date, start_time, end_time, description, location}) => {
-    console.log('booking')
+    // console.log('booking')
     const url = 'http://localhost:8000/hangouts/'
     axios.post(url, {
       name,
@@ -64,7 +64,7 @@ function Calendar() {
     .catch(function (error) {
       // handle error
       console.log(error);
-      console.log(error.response.data.code);
+      // console.log(error.response.data.code);
       const refreshUrl = 'http://localhost:8000/refresh/'
       if (error.response.data.code === 'token_not_valid') {
         axios.post(refreshUrl, {refresh: localStorage.getItem('refreshtoken')})

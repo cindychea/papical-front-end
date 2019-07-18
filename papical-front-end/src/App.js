@@ -31,13 +31,13 @@ function AppRouter() {
   function onLogInFunc({username, password}) {
     
     const urlToken = "http://localhost:8000/login/";
-    console.log('working', username, password)
+    // console.log('working', username, password)
     axios.post(urlToken, {
       username,
       password,
     })
     .then(function(response) {
-      console.log(response.data.access)
+      // console.log(response.data.access)
       localStorage.setItem('accesstoken', response.data.access)
       localStorage.setItem('refreshtoken', response.data.refresh)
       setState({
@@ -67,7 +67,7 @@ function AppRouter() {
 
     function onDropdownClick(e) {
       e.preventDefault();
-      console.log(state.showDropdown)
+      // console.log(state.showDropdown)
       if (state.showDropdown === false) {
         setState({...state, showDropdown: true})
       } else if (state.showDropdown === true) {

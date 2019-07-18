@@ -37,11 +37,10 @@ function SignUp({onFormSubmit}) {
       date_of_birth: null,
       gender: '',
       location: null,
-      tag: state.tag,
-      picture: state.picture
+      tag: state.tag
       })
       .then(function(response) {
-        console.log(response)
+        // console.log(response)
         let stateReg = {
           username: state.username,
           password: state.password
