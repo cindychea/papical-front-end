@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-import Cal from './Cal.js';
+import CalFriend from './CalFriend.js';
 
 function FriendProfile(props) {
 
@@ -59,7 +59,7 @@ function FriendProfile(props) {
           <NavLink className="std-btn base dash" to="/calendar">Book a hangout</NavLink>
         </div>
         <div id="friend-profile-cal-box">
-          <Cal event={freeTime}/>
+          <CalFriend />
         </div>
     </div>
   )

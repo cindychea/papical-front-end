@@ -10,10 +10,11 @@ import {
   // components,
 } from 'react-big-calendar'
 import moment from "moment";
-import events from './user-events'
+import events from './friend-events.js'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-function Cal() {
+
+function CalFriend({userHangouts, event}) {
 
   const localizer = momentLocalizer(moment)
 
@@ -36,10 +37,12 @@ function Cal() {
             components={{
               timeSlotWrapper: ColoredDateCellWrapper,
             }}
-            startAccessor="start"
-            endAccessor="end"
+            // titleAccessor="name"
+            startAccessor="start_time"
+            endAccessor="end_time"
+            defaultDate={new Date(2019, 6, 18)}
           />
     )
 }
 
-export default Cal;
+export default CalFriend;

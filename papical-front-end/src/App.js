@@ -31,7 +31,7 @@ function AppRouter() {
   function onLogInFunc({username, password}) {
     
     const urlToken = "http://localhost:8000/login/";
-    // console.log('working', username, password)
+    console.log('working', username, password)
     axios.post(urlToken, {
       username,
       password,

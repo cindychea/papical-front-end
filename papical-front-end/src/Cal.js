@@ -10,7 +10,7 @@ import {
   // components,
 } from 'react-big-calendar'
 import moment from "moment";
-import events from './user-events.js'
+import events from './jane-events.js'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 
