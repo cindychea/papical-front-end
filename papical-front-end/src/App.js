@@ -92,7 +92,10 @@ function AppRouter() {
     function closeDropdown(e) {
       e.preventDefault();
       if (state.showDropdown === true) {
-        setState({...state, showDropdown: false})
+        const logout = document.getElementById('logout')
+        if (e.target !== logout) {
+          setState({...state, showDropdown: false})
+        }
       } else {
         state.showDropdown = false
       }
@@ -147,7 +150,7 @@ function AppRouter() {
         </React.Fragment>
       )
     }
-  
+    
     return (
     <BrowserRouter>
       <div className="App" onClick={closeDropdown}>

@@ -7,7 +7,7 @@ function DropdownMenu ({onLogOut}) {
     <div className="menu-container">
       <div className="menu">
         <NavLink to="/user">Profile</NavLink>
-        <NavLink to="/" onClick={onLogOut}>Logout</NavLink>
+        <NavLink to="/" id="logout" onClick={onLogOut}>Logout</NavLink>
       </div>
     </div>
   )
