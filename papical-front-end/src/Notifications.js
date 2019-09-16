@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import axios from 'axios';
 
 function Notifications() {
@@ -49,7 +49,7 @@ function Notifications() {
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
       const inviteList = response.data
-        const confirmedInvite = inviteList.filter(invite => invite.creator === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
+        const confirmedInvite = inviteList.filter(invite => invite.creator['username'] === currentUser.username | invite.invitee['pk'] === currentUser.pk && invite.attending === "A")
         const pendingInvite = inviteList.filter(invite => invite.invitee['pk'] === currentUser.pk && invite.attending === "NA")
         setConfirmedInvite(confirmedInvite)
         setPendingInvite(pendingInvite)
@@ -79,41 +79,56 @@ function Notifications() {
       })
     }
     
-  const HangoutDetails = (confirmedInvite) => {
-    const hangout = confirmedInvite.hangout
-    const invitee = confirmedInvite.invitee['username']
-    const creator = confirmedInvite.creator
+    const HangoutDetails = (confirmedInvite) => {
+      const hangout = confirmedInvite.hangout
+      const invitee = confirmedInvite.invitee
+      const creator = confirmedInvite.creator
 
-    const friend = (invitee !== currentUser.username) ? invitee : creator
+      const friend = (invitee.username !== currentUser.username) ? invitee : creator
 
-    return (
-      <div className="notif-container">
-        <div className="notif-box" key={hangout.pk}>
-          <div className="notif-left">
-            <p className="notif-name">{hangout.name}</p>
-            <p className="notif-friend">{friend}</p>
+      return (
+        <div className="notif-container">
+          <div className="notif-box" key={hangout.pk}>
+            <div className="notif-left">
+              <p className="notif-name">{hangout.name}</p>
+              <Link to={{
+                pathname: "/friendprofile",
+                friendProfileProps:{
+                  friend: friend
+                  }
+                }} key={friend.pk} className="friend">
+                <p className="notif-friend">{friend.username}</p>
+              </Link>
+            </div>
+            <div className="notif-right">
+              <p className="notif-dt">{hangout.date}</p>
+              <p className="notif-dt">{hangout.start_time.substr(0, hangout.start_time.length - 3)} to {hangout.end_time.substr(0, hangout.end_time.length - 3)}</p>
+            </div>
           </div>
-          <div className="notif-right">
-            <p className="notif-dt">{hangout.date}</p>
-            <p className="notif-dt">{hangout.start_time.substr(0, hangout.start_time.length - 3)} to {hangout.end_time.substr(0, hangout.end_time.length - 3)}</p>
-          </div>
+          <p>{hangout.description}</p>
         </div>
-        <p>{hangout.description}</p>
-      </div>
-    )
-  }
+      )
+    }
 
   const PendingInviteDetails = (pendingInvite) => {
     const hangout = pendingInvite.hangout
-    const invitee = pendingInvite.invitee['username']
+    const invitee = pendingInvite.invitee
     const creator = pendingInvite.creator    
-    const friend = (invitee !== currentUser.username) ? invitee : creator
+
+    const friend = (invitee.username !== currentUser.username) ? invitee : creator
 
     return (
       <li className="notif-box" key={hangout.pk}>
         <div className="notif-left">
         <p className="notif-name">{hangout.name}</p>
-        <p className="notif-friend">{friend}</p>
+        <Link to={{
+          pathname: "/friendprofile",
+          friendProfileProps:{
+            friend: friend
+            }
+          }} key={friend.pk} className="friend">
+          <p className="notif-friend">{friend.username}</p>
+        </Link>
         <p className="notif-dt">{hangout.date}</p>
         <p className="notif-dt">{hangout.start_time.substr(0, hangout.start_time.length - 3)} to {hangout.end_time.substr(0, hangout.end_time.length - 3)}</p>
         </div>

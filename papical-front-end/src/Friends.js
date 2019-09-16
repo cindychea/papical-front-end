@@ -101,7 +101,7 @@ function Friends() {
     
 
     return (
-      <Link to={{
+      <Link id="notif-friend" to={{
         pathname: "/friendprofile",
         friendProfileProps:{
           friend: friend

@@ -736,7 +736,9 @@ input {
   padding: 5px;
   min-width: 80px;
   margin-bottom: 10px;
-
+}
+.notifications a.friend {
+  margin-bottom: 0;
 }
 .notif-friend {
   font-family: 'Helvetica Neue Medium', Arial, Helvetica, sans-serif;
