@@ -19,6 +19,12 @@ function SignUp({onFormSubmit}) {
     // active: localStorage.getItem('refreshtoken') ? '' : 'stepBase',
   });
 
+  function onFileSelect(event) {
+    var imageFile = document.getElementById("file");
+    console.log(imageFile.files[0].type);
+    setState({...state, picture: imageFile.files[0]});
+  }
+
   const onSubmit = (e) => {
     e.preventDefault()
     registerUser(state)
@@ -35,6 +41,7 @@ function SignUp({onFormSubmit}) {
       email: state.email,
       password: state.password,
       date_of_birth: null,
+      picture: state.picture,
       gender: '',
       location: null,
       tag: state.tag
@@ -88,7 +95,7 @@ function SignUp({onFormSubmit}) {
               <div className="photo-box">
                 <div className="photo-holder su"></div>
                 <label className="photo-upload-label" htmlFor="file">Add photo</label>
-                <input className="photo-upload" id='file' type='file' name='profilePicture' onChange={(e) => setState({...state, picture: e.target.value})}/>
+                <input className="photo-upload" id='file' type='file' name='profilePicture' onChange={onFileSelect}/>
               </div>
               <div className="photo-text">
                 <p className="sign-in-tagline photo">Add a photo so your friends can find you easily.</p>

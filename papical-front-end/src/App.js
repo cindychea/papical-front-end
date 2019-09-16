@@ -88,6 +88,15 @@ function AppRouter() {
         setState({...state, showDropdown: false})
       }
     }
+
+    function closeDropdown(e) {
+      e.preventDefault();
+      if (state.showDropdown === true) {
+        setState({...state, showDropdown: false})
+      } else {
+        state.showDropdown = false
+      }
+    }
     
     function getActiveNav() {
       switch (state.isInsider && state.isLoggedIn) {
@@ -141,7 +150,7 @@ function AppRouter() {
   
     return (
     <BrowserRouter>
-      <div className="App">
+      <div className="App" onClick={closeDropdown}>
         {getActiveNav()}
         <Route exact path="/" component={Dashboard} />
         <Route path="/calendar/" component={Calendar} />
