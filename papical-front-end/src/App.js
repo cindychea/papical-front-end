@@ -81,8 +81,7 @@ function AppRouter() {
 
     function onDropdownClick(e) {
       e.preventDefault();
-      // console.log(state.showDropdown)
-      if (state.showDropdown === false) {
+      if (state.isLoggedIn === true && state.showDropdown === false) {
         setState({...state, showDropdown: true})
       } else if (state.showDropdown === true) {
         setState({...state, showDropdown: false})
@@ -153,19 +152,21 @@ function AppRouter() {
     
     return (
     <BrowserRouter>
-      <div className="App" onClick={closeDropdown}>
-        {getActiveNav()}
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/calendar/" component={Calendar} />
-        <Route path="/friends/" component={Friends} />
-        <Route path="/friendprofile/" component={FriendProfile} />
-        <Route path="/notifications/" component={Notifications} />
-        <Route path="/user/" component={User} />
+      <div className="App">
+        <div onClick={closeDropdown}>
+          {getActiveNav()}
+          <Route exact path="/" component={Dashboard} />
+          <Route path="/calendar/" component={Calendar} />
+          <Route path="/friends/" component={Friends} />
+          <Route path="/friendprofile/" component={FriendProfile} />
+          <Route path="/notifications/" component={Notifications} />
+          <Route path="/user/" component={User} />
+        </div>
         <Route path="/signup/" 
               render={(routeProps) => (
                 <SignUp {...routeProps} onFormSubmit={onLogInFunc} />
                 )} 
-        />
+                />
         <Route path="/login/"
               render={(routeProps) => (
                 <LogIn {...routeProps} onLogInFunc={onLogInFunc} />

@@ -12,47 +12,71 @@ function SignUp({onFormSubmit}) {
     email: '',
     username: '',
     password: '',
-    tag: '["rock climbing"]',
-    picture: '',
+    tag: '',
+    picture: null,
     friends: '',
     active: 'stepBase',
     // active: localStorage.getItem('refreshtoken') ? '' : 'stepBase',
   });
 
-  function onFileSelect(event) {
+  // function onFileSelect(event) {
+  //   var imageFile = document.getElementById("file");
+  //   console.log(imageFile.files[0].type);
+  //   setState({...state, picture: imageFile.files[0]});
+  // }
+
+  const handleImageChange = () => {
+    // setState({...state, image: e.target.files[0]})
     var imageFile = document.getElementById("file");
-    console.log(imageFile.files[0].type);
     setState({...state, picture: imageFile.files[0]});
-  }
+        console.log(imageFile.files[0])
+  };
 
   const onSubmit = (e) => {
     e.preventDefault()
+    console.log(state);
     registerUser(state)
     setState({...state, active: 'stepThree'})
   }
 
   const registerUser = () => {
     // console.log('registering')
+    let form_data = new FormData();
+    form_data.append('username', state.username);
+    form_data.append('first_name', state.first_name);
+    form_data.append('last_name', state.last_name);
+    form_data.append('email', state.email);
+    form_data.append('password', state.password);
+    form_data.append('picture', state.picture);
+    form_data.append('location', null);
+    form_data.append('tag', state.tag);
+
     const url = "http://localhost:8000/users/"
-    axios.post(url, {
-      username: state.username,
-      first_name: state.first_name,
-      last_name: state.last_name,
-      email: state.email,
-      password: state.password,
-      date_of_birth: null,
-      picture: state.picture,
-      gender: '',
-      location: null,
-      tag: state.tag
-      })
+    axios.post(url, form_data, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    }
+      // {
+      // username: state.username,
+      // first_name: state.first_name,
+      // last_name: state.last_name,
+      // email: state.email,
+      // password: state.password,
+      // date_of_birth: null,
+      // picture: state.picture,
+      // gender: '',
+      // location: null,
+      // tag: state.tag,
+      // }
+      )
       .then(function(response) {
-        // console.log(response)
+        console.log(response)
         let stateReg = {
           username: state.username,
-          password: state.password
+          password: state.password,
         }
-        // console.log(stateReg)
+        console.log(stateReg)
         onFormSubmit(stateReg)
       })
       .catch(function (error) {
@@ -94,8 +118,9 @@ function SignUp({onFormSubmit}) {
             <div className="photo-section">
               <div className="photo-box">
                 <div className="photo-holder su"></div>
-                <label className="photo-upload-label" htmlFor="file">Add photo</label>
-                <input className="photo-upload" id='file' type='file' name='profilePicture' onChange={onFileSelect}/>
+                <label className="photo-upload-label" id="add-photo" htmlFor="file">Add photo</label>
+                <input className="photo-upload" id='file' type='file' accept="image/png, image/jpeg" name='profilePicture' onChange={handleImageChange}/>
+                {/* <input className="photo-upload" id='file' type='file' name='profilePicture' onChange={onFileSelect}/> */}
               </div>
               <div className="photo-text">
                 <p className="sign-in-tagline photo">Add a photo so your friends can find you easily.</p>
