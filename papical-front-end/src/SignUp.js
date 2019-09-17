@@ -14,6 +14,7 @@ function SignUp({onFormSubmit}) {
     password: '',
     tag: '',
     picture: null,
+    picture_preview: null,
     friends: '',
     active: 'stepBase',
     // active: localStorage.getItem('refreshtoken') ? '' : 'stepBase',
@@ -28,8 +29,7 @@ function SignUp({onFormSubmit}) {
   const handleImageChange = () => {
     // setState({...state, image: e.target.files[0]})
     var imageFile = document.getElementById("file");
-    setState({...state, picture: imageFile.files[0]});
-        console.log(imageFile.files[0])
+    setState({...state, picture: imageFile.files[0], picture_preview: URL.createObjectURL(imageFile.files[0])});
   };
 
   const onSubmit = (e) => {
@@ -117,7 +117,9 @@ function SignUp({onFormSubmit}) {
             </div>
             <div className="photo-section">
               <div className="photo-box">
-                <div className="photo-holder su"></div>
+                <div className="photo-holder su">
+                  <img src={state.picture_preview} className="photo-holder su"></img>
+                </div>
                 <label className="photo-upload-label" id="add-photo" htmlFor="file">Add photo</label>
                 <input className="photo-upload" id='file' type='file' accept="image/png, image/jpeg" name='profilePicture' onChange={handleImageChange}/>
                 {/* <input className="photo-upload" id='file' type='file' name='profilePicture' onChange={onFileSelect}/> */}
