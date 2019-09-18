@@ -8,13 +8,13 @@ function Tags() {
 // Getting list of tags from current user
   useEffect( () => {
   
-    const url = 'http://localhost:8000/users/'
+    const url = 'http://localhost:8000/users/current/'
     axios.get(url, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
       } 
     }).then(function (response) {
-        const currentUser = response.data[0]
+        const currentUser = response.data
         setUserTags(currentUser.tag);
       })
       .catch(function (error) {
@@ -30,7 +30,7 @@ function Tags() {
         }
       })
       .then(function(response) {
-        const url = 'http://localhost:8000/users/'
+        const url = 'http://localhost:8000/users/current/'
         axios.get(url, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accesstoken')}`

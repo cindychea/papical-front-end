@@ -11,11 +11,11 @@ function Dashboard() {
   // Getting current user's information
   useEffect( () => {
     // console.log('use effect')
-    const url = 'http://localhost:8000/users/'
+    const url = 'http://localhost:8000/users/current/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
   }).then(function (response) {
     // handle success
-    const user = response.data[0]
+    const user = response.data
     setCurrentUser(user)
     getInvites(user)
       })
@@ -30,7 +30,7 @@ function Dashboard() {
             localStorage.setItem('accesstoken', response.data.access)
           })
           .then(function(response) {
-            const url = 'http://localhost:8000/users/'
+            const url = 'http://localhost:8000/users/current/'
             axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
             })
           })

@@ -9,10 +9,10 @@ function User() {
 // Getting current user information
   useEffect( () => {
   
-    const url = 'http://localhost:8000/users/'
+    const url = 'http://localhost:8000/users/current/'
     axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
     }).then(function (response) {
-        setCurrentUser(response.data[0])
+        setCurrentUser(response.data)
       })
       .catch(function (error) {
         // handle error
@@ -27,10 +27,10 @@ function User() {
         }
       })
       .then(function(response) {
-        const url = 'http://localhost:8000/users/'
+        const url = 'http://localhost:8000/users/current/'
         axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
         }).then(function (response) {
-            setCurrentUser(response.data[0])
+            setCurrentUser(response.data)
           })
       })
       .catch(function (error) {

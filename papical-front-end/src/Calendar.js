@@ -132,10 +132,10 @@ function Calendar() {
   // Getting current user information
     useEffect( () => {
     
-      const url = 'http://localhost:8000/users/'
+      const url = 'http://localhost:8000/users/current/'
       axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
       }).then(function (response) {
-          const user = response.data[0]
+          const user = response.data
           setCurrentUser(user)
           // setAvailability({...availability, creator: currentUser.pk})
           // console.log(availability)
@@ -154,10 +154,10 @@ function Calendar() {
           }
         })
         .then(function(response) {
-          const url = 'http://localhost:8000/users/'
+          const url = 'http://localhost:8000/users/current/'
           axios.get(url, {headers: {Authorization: `Bearer ${localStorage.getItem('accesstoken')}`} 
           }).then(function (response) {
-              const user = response.data[0]
+              const user = response.data
               setCurrentUser(user)
               // getUserHangouts(user)
             })

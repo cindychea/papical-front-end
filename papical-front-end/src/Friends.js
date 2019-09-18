@@ -4,21 +4,27 @@ import { Link } from 'react-router-dom';
 
 function Friends() {
   
-  const [friendships, setFriendships] = useState([])
-  const [currentUser, setCurrentUser] = useState({})
+  const searchBar = document.getElementById('friend-search');
+
+  const [friendships, setFriendships] = useState([]);
+  const [currentUser, setCurrentUser] = useState({});
+  const [state, setState] = useState({
+    query: '',
+    results: []
+  });
 
   
 // Getting current user information
   useEffect( () => {
   
-    const url = 'http://localhost:8000/users/'
+    const url = 'http://localhost:8000/users/current/'
     axios.get(url, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
       } 
     }).then(function (response) {
         // handle success
-        setCurrentUser(response.data[0])
+        setCurrentUser(response.data)
       })
       .catch(function (error) {
         // handle error
@@ -31,7 +37,7 @@ function Friends() {
             localStorage.setItem('accesstoken', response.data.access)
           })
           .then(function(response) {
-            const url = 'http://localhost:8000/users/'
+            const url = 'http://localhost:8000/users/current/'
             axios.get(url, {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
@@ -113,14 +119,29 @@ function Friends() {
     )
   }
 
+  const handleInputChange = () => {
+    setState({
+      query: searchBar.value
+    })
+  }
+
   return (
     <section className="friends-box">
       <div className="inner-content">      
         <h2 className="sign-up-header">Friends</h2>        
         <div className="control-row">
-          <input className="sign-up-input italics friend" type='text' name='friends' placeholder='Search by username/name/email' />
+          <input
+            id='friend-search'
+            className="sign-up-input italics friend"
+            type='text'
+            name='friends'
+            placeholder='Search by username/name/email'
+            // ref={searchBar}
+            onChange={handleInputChange}
+          />
           <button className="std-btn base">Add friends</button>
         </div>
+        <p>{state.query}</p>
         {friendships.map((friendship) => FriendDetails(friendship))}
       </div>
     </section>
