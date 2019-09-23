@@ -157,12 +157,13 @@ function Friends() {
 
   const getResults = () => {
     const users = listOfUsers.filter(user => 
-      user.username.toLowerCase().includes(state.query) || 
+      user.pk !== currentUser.pk &&
+      (user.username.toLowerCase().includes(state.query) ||
       user.first_name.toLowerCase().includes(state.query) ||
       user.last_name.toLowerCase().includes(state.query) ||
-      user.email.toLowerCase().includes(state.query)
+      user.email.toLowerCase().includes(state.query))
       )
-    setResults(users)
+      setResults(users)
   }
   
   const Suggestions = (result) => {
