@@ -2,9 +2,10 @@ import React, { useState }  from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import Cal from './Cal.js';
+import Friends from './Friends.js';
 import BackArrow from './pictures/BackArrow.png';
 
-function SignUp({onFormSubmit}) {
+function SignUp({onFormSubmit, handleInputChange}) {
 
   const [state, setState] = useState({
     first_name: '',
@@ -122,7 +123,6 @@ function SignUp({onFormSubmit}) {
                 </div>
                 <label className="photo-upload-label" id="add-photo" htmlFor="file">Add photo</label>
                 <input className="photo-upload" id='file' type='file' accept="image/png, image/jpeg" name='profilePicture' onChange={handleImageChange}/>
-                {/* <input className="photo-upload" id='file' type='file' name='profilePicture' onChange={onFileSelect}/> */}
               </div>
               <div className="photo-text">
                 <p className="sign-in-tagline photo">Add a photo so your friends can find you easily.</p>
@@ -192,7 +192,14 @@ function SignUp({onFormSubmit}) {
             </div>
             <div className="friends-section">
               <p className="sign-in-tagline">Add your friends!</p>
-              <input className="sign-up-input italics" type='text' name='friends' placeholder='Search by username/name/email' onChange={(e) => setState({...state, friends: e.target.value})}/>
+              <input 
+                className="sign-up-input italics"
+                type='text'
+                name='friends'
+                placeholder='Search by username/name/email'
+                onChange={handleInputChange}
+                // onChange={(e) => setState({...state, friends: e.target.value})}
+              />
             </div>
             <div className="sign-up-btns">
               <button className="std-btn base plus" type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Continue</button>

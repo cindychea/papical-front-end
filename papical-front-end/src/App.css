@@ -648,8 +648,8 @@ input {
   font-size: 15pt;
 
 }
-.friend-name-link {
-}
+/* .friend-name-link {
+} */
 .friends-box .inner-content {
   /* flex: 0 0 300px; */
   width: 600px;
@@ -752,4 +752,27 @@ input {
   color: #888888;
   font-size: 12pt;
   margin-top: 5px;
+}
+
+.sign-up-input.italics.friend {
+  width: 350px;
+}
+.search-bar {
+  position: relative;
+}
+
+.friend-search-list {
+  position: absolute;
+  top: 37px;
+  z-index: 1;
+  width: 350px;
+  background: #FFF;
+}
+.friend-search {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid black;
+  border-top: 0;
+  text-decoration: none;
 }
