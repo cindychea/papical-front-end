@@ -2,10 +2,10 @@ import React, { useState }  from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import Cal from './Cal.js';
-import Friends from './Friends.js';
+import SearchFriends from './SearchFriends.js';
 import BackArrow from './pictures/BackArrow.png';
 
-function SignUp({onFormSubmit, handleInputChange}) {
+function SignUp({onFormSubmit}) {
 
   const [state, setState] = useState({
     first_name: '',
@@ -77,7 +77,7 @@ function SignUp({onFormSubmit, handleInputChange}) {
           username: state.username,
           password: state.password,
         }
-        console.log(stateReg)
+        // console.log(stateReg)
         onFormSubmit(stateReg)
       })
       .catch(function (error) {
@@ -192,14 +192,14 @@ function SignUp({onFormSubmit, handleInputChange}) {
             </div>
             <div className="friends-section">
               <p className="sign-in-tagline">Add your friends!</p>
-              <input 
+              {/* <input 
                 className="sign-up-input italics"
                 type='text'
                 name='friends'
                 placeholder='Search by username/name/email'
-                onChange={handleInputChange}
-                // onChange={(e) => setState({...state, friends: e.target.value})}
-              />
+                onChange={(e) => setState({...state, friends: e.target.value})}
+              /> */}
+              <SearchFriends />
             </div>
             <div className="sign-up-btns">
               <button className="std-btn base plus" type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Continue</button>

@@ -28,19 +28,19 @@ function AppRouter() {
     showDropdown: false
   });
   
-  const reload = () => {
-    if( window.localStorage )
-    {
-      if( !localStorage.getItem( 'firstLoad' ) )
-      {
-        localStorage[ 'firstLoad' ] = true;
-        window.location.reload();
-      }  
+  // const reload = () => {
+  //   if( window.localStorage )
+  //   {
+  //     if( !localStorage.getItem( 'firstLoad' ) )
+  //     {
+  //       localStorage[ 'firstLoad' ] = true;
+  //       window.location.reload();
+  //     }  
 
-      else
-        localStorage.removeItem( 'firstLoad' );
-    }
-  };
+  //     else
+  //       localStorage.removeItem( 'firstLoad' );
+  //   }
+  // };
 
   function onLogInFunc({username, password}) {
     
@@ -54,6 +54,7 @@ function AppRouter() {
       // console.log(response.data.access)
       localStorage.setItem('accesstoken', response.data.access)
       localStorage.setItem('refreshtoken', response.data.refresh)
+      window.location.reload();
       setState({
         isInsider: true,
         isLoggedIn: true,
@@ -63,6 +64,28 @@ function AppRouter() {
         console.log(error);
       });
     }
+
+    function onLogInFuncSignUp({username, password}) {
+    
+      const urlToken = "http://localhost:8000/login/";
+      // console.log('working', username, password)
+      axios.post(urlToken, {
+        username,
+        password,
+      })
+      .then(function(response) {
+        // console.log(response.data.access)
+        localStorage.setItem('accesstoken', response.data.access)
+        localStorage.setItem('refreshtoken', response.data.refresh)
+        setState({
+          isInsider: true,
+          isLoggedIn: true,
+        });
+      })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
     
     function onSignUpFunc() {
       setState({
@@ -164,7 +187,7 @@ function AppRouter() {
         </div>
         <Route path="/signup/" 
               render={(routeProps) => (
-                <SignUp {...routeProps} onFormSubmit={onLogInFunc} />
+                <SignUp {...routeProps} onFormSubmit={onLogInFuncSignUp} />
                 )} 
                 />
         <Route path="/login/"

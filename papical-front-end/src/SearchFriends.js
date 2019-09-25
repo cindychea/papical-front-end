@@ -80,16 +80,17 @@ function SearchFriends() {
   }
 
   const handleInputChange = () => {
+    if (state.query && state.query.length > 1) {
+      getResults()
+      // if (state.query.length % 2 === 0) {
+      //   getResults()
+      // }
+    } else if (!state.query) {
+    }
     setState({
       query: searchBar.value
     })
-    if (state.query && state.query.length > 1) {
-      if (state.query.length % 2 === 0) {
-        getResults()
-      }
-    } else if (!state.query) {
-      }
-    }
+  }
 
   return (
     <div className="search-bar">
