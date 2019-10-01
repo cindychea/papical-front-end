@@ -36,7 +36,7 @@ function SignUp({onFormSubmit}) {
   const onSubmit = (e) => {
     e.preventDefault()
     console.log(state);
-    registerUser(state)
+    registerUser(state);
     setState({...state, active: 'stepThree'})
   }
 
@@ -192,14 +192,7 @@ function SignUp({onFormSubmit}) {
             </div>
             <div className="friends-section">
               <p className="sign-in-tagline">Add your friends!</p>
-              {/* <input 
-                className="sign-up-input italics"
-                type='text'
-                name='friends'
-                placeholder='Search by username/name/email'
-                onChange={(e) => setState({...state, friends: e.target.value})}
-              /> */}
-              <SearchFriends />
+              <SearchFriends/>
             </div>
             <div className="sign-up-btns">
               <button className="std-btn base plus" type='button' onClick={() => {setState({...state, active: 'stepFour'})}}>Continue</button>
