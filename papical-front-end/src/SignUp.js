@@ -13,7 +13,7 @@ function SignUp({onFormSubmit}) {
     email: '',
     username: '',
     password: '',
-    tag: '',
+    tag: [],
     picture: null,
     picture_preview: null,
     friends: '',
@@ -160,7 +160,7 @@ function SignUp({onFormSubmit}) {
                 <p className="sign-in-tagline">What are your interests and hobbies?</p>
                 <p className="sign-in-tagline">(Separate each interest with a comma)</p>
                 <br></br>
-                <input className="sign-up-input italics" type='text' name='tag' placeholder='I am interested in...' />
+                <input className="sign-up-input italics" type='text' name='tag' placeholder='I am interested in...' onChange={(e) => setState({...state, tag: e.target.value})}/>
                 <div className="sign-up-btns">
                   <button className="submit-form" type='submit'><span className="std-btn base plus">Continue</span><span className="hollow-btn plus">Skip</span></button>
                 </div>
