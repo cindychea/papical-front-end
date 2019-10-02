@@ -138,9 +138,7 @@ function AppRouter() {
         <React.Fragment>
           <nav className="nav outer">
             <div className="left-side">
-              <NavLink to="/">
-                <img className="papical-logo-white" src={Name2} alt="Papical Logo"/>
-              </NavLink>
+              <img className="papical-logo-white" src={Name2} alt="Papical Logo" onClick={onLogOut}/>
             </div>
             <div className="right-side">
               <Link className="nav-hollow-btn" to="/login">Log In</Link>
